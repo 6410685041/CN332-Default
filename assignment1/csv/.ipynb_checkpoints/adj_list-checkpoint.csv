@@ -1,0 +1,16 @@
+TEXT,LEMMA,POS,TAG,DEP,SHAPE,ALPHA,STOP
+several,several,ADJ,JJ,amod,xxxx,True,True
+harder,hard,ADJ,JJR,acomp,xxxx,True,False
+easier,easy,ADJ,JJR,acomp,xxxx,True,False
+detect,detect,ADJ,JJ,pobj,xxxx,True,False
+top,top,ADJ,JJ,amod,xxx,True,True
+nearest,near,ADJ,JJS,amod,xxxx,True,False
+unexpected,unexpected,ADJ,JJ,amod,xxxx,True,False
+other,other,ADJ,JJ,amod,xxxx,True,True
+editable,editable,ADJ,JJ,acomp,xxxx,True,False
+interested,interested,ADJ,JJ,acomp,xxxx,True,False
+JSON,json,ADJ,JJ,compound,XXXX,True,False
+own,own,ADJ,JJ,amod,xxx,True,True
+more,more,ADJ,JJR,amod,xxxx,True,True
+such,such,ADJ,JJ,amod,xxxx,True,True
+more,more,ADJ,JJR,amod,xxxx,True,True
