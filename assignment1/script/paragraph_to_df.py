@@ -1,10 +1,10 @@
 import pandas as pd
 import spacy
 import argparse
-parser = argparse.ArgumentParser(description='Input the paragraph.txt and the output will saved.')
+parser = argparse.ArgumentParser(description='Input the paragraph.txt and the output will be saved.')
 # Add arguments with default values
-parser.add_argument('--input', type=str, default="./paragraph.txt", help='An size argument with a default value of ./paragraph.txt, the path argument is for select where the input is.')
-parser.add_argument('--output', type=str, default="./dataframe.csv", help='An size argument with a default value of ./dataframe.csv, the path argument is for select where the output will be saved at.')
+parser.add_argument('--input', type=str, default="./paragraph.txt", help='An input argument with a default value of ./paragraph.txt, the path argument is for select where the input is.')
+parser.add_argument('--output', type=str, default="./dataframe.csv", help='An output argument with a default value of ./dataframe.csv, the path argument is for select where the output will be saved at.')
 # Parse the arguments
 args = parser.parse_args()
 # Load the spaCy model
