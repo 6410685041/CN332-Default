@@ -1,3 +1,5 @@
 [submodule "previous_work"]
 	path = previous_work
 	url = https://github.com/6410685165/previous_work_ooad.git
+[submodule "previous_work/"]
+	url = https://github.com/6410685165/previous_work_ooad.git
