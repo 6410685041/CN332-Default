@@ -1,0 +1,147 @@
+https://www.mermaidchart.com/app/sign-up
+
+---
+title: Car Detection
+---
+classDiagram
+
+    class User {
+        +id: AutoField
+        +email: EmailField
+        +first_name: String
+        +is_staff: Boolean
+        +is_superuser: Boolean
+        +last_name: String
+        -password: String
+        +username: String
+
+        set_password(raw_password)
+    }
+
+    Task <-- Profile : use
+    Result <-- Profile : use
+    User <|-- Profile
+    class Profile {
+        +bio: String
+        +phone_number: String
+        +occupation: String
+
+        +create_loop(points: Integer[][2])
+        +add_task(VideoField, Loop)
+        +edit_task(Task)
+    }
+
+    Task *-- Intersection
+    class Intersection {
+        +Intersection_name: String
+        +location: LocationField
+        +contains_roads()
+    }
+
+    Intersection "1" *-- "2..*" Road
+    class Road {
+        +code: Integer
+        +road_name: String
+        +lanes: Integer
+    }
+
+    Road o-- Vehicle
+    class Vehicle {
+        +location: LocationField
+        +speed: Float
+        +color: String
+        +license_plate: String
+        +brand: String
+
+        +is_in_road()
+    }
+
+
+    Vehicle <|-- Car
+    class Car {
+        +model: String
+    }
+
+    Vehicle <|-- Motorbike
+    class Motorbike {
+        +model: String
+    }
+
+    Vehicle <|-- Truck
+    class Truck {
+        +model: String
+    }
+
+    TaskQueue -- Task
+    class Task {
+        +status: String
+        +time: DateTimeField
+        +video: VideoField
+
+        +edit_loop()
+    }
+
+    Task *-- Weather
+    class Weather {
+        how: String
+    }
+
+    Task "1" *-- "4" Loop
+    class Loop {
+        +points: Integer[][2]
+    }
+
+    class Queue~Object~ {
+        <<interface>>
+        insert(Object)
+        remove() Object
+    }
+
+    Queue <.. QueueADT
+    class QueueADT~Task~{
+        <<Abstract>>
+        Tasks: List~Task~
+        maxSize: Integer
+
+        +insert(Task)
+        +remove() Task
+    }
+
+    QueueADT <-- TaskQueue
+    Process <-- TaskQueue : use
+    class TaskQueue~Task~ {
+        Tasks: List~Task~
+        maxSize: Integer
+
+        +insert(Task)
+        +remove() Task 
+        +isBusy()
+        +sent_to_process(Task)
+    }
+
+    Result <-- Process : use
+    class Process {
+        +task: Task
+
+        +count_vehicle(VideoField,Loop)
+        +track_direction(VideoField,Loop)
+    }
+
+    Process *-- AI_detection
+    class AI_detection {
+        +detect_car(ImageField)
+    }
+
+    Process *-- AI_classification
+    class AI_classification {
+        +classify_car(ImageField)
+    }
+
+    class Result {
+        +vehicle_count: Int
+        +vehicle_with_direction: String[][]
+        
+        +speed_of_vehicle(which: String) Integer
+        +edit_result()
+    }
+
