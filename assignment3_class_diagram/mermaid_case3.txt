@@ -1,0 +1,23 @@
+sequenceDiagram
+    participant P as Profile
+    participant T as Task
+    participant L as Loop
+    participant Q as TaskQueue
+    participant Pro as Process
+    participant R as Result
+
+    %% Case 3
+    P->>R: Request Result
+    R-->>P: Display Result
+    R-->>T: identify Task
+    T-->>P: identify Task
+    P->>L: Edit Loop
+    L-->>T: Update Loop
+    T-->>P: Task is ready to create
+    P->>T: request create Task
+    T->>Q: Add task to TaskQueue
+    Q->>Pro: Process the Task
+    Pro->>R: create Result 
+    R-->>P: Notify Result created
+    P->>R: request Result
+    R-->>P: display Result

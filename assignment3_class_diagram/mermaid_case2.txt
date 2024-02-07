@@ -1,0 +1,9 @@
+sequenceDiagram
+    participant P as Profile
+    participant R as Result
+
+    %% Case 2
+    P->>R: Request Result
+    R-->>P: Display Result
+    P->>R: edit Result
+    R-->>P: Confirm Result Edited
