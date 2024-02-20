@@ -1,7 +1,7 @@
 encrypt:
 
-`openssl enc -aes-256-cbc -salt -in GoogleService-Info.plist -out GoogleService-Info.enc -k <password>`
+`openssl enc -aes-256-cbc -salt -in key.py -out key.enc -k <password>`
 
 decrypt:
 
-`openssl enc -d -aes-256-cbc -in GoogleService-Info.enc -out GoogleService-Info.plist -k <password>`
+`openssl enc -d -aes-256-cbc -in key.enc -out key.py -k <password>`
