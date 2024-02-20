@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from key import github_cid, github_csecrets, google_cid, google_csecrets
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -146,14 +147,14 @@ LOGIN_REDIRECT_URL = "/"
 SOCIALACCOUNT_PROVIDERS = {
     "github": {
         "carDetection": {
-            "client_id": "4dc7a60ca55f801fb2b9",
-            "secret": "b2265dc04e658f0d14fdf5cff95aeb9bcf8a90ca",
+            "client_id": github_cid,
+            "secret": github_csecrets,
         }
     },
     "google": {
         "carDetection_dome": {
-            "client_id": "291999414856-d450lrstpdl4mhb9voj4cqvm9u9jh2ml.apps.googleusercontent.com",
-            "secret": "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",
+            "client_id": google_cid,
+            "secret": google_csecrets,
             'key': ''
         },
         'SCOPE': [
