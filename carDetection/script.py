@@ -7,7 +7,6 @@ django.setup()
 
 from django.contrib.sites.models import Site
 from allauth.socialaccount.models import SocialApp
-from key import github_cid, github_csecrets, google_cid, google_csecrets
 from django.core.management import call_command
 from django.contrib.auth.models import User
 import subprocess
