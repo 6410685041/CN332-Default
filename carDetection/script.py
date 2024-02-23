@@ -71,6 +71,7 @@ if __name__ == "__main__":
         subprocess.run(["pip", "install", "-r", "requirements.txt"])
     if args.r:
         subprocess.run(["rm", "-rf", "db.sqlite3"])
+        subprocess.run(["rm", "-rf", "**/migrations"])
     run_migrations()
     create_initial_data()
     create_superuser()
