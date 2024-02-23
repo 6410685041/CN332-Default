@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from project.key import github_cid, github_csecrets, google_cid, google_csecrets
+from key import github_cid, github_csecrets, google_cid, google_csecrets
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     "allauth.socialaccount",  # new
     "allauth.socialaccount.providers.github",  # new for GitHub provider
     "allauth.socialaccount.providers.google",
+    'location_field.apps.DefaultConfig',
+    'Process',
 ]
 
 MIDDLEWARE = [
