@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-occupations = ["Traffic police", "Local police", "Department police"]
-
 class User(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE) 
     first_name = models.TextField()
@@ -14,7 +12,13 @@ class User(models.Model):
     is_superuser = models.BooleanField()
 
 class Profile(User):
-    occupation = models.CharField(choices=occupations)
+    occupations = {
+        "TP": "Traffic police", 
+        "LP": "Local police",
+        "DP": "Department of Highway",
+        }
+    
+    occupation = models.CharField(max_length=256, choices=occupations)
     phone_number = models.TextField()
     bio = models.TextField(default=None)
 
