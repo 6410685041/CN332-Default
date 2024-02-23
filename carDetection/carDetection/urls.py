@@ -22,8 +22,7 @@ from user import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("/", include("user.urls")),
     path("accounts/", include("allauth.urls")),  # social
-    path("", TemplateView.as_view(template_name="home.html")), # social
+    path("", TemplateView.as_view(template_name="index.html")), # social
 ]
 
