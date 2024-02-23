@@ -11,6 +11,7 @@ from django.core.management import call_command
 from django.contrib.auth.models import User
 import subprocess
 import argparse
+from django.core.exceptions import ObjectDoesNotExist
 from key import github_cid, github_csecrets, google_cid, google_csecrets
 
 def run_migrations():
@@ -22,7 +23,15 @@ def run_migrations():
 def create_initial_data():
     print("Creating initial data...")
     # Create some initial data
-    site = Site.objects.create(name='127.0.0.1', domain='127.0.0.1')
+    try:
+        site = Site.objects.get(id=1)
+        # If site with ID 1 exists, update its attributes
+        site.name = '127.0.0.1'
+        site.domain = '127.0.0.1'
+        site.save()
+    except ObjectDoesNotExist:
+        # If site with ID 1 doesn't exist, create a new one
+        site = Site.objects.create(id=1, name='127.0.0.1', domain='127.0.0.1')
     github = SocialApp.objects.create(
         provider='github',
         name='Github',
