@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-asgiref==3.7.2
-Django==5.0.2
-sqlparse==0.4.4
 django-allauth==0.60.0
-=======
 Django
 django-location-field
->>>>>>> f128f9ff47fff06931371c56a1e677a277e0e409
+six
