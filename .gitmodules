@@ -1,8 +1,8 @@
 [submodule "previous"]
-	path = previous
+	path = submodules/previous
 	url = https://github.com/6410685165/previous_work_ooad.git
 [submodule "previous_63"]
-	path = previous_63
+	path = submodules/previous_63
 	url = https://github.com/6310682643/CN332dronepj
 [submodule "project"]
 	path = project
