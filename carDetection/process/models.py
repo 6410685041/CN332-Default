@@ -1,5 +1,6 @@
 from django.db import models
 from location_field.models.plain import PlainLocationField
+from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
 
@@ -21,13 +22,28 @@ class Motorbike(Vehicle):
 class Truck(Vehicle):
     model = models.TextField()
     
+class Intersection(models.Model):
+    intersection_name = models.CharField(max_length=256)
+    location = PlainLocationField()
     
 class Road(models.Model):
     code = models.IntegerField()
     road_name = models.CharField(max_length=256)
     lanes = models.IntegerField()
-    
-class Intersection(models.Model):
-    intersection_name = models.CharField(max_length=256)
-    location = PlainLocationField()
-    roads = models.ForeignKey(Road, verbose_name="road", on_delete=models.CASCADE)
+    intersection = models.ForeignKey(Intersection, on_delete=models.CASCADE)
+
+class Task(models.Model):
+    status = models.TextField()
+    time = models.DateTimeField()
+    video = models.FileField(upload_to='video_file', blank=True, null=True)
+
+class Loop(models.Model):
+    points = ArrayField(
+        ArrayField(
+            models.FloatField(blank=True),
+            size=2,
+        ),
+        size=4,
+    )
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+
