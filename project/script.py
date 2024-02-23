@@ -71,16 +71,16 @@ def create_superuser():
 if __name__ == "__main__":
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description='Decrypt file using OpenSSL')
-    parser.add_argument('-i', "--input", default="key.enc", help='Input encrypted file path')
-    parser.add_argument('-o', "--output", default="key.py", help='Output decrypted file path')
-    parser.add_argument('-r', '--reset', action='store_true', help='Reset Database')
-    parser.add_argument('-p', '--password', required=True, help='Password for decryption')
+    parser.add_argument('-i', default="key.enc", help='Input encrypted file path')
+    parser.add_argument('-o', default="key.py", help='Output decrypted file path')
+    parser.add_argument('-r', action='store_true', help='Reset Database')
+    parser.add_argument('-p', required=True, help='Password for decryption')
     args = parser.parse_args()
-    
-    if args.r:
-        subprocess.run("rm -rf db.sqlite3")
 
-    decrypt_file(args.input_file, args.output_file, args.password)
+    if args.r:
+        subprocess.run(["rm", "-rf", "db.sqlite3"])
+
+    decrypt_file(args.i, args.o, args.p)
     run_migrations()
     create_initial_data()
     create_superuser()
