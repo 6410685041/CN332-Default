@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "location_field.apps.DefaultConfig",
     "process",
+    "user",
     "django.contrib.sites",  # social
     "allauth",  # social
     "allauth.account",  # socail
