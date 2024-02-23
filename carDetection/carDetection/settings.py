@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from key import github_cid, github_csecrets, google_cid, google_csecrets
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +40,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "location_field.apps.DefaultConfig",
     "process",
+    "django.contrib.sites",  # social
+    "allauth",  # social
+    "allauth.account",  # socail
+    "allauth.socialaccount",  # social
+    "allauth.socialaccount.providers.github", # github
+    "allauth.socialaccount.providers.google", # google
 ]
 
 MIDDLEWARE = [
@@ -49,6 +56,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",  # social
 ]
 
 ROOT_URLCONF = "carDetection.urls"
@@ -123,3 +131,40 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# social
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",  # social
+    "allauth.account.auth_backends.AuthenticationBackend",  # social
+]
+
+SITE_ID = 2  # social
+
+ACCOUNT_EMAIL_VERIFICATION = "none"  # social
+
+LOGIN_REDIRECT_URL = "/"  # social
+
+# social
+SOCIALACCOUNT_PROVIDERS = {
+    "github": {
+        "carDetection": {
+            "client_id": github_cid,
+            "secret": github_csecrets,
+        }
+    },
+    "google": {
+        "carDetection_dome": {
+            "client_id": google_cid,
+            "secret": google_csecrets,
+            'key': ''
+        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+
+    }
+}
