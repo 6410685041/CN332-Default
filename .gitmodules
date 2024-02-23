@@ -4,3 +4,6 @@
 [submodule "previous_63"]
 	path = previous_63
 	url = https://github.com/6310682643/CN332dronepj
+[submodule "project"]
+	path = project
+	url = https://github.com/6410685033/CarDetection.git
