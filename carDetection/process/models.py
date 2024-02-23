@@ -20,3 +20,14 @@ class Motorbike(Vehicle):
     
 class Truck(Vehicle):
     model = models.TextField()
+    
+    
+class Road(models.Model):
+    code = models.IntegerField()
+    road_name = models.CharField(max_length=256)
+    lanes = models.IntegerField()
+    
+class Intersection(models.Model):
+    intersection_name = models.CharField(max_length=256)
+    location = PlainLocationField()
+    roads = models.ForeignKey(Road, verbose_name="road", on_delete=models.CASCADE)
