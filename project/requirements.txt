@@ -1,2 +1,5 @@
 django
-django-allauth==0.60.0
+django-allauth
+django-location-field
+six
+requests
