@@ -155,7 +155,12 @@ SOCIALACCOUNT_PROVIDERS = {
         "carDetection": {
             "client_id": github_cid,
             "secret": github_csecrets,
-        }
+        },
+        'SCOPE': [
+            'user',
+            'repo',
+            'read:org',
+        ],
     },
     "google": {
         "carDetection_dome": {
