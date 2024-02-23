@@ -11,6 +11,7 @@ from django.core.management import call_command
 from django.contrib.auth.models import User
 import subprocess
 import argparse
+from key import github_cid, github_csecrets, google_cid, google_csecrets
 
 def run_migrations():
     print("Running migrations...")
