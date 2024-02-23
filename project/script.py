@@ -9,12 +9,22 @@ from django.contrib.sites.models import Site
 from allauth.socialaccount.models import SocialApp
 from key import github_cid, github_csecrets, google_cid, google_csecrets
 from django.core.management import call_command
+from django.contrib.auth.models import User
 
 def run_migrations():
     print("Running migrations...")
     call_command("makemigrations")
     call_command("migrate")
     print("Migrations complete.")
+    username = 'admin'
+    email = 'admin@example.com'
+    password = 'admin1234'
+    call_command('createsuperuser', username=username, email=email, interactive=False)
+    # Set the password for the created superuser
+    user = User.objects.get(username=username)
+    user.set_password(password)
+    user.save()
+    print("Create super user complete.")
 
 def create_initial_data():
     print("Creating initial data...")
