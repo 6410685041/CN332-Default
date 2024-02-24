@@ -1,20 +1,20 @@
 import os
 import django
 import subprocess
-from key import github_cid, github_csecrets, google_cid, google_csecrets
 
 try:
     # Set up Django environment
+    from key import github_cid, github_csecrets, google_cid, google_csecrets
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "carDetection.settings")
     django.setup()
-except:
-    print("Django setting error")
+except Exception as e:
+    # Handle the exception (e.g., log it)
+    print(f"An error occurred: {e}")
     print("Enter the password: ", end="")
     subprocess.run(["openssl", "enc", "-d", "-aes-256-cbc", "-in", "key.enc", "-out", "key.py", "-k", input()])
     print("decryption DONE!")
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "carDetection.settings")
     django.setup()
-
 
 from django.contrib.sites.models import Site
 from allauth.socialaccount.models import SocialApp
@@ -74,11 +74,7 @@ def create_superuser():
 
 if __name__ == "__main__":
     # Parse command-line arguments
-    parser = argparse.ArgumentParser(description='Decrypt file using OpenSSL')
-    parser.add_argument('-d', action='store_true', help='Decrypt key.enc')
-    parser.add_argument('-i', default="key.enc", help='Input encrypted file path')
-    parser.add_argument('-o', default="key.py", help='Output decrypted file path')
-    parser.add_argument('-p', help='Password to decrypt file')
+    parser = argparse.ArgumentParser(description='Script to help doing the things')
     parser.add_argument('-r', action='store_true', help='Reset')
     parser.add_argument('-e', action='store_true', help='install requirements to environment')
     parser.add_argument('-s', action='store_true', help='Setting')
@@ -91,9 +87,6 @@ if __name__ == "__main__":
             for to_clear in file.read().split("\n"):
                 subprocess.run(["rm", "-rf", to_clear])
         print("clear file in reset_list DONE!")
-    if args.d:
-        subprocess.run(["openssl", "enc", "-d", "-aes-256-cbc", "-in", args.i, "-out", args.o, "-k", args.p])
-        print("decryption DONE!")
     if args.s:
         run_migrations()
         with open(args.o , 'r') as file:
