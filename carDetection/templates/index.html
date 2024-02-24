@@ -18,6 +18,8 @@
     {% if user.is_authenticated %}
         <p>Welcome {{ user.username }} !!!</p>
         <a href="{% url 'account_logout' %}">Sign out</a>
+        <a href="{% url 'profile' %}">My Profile</a>
+        <a href="">My Queue</a>
     {% else %}
         <p>Welcome to my channel!</p>
         <a href="{% url 'account_signup' %}">Get started</a>

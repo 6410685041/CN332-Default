@@ -1,10 +1,28 @@
 from django.shortcuts import render
 from django.urls import reverse
 from process.models import Task, Intersection, Loop, Result
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.utils import timezone
+from .tasks import abc
+from random import random
 
-# Create your views here.
+# test celery
+def process_view(request):
+    return render(request, "process/process_view.html")
+
+    
+def start_task(request):
+    """Initiate a task and return its ID to the frontend."""
+    task = abc.delay(random(), random())
+    return JsonResponse({'task_id': task.id})
+
+def task_status(request, task_id):
+    """Check the task status and return the result if completed."""
+    task = abc.AsyncResult(task_id)
+    if task.ready():
+        return JsonResponse({'status': 'SUCCESS', 'result': task.result})
+    else:
+        return JsonResponse({'status': 'PENDING'})
 
 
 # go to upload page (for upload video)
