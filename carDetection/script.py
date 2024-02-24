@@ -16,6 +16,8 @@ from key import github_cid, github_csecrets, google_cid, google_csecrets
 
 def run_migrations():
     print("Running migrations...")
+    subprocess.run(["python", "manage.py", "makemigrations", "user"])
+    subprocess.run(["python", "manage.py", "makemigrations", "process"])
     call_command("makemigrations")
     call_command("migrate")
     print("Migrations complete.")
@@ -72,6 +74,7 @@ if __name__ == "__main__":
     if args.r:
         subprocess.run(["rm", "-rf", "db.sqlite3"])
         subprocess.run(["rm", "-rf", "**/migrations"])
+        subprocess.run(["rm", "-rf", "**/__pycache___"])
     run_migrations()
     create_initial_data()
     create_superuser()

@@ -1,7 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
+<div>
     <h1>My Profile</h1>
     <p>Name: {{ profile.first_name }} {{ profile.last_name }}</p>
     <p>Occupation: {{ profile.occupation }}</p>
     <p>Bio: {{ profile.bio }}</p>
+</div>
+
+<a href="{% url 'edit_profile' %}">Edit Profile</a>
 {% endblock content %}
