@@ -6,16 +6,18 @@
 
 <p> Vehicle count : {{count}} </p>
 {% for lib in JSON%}
-<h3>{{lib.loop}}</h3>
 <table>
     <tr>
-        <th>Type</th>
-        <th>Direction</th>
+        <th>{{lib.loop}}</th>
+        <th>North</th>
+        <th>East</th>
+        <th>West</th>
+        <th>South</th>
     </tr>
     {% for di in lib.data  %}
     <tr>
         {% for i in di %}
-        <td>{{ i }}</td>
+        <td>{{ i.value }}</td>
         {% endfor %}
     </tr>
     {% endfor %}
