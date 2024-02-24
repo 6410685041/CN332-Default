@@ -20,6 +20,7 @@ from . import views
 
 urlpatterns = [
     path('create_task', views.view_create_task, name='create_task'),
+    path('upload_task/submit', views.create_task, name='upload_video'),
     path('edit_task/<str:task_id>', views.view_edit_task, name='edit_task'),
     path('edit_task/add_loop/<str:task_id>', views.add_loop, name='add_loop'),
     path('submit_task/<str:task_id>', views.submit_task, name='submit_task'),
