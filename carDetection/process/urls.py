@@ -19,7 +19,7 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('upload_task', views.view_upload_task, name='upload_task'),
+    path('create_task', views.view_create_task, name='create_task'),
     path('edit_task/<str:task_id>', views.view_edit_task, name='edit_task'),
     path('edit_task/add_loop/<str:task_id>', views.add_loop, name='add_loop'),
     path('submit_task/<str:task_id>', views.submit_task, name='submit_task'),
