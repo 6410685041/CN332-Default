@@ -40,14 +40,15 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "location_field.apps.DefaultConfig",
-    "process",
-    "user",
     "django.contrib.sites",  # social
     "allauth",  # social
     "allauth.account",  # socail
     "allauth.socialaccount",  # social
     "allauth.socialaccount.providers.github", # github
     "allauth.socialaccount.providers.google", # google
+    "phonenumber_field",
+    "process",
+    "user",
 ]
 
 MIDDLEWARE = [
