@@ -1,24 +1,25 @@
 {% extends "layout.html" %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="{% static 'style/index.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-</head>
-<body>
-    {% block content %}
-    <!-- templates/home.html -->
-    {% load socialaccount %}
+{% load socialaccount %}
+
+{% block css %} 
+    <link rel="stylesheet" href="{% static 'style/layout.css' %}"> 
+{% endblock %}
+
+{% block navbar %}
+    <ul>
+        <li><a href="{% url 'account_login' %}">Sign in</a></li>
+        <li><a href="{% url 'account_signup' %}">Sign up</a></li>
+    </ul>
+{% endblock %}
+{% block content %}
+
     {% if user.is_authenticated %}
         <p>Welcome {{ user.username }} !!!</p>
         <a href="{% url 'account_logout' %}">Sign out</a>
     {% else %}
-        <a href="{% url 'account_login' %}">Sign in</a>
-        <a href="{% url 'account_signup' %}">Sign up</a>
 
+    
         <p>Sign up with Social Account</p>
         <ul>
             <li><a href="{% provider_login_url 'github' %}">Sign Up with GitHub</a></li>
@@ -29,6 +30,3 @@
 
     {% endif %}
 {% endblock %}
-</body>
-</html>
-
