@@ -1,12 +1,15 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="stylesheet" href="{% static 'style/index.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 </head>
 <body>
-    <p>Hello World!</p>
+    {% block content %}
     <!-- templates/home.html -->
     {% load socialaccount %}
     {% if user.is_authenticated %}
@@ -25,7 +28,7 @@
         
 
     {% endif %}
-
+{% endblock %}
 </body>
 </html>
 
