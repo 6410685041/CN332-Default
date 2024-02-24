@@ -30,10 +30,8 @@
             <a href="{% url 'account_signup' %}">Sign Up</a>
 
             <p>Sign up with Social Account</p>
-            <ul>
-                <li><a href="{% provider_login_url 'github' %}">Login with GitHub</a></li>
-                <li><a href="{% provider_login_url 'google' %}">Login with Google</a></li>
-            </ul>
+            <a href="{% provider_login_url 'github' %}">Login with GitHub</a>
+            <a href="{% provider_login_url 'google' %}">Login with Google</a>
         </div>
     {% endif %}
 {% endblock %}
