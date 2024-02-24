@@ -92,6 +92,7 @@ def view_display_result(request, result_id):
         return HttpResponseRedirect(reverse("account_login"))
     result = Result.objects.get(id=result_id)
     data = {
-        "task": result,
+        "count": result.vehicle_count,
+        "JSON": result.vehicle_with_direction,
     }
     return render(request, "process/result.html", data)

@@ -1,0 +1,6 @@
+db.sqlite3
+process/migrations
+user/migrations
+carDetection/__pycache__
+process/__pycache__
+user/__pycache__
