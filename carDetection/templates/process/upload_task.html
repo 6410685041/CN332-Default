@@ -2,4 +2,22 @@
 
 {% block content %}
 <h1>Upload Task</h1>
+<form action="{% url 'upload_video' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <label for="time">Time:</label>
+    <input type="datetime-local" id="time" name="time"><br><br>
+    
+    <label for="video">Video:</label>
+    <input type="file" id="video" name="video" accept="video/*"><br><br>
+    
+    <label for="intersection">Intersection:</label>
+    <select id="intersection" name="intersection">
+      {% for intersection in intersections %}
+      <option value="{{ intersection.id }}">{{ intersection }}</option>
+      {% endfor %}
+    </select><br><br>
+    <button type="submit">Upload</button>
+    
+  </form>
 {% endblock content %}
