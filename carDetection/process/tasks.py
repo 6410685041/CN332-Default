@@ -7,8 +7,3 @@ def abc(x, y):
     for i in range(1000000):
         z = x*y*i
     return z
-
-def xyz(x, y):
-    for i in range(1000000):
-        z = x*y*i
-    return z

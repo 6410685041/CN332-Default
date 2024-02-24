@@ -13,7 +13,7 @@ def process_view(request):
     
 def start_task(request):
     """Initiate a task and return its ID to the frontend."""
-    task = abc.delay(4, 4)
+    task = abc.delay(random(), random())
     return JsonResponse({'task_id': task.id})
 
 def task_status(request, task_id):
