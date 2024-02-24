@@ -83,7 +83,7 @@ if __name__ == "__main__":
         subprocess.run(["pip", "install", "-r", "requirements.txt"])
         print("install requirement DONE!")
     if args.r:
-        with open(args.o , 'r') as file:
+        with open("reset_list.txt" , 'r') as file:
             for to_clear in file.read().split("\n"):
                 subprocess.run(["rm", "-rf", to_clear])
         print("clear file in reset_list DONE!")
