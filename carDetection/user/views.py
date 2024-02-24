@@ -24,7 +24,7 @@ def view_profile(request):
     data = {
         "profile": profile,
     }
-    return render("user/profile.html", data)
+    return render(request, "user/profile.html", data)
 
 
 def view_edit_profile(request):
@@ -34,7 +34,7 @@ def view_edit_profile(request):
     data = {
         "profile": profile,
     }
-    return render("user/profile.html", data)
+    return render(request, "user/profile.html", data)
 
 
 def submit_edit_profile(request):
