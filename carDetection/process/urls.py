@@ -23,4 +23,5 @@ urlpatterns = [
     path('edit_task/<str:task_id>', views.view_edit_task, name='edit_task'),
     path('edit_task/add_loop/<str:task_id>', views.add_loop, name='add_loop'),
     path('submit_task/<str:task_id>', views.submit_task, name='submit_task'),
+    path('display_result/<str:result_id', views.view_display_result, name='display_result'),
 ]
