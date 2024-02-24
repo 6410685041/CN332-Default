@@ -15,15 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import TemplateView
+from . import views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", TemplateView.as_view(template_name="index.html")), # homepage
-    path("accounts/", include("allauth.urls")),  # social
-    path("user/", include(("user.urls", 'user'), namespace="user")), # chatgpt recommend namespace for prevent collisions
-    path("process/", include(("process.urls", 'process'), namespace="process")),
+    path('upload_task', views.view_upload_task, name='upload_task'),
+    path('edit_task', views.view_edit_task, name='edit_task'),
 ]
-
