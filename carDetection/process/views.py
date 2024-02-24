@@ -29,7 +29,9 @@ def task_status(request, task_id):
 def view_create_task(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("account_login"))
-    return render(request, "process/upload_task.html")
+    intersections = Intersection.objects.all()
+    data = {"intersections": intersections}
+    return render(request, "process/upload_task.html", data)
 
 
 def view_edit_task(request, task_id):
@@ -42,18 +44,46 @@ def view_edit_task(request, task_id):
     return render(request, "process/edit_task.html", data)
 
 
+# def create_task(request):
+#     if request.method == "POST":
+#         status = "In process"
+#         time = timezone.now()
+#         video = request.POST["video"]
+#         intersection = request.POST["intersection"]
+#         Intersection.objects.get_or_create(intersection_name=intersection)
+#         task = Task.objects.create(
+#             video=video, intersection=intersection, time=time, status=status
+#         )
+#         task.save()
+#         reverse("edit_task", task.id)
+
 def create_task(request):
     if request.method == "POST":
         status = "In process"
         time = timezone.now()
-        video = request.POST["video"]
-        intersection = request.POST["intersection"]
-        Intersection.objects.get_or_create(intersection_name=intersection)
-        task = Task.objects.create(
-            video=video, intersection=intersection, time=time, status=status
-        )
-        task.save()
-        reverse("edit_task", task.id)
+        video = request.FILES.get("video")
+        intersection_name = request.POST.get("intersection")
+
+        # Check if intersection_name is not empty
+        if intersection_name:
+            # Create or get the intersection instance
+            intersection_instance, created = Intersection.objects.get_or_create(intersection_name=intersection_name)
+            
+            # Create the task with the intersection instance
+            task = Task.objects.create(
+                video=video, intersection=intersection_instance, time=time, status=status
+            )
+            
+            # Save the task
+            task.save()
+            
+            # Redirect to the edit page of the created task
+            return HttpResponseRedirect(reverse("edit_task", args=(task.id,)))
+        else:
+            # Handle the case where intersection_name is empty
+            # Here you can redirect to an error page or display a message
+            return HttpResponseRedirect(reverse("upload_task"))  # Example redirect to an error page
+
 
 
 # receive loop points
