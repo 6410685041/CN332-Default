@@ -26,6 +26,14 @@ def view_profile(request):
     }
     return render(request, "user/profile.html", data)
 
+def view_my_queue(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("account_login"))
+    profile = Profile.objects.get(id=request.user.id)
+    data = {
+        "profile": profile,
+    }
+    return render(request, "user/my_queue.html", data)
 
 def view_edit_profile(request):
     if not request.user.is_authenticated:

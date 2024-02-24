@@ -1,5 +1,8 @@
 {% extends "layout.html" %}
-
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'style/layout.css' %}">
+{% endblock %}
 {% block content %}
 <h1>Upload Task</h1>
 <form action="{% url 'upload_video' %}" method="post" enctype="multipart/form-data">

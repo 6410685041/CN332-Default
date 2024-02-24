@@ -31,7 +31,7 @@ def view_create_task(request):
         return HttpResponseRedirect(reverse("account_login"))
     intersections = Intersection.objects.all()
     data = {"intersections": intersections}
-    return render(request, "process/upload_task.html", data)
+    return render(request, "process/create_task.html", data)
 
 
 def view_edit_task(request, task_id):
