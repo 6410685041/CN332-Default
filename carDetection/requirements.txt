@@ -4,3 +4,5 @@ django-location-field
 six
 psycopg2
 django-phonenumber-field[phonenumbers]
+celery
+django-celery-results
