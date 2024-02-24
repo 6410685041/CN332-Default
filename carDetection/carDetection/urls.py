@@ -23,7 +23,7 @@ from user import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),  # social
-    path("", TemplateView.as_view(template_name="user/home.html")), # social
-    path("<str:profile>/", include("user.urls")),
+    path("", TemplateView.as_view(template_name="login.html")), # social
+    path("user/", include("user.urls")),
 ]
 
