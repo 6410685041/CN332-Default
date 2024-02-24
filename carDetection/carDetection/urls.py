@@ -23,7 +23,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", TemplateView.as_view(template_name="index.html")), # homepage
     path("accounts/", include("allauth.urls")),  # social
-    path("user/", include("user.urls")), # chatgpt recommend namespace for prevent collisions
+    path("user/", include("user.urls")),
     path("process/", include("process.urls")),
 ]
 
