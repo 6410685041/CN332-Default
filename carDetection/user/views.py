@@ -49,4 +49,4 @@ def submit_edit_profile(request):
         profile.bio = request.POST["bio"]
         profile.save()
 
-        return reverse("profile")
+        return HttpResponseRedirect(reverse("profile"))
