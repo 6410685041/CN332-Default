@@ -8,7 +8,7 @@ django.setup()
 from django.contrib.sites.models import Site
 from allauth.socialaccount.models import SocialApp
 from django.core.management import call_command
-from django.contrib.auth.models import User
+from user.models import Profile
 import subprocess
 import argparse
 from django.core.exceptions import ObjectDoesNotExist
@@ -54,7 +54,7 @@ def create_superuser():
     password = 'admin1234'
     call_command('createsuperuser', username=username, email=email, interactive=False)
     # Set the password for the created superuser
-    user = User.objects.get(username=username)
+    user = Profile.objects.get(username=username)
     user.set_password(password)
     user.save()
     print("Create super user complete.")
