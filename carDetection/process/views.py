@@ -29,7 +29,9 @@ def task_status(request, task_id):
 def view_create_task(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("account_login"))
-    return render(request, "process/upload_task.html")
+    intersections = Intersection.objects.all()
+    data = {"intersections": intersections}
+    return render(request, "process/upload_task.html", data)
 
 
 def view_edit_task(request, task_id):
