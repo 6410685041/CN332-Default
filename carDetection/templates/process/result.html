@@ -4,6 +4,23 @@
 {% block content %}
 <h1>Result</h1>
 
+<p> Vehicle count : {{count}} </p>
+{% for lib in JSON%}
+<h3>{{lib.loop}}</h3>
+<table>
+    <tr>
+        <th>Type</th>
+        <th>Direction</th>
+    </tr>
+    {% for di in lib.data  %}
+    <tr>
+        {% for i in di %}
+        <td>{{ i }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
 
+</table>
+{% endfor %}
 
 {% endblock content %}
