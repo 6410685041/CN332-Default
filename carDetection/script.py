@@ -1,18 +1,31 @@
 import os
 import django
+import subprocess
 
-# Set up Django environment
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "carDetection.settings")
-django.setup()
+try:
+    # Set up Django environment
+    from key import github_cid, github_csecrets, google_cid, google_csecrets
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "carDetection.settings")
+    django.setup()
+except Exception as e:
+    # Handle the exception (e.g., log it)
+    print(f"An error occurred: {e}")
+    print("Enter the password: ", end="")
+    subprocess.run(["openssl", "enc", "-d", "-aes-256-cbc", "-in", "key.enc", "-out", "key.py", "-k", input()])
+    print("decryption DONE!")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "carDetection.settings")
+    django.setup()
 
 from django.contrib.sites.models import Site
 from allauth.socialaccount.models import SocialApp
 from django.core.management import call_command
 from user.models import Profile
-import subprocess
+from process.models import Intersection
+from location_field.models.plain import PlainLocationField
 import argparse
 from django.core.exceptions import ObjectDoesNotExist
-from key import github_cid, github_csecrets, google_cid, google_csecrets
+import glob
+
 
 def run_migrations():
     print("Running migrations...")
@@ -22,7 +35,7 @@ def run_migrations():
     call_command("migrate")
     print("Migrations complete.")
 
-def create_initial_data():
+def create_initial_data(github_cid, github_csecrets, google_cid, google_csecrets):
     print("Creating initial data...")
     # Create some initial data
     try:
@@ -48,6 +61,7 @@ def create_initial_data():
     )
     github.sites.set([site])
     google.sites.set([site])
+    Intersection.objects.create(intersection_name="Default Intersection", location=PlainLocationField(based_fields=['city'],initial='0,0'))
     print("Initial data created.")
 
 def create_superuser():    
@@ -63,18 +77,20 @@ def create_superuser():
 
 if __name__ == "__main__":
     # Parse command-line arguments
-    parser = argparse.ArgumentParser(description='Decrypt file using OpenSSL')
-    parser.add_argument('-i', default="key.enc", help='Input encrypted file path')
-    parser.add_argument('-o', default="key.py", help='Output decrypted file path')
-    parser.add_argument('-r', action='store_true', help='Reset Database')
+    parser = argparse.ArgumentParser(description='Script to help doing the things')
+    parser.add_argument('-r', action='store_true', help='Reset')
     parser.add_argument('-e', action='store_true', help='install requirements to environment')
+    parser.add_argument('-s', action='store_true', help='Setting')
     args = parser.parse_args()
     if args.e:
         subprocess.run(["pip", "install", "-r", "requirements.txt"])
+        print("install requirement DONE!")
     if args.r:
-        subprocess.run(["rm", "-rf", "db.sqlite3"])
-        subprocess.run(["rm", "-rf", "**/migrations"])
-        subprocess.run(["rm", "-rf", "**/__pycache___"])
-    run_migrations()
-    create_initial_data()
-    create_superuser()
+        with open("reset_list.txt" , 'r') as file:
+            for to_clear in file.read().split("\n"):
+                subprocess.run(["rm", "-rf", to_clear])
+        print("clear file in reset_list DONE!")
+    if args.s:
+        run_migrations()
+        create_initial_data(github_cid, github_csecrets, google_cid, google_csecrets)
+        create_superuser()
