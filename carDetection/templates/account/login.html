@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
-<div class="login-container">
+<div class="container">
     <h2>Login</h2>
     <form method="post" action="{% url 'account_login' %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Login</button>
+        <button type="submit" class="btn btn-primary">Login</button>
     </form>
     <a href="{% url 'account_signup' %}">Sign Up</a>
 </div>
