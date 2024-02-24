@@ -1,5 +1,20 @@
-{% extends "base.html" %}
-<body>
+{% extends "layout.html" %}
+{% load static %}
+{% load socialaccount %}
+
+{% block css %} 
+    <link rel="stylesheet" href="{% static 'style/layout.css' %}"> 
+{% endblock %}
+
+{% block navbar %}
+    <div class="container">
+      <ul class="nav-index">
+        <li><a href="{% url 'account_login' %} ">Sign in</a></li>
+        <li><a href="{% url 'account_signup' %}">Sign up</a></li>
+      </ul>
+  </div>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <h2>Sign Up</h2>

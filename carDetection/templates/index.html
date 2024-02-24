@@ -7,25 +7,20 @@
 {% endblock %}
 
 {% block navbar %}
-    <ul>
-        <li><a href="{% url 'account_login' %}">Sign in</a></li>
+    <div class="container">
+      <ul class="nav-index">
+        <li><a href="{% url 'account_login' %} ">Sign in</a></li>
         <li><a href="{% url 'account_signup' %}">Sign up</a></li>
-    </ul>
+      </ul>
+  </div>
 {% endblock %}
 {% block content %}
-
     {% if user.is_authenticated %}
         <p>Welcome {{ user.username }} !!!</p>
         <a href="{% url 'account_logout' %}">Sign out</a>
     {% else %}
-
-    
-        <p>Sign up with Social Account</p>
-        <ul>
-            <li><a href="{% provider_login_url 'github' %}">Sign Up with GitHub</a></li>
-            <li><a href="{% provider_login_url 'google' %}">Sign Up with Google</a></li>
-        </ul>
-        
+        <p>Welcome to my channel!</p>
+        <a href="{% url 'account_signup' %}">Get started</a>
         
 
     {% endif %}
