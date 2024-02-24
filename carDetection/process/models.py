@@ -4,7 +4,7 @@ from location_field.models.plain import PlainLocationField
 from django.db.models import JSONField
 
 class Vehicle(models.Model):
-    # location = PlainLocationField(based_fields=['city'], zoom=7)
+    location = PlainLocationField(based_fields=['city'], zoom=7)
     speed = models.FloatField()
     color = models.TextField()
     license_plate = models.TextField()
@@ -35,7 +35,7 @@ class Road(models.Model):
 class Task(models.Model):
     status = models.TextField()
     time = models.DateTimeField()
-    video = models.FileField(upload_to='video_file', blank=True, null=True)
+    video = models.FileField(upload_to='video', blank=True, null=True)
     intersection = models.ForeignKey(Intersection, on_delete=models.CASCADE)
 
 class Loop(models.Model):
