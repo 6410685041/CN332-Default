@@ -49,3 +49,44 @@ body {
 #content a:hover {
     background-color: #2b70e4; /* Brighter Blue on Hover */
 }
+
+/* Style the navigation bar */
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial, sans-serif;
+}
+
+/* The navigation links */
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+/* The logo */
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Right-aligned link container */
+.navbar-right {
+    float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Clear floats */
+.navbar::after {
+    content: "";
+    clear: both;
+    display: table;
+}

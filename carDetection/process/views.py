@@ -8,7 +8,7 @@ from django.utils import timezone
 
 
 # go to upload page (for upload video)
-def view_upload_task(request):
+def view_create_task(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("account_login"))
     return render(request, "process/upload_task.html")

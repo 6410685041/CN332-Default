@@ -61,7 +61,10 @@ def create_initial_data(github_cid, github_csecrets, google_cid, google_csecrets
     )
     github.sites.set([site])
     google.sites.set([site])
-    Intersection.objects.create(intersection_name="Default Intersection", location=PlainLocationField(based_fields=['city'],initial='0,0'))
+    Intersection.objects.create(
+    intersection_name="Default Intersection", 
+    location="40.7128,-74.0060"
+    )
     print("Initial data created.")
 
 def create_superuser():    
