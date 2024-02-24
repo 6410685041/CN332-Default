@@ -3,16 +3,29 @@
 {% block content %}
 <div class="container">
     <h2>Edit Profile</h2>
-    <form method="post" action="">
+    <form method="post" action="{% url 'submit_profile' %}">
         {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ profile.first_name }}">
+        </div>
+        
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ profile.last_name }}">
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ profile.email }}">
+        </div>
+        
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" name="username" value="{{ profile.username }}" readonly>
         </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ profile.email }}" readonly>
-        </div>
+        
         <div class="form-group">
             <label for="occupation">Occupation</label>
             <select class="form-control" id="occupation" name="occupation">
@@ -21,14 +34,17 @@
                 {% endfor %}
             </select>
         </div>
+        
         <div class="form-group">
             <label for="phone_number">Phone Number</label>
             <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ profile.phone_number }}">
         </div>
+        
         <div class="form-group">
             <label for="bio">Bio</label>
             <textarea class="form-control" id="bio" name="bio">{{ profile.bio }}</textarea>
         </div>
+        
         <button type="submit" class="btn btn-primary">Update Profile</button>
     </form>
 </div>
