@@ -57,3 +57,5 @@ class Result(models.Model):
             models.CharField(max_length=256),
         ),   
     )
+class Weather(models.Model):
+    how = models.TextField()
