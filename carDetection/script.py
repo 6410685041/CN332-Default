@@ -89,11 +89,5 @@ if __name__ == "__main__":
         print("clear file in reset_list DONE!")
     if args.s:
         run_migrations()
-        with open(args.o , 'r') as file:
-            line = file.read().split("\n")
-        key_list = []
-        for i in line:
-            key_list.append(i.split(" ")[2])
-        github_cid, github_csecrets, google_cid, google_csecrets = key_list
         create_initial_data(github_cid, github_csecrets, google_cid, google_csecrets)
         create_superuser()
