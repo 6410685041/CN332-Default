@@ -19,5 +19,7 @@ from django.urls import path, include  # social
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('profile', views.view_profile, name='profile'),
+    path('edit_profile', views.view_edit_profile, name='edit_profile'),
+    path('edit_profile/submit', views.submit_edit_profile, name='submit_profile'),
 ]
