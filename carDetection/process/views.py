@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse
-from process.models import Task, Intersection, Loop
+from process.models import Task, Intersection, Loop, Result
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 
@@ -68,3 +68,12 @@ def remove_task(request, task_id):
 def submit_task(request, task_id):
     task = Task.objects.get(id=task_id)
     reverse("my_queue")
+
+def view_display_result(request, result_id):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("account_login"))
+    result = Result.objects.get(id=result_id)
+    data = {
+        "task": result,
+    }
+    return render(request, "process/result.html", data)
