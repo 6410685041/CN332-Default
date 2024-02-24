@@ -1,0 +1,2 @@
+> run celery
+celery -A carDetection worker --loglevel=info
