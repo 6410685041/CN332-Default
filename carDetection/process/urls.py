@@ -20,5 +20,5 @@ from . import views
 
 urlpatterns = [
     path('upload_task', views.view_upload_task, name='upload_task'),
-    path('edit_task', views.view_edit_task, name='edit_task'),
+    path('edit_task/<str:task_id>', views.view_edit_task, name='edit_task'),
 ]
