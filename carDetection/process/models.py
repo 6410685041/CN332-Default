@@ -36,8 +36,11 @@ class Task(models.Model):
     status = models.TextField()
     time = models.DateTimeField()
     video = models.FileField(upload_to='video_file', blank=True, null=True)
+    intersection = models.ForeignKey(Intersection, on_delete=models.CASCADE)
+    
 
 class Loop(models.Model):
+    loop_name = models.CharField(max_length=256)
     points = ArrayField(
         ArrayField(
             models.FloatField(blank=True),
@@ -47,3 +50,10 @@ class Loop(models.Model):
     )
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
+class Result(models.Model):
+    vehicle_count = models.IntegerField()
+    vehicle_with_direction = ArrayField(
+        ArrayField(
+            models.CharField(max_length=256),
+        ),   
+    )
