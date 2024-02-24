@@ -1,5 +1,18 @@
 {% extends "layout.html" %}
+{% load static %}
 
 {% block content %}
 <h1>Edit Task</h1>
+
+<!-- Display the image to be labeled -->
+<img id="imageToLabel" src="{% static 'images/mountain.jpeg' %}" alt="Image to label">
+
+<form method="post" id="labelForm">
+    {% csrf_token %}
+    <label for="roadLabel">Road Label:</label>
+    <input type="text" id="roadLabel" name="roadLabel" required>
+    <button type="submit">Submit</button>
+</form>
+<script src="{% static 'images/label.js' %}"></script> 
+
 {% endblock content %}
