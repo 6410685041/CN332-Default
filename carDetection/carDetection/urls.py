@@ -16,14 +16,13 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include  # social
-from django.views.generic import TemplateView  # social
-from user import views
+from django.urls import path, include
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("", TemplateView.as_view(template_name="index.html")), # homepage
     path("accounts/", include("allauth.urls")),  # social
-    path("", TemplateView.as_view(template_name="index.html")), # social
-    path("user/", include("user.urls")),
+    path("user/", include(("user.urls", 'user'), namespace="user")), # chatgpt recommend namespace for prevent collisions
 ]
 
