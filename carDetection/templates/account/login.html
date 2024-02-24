@@ -1,13 +1,20 @@
-{% extends "base.html" %}
+{% extends "../layout.html" %}
 {% load static %}
-{% block content %}
-<div class="container">
-    <h2>Login</h2>
-    <form method="post" action="{% url 'account_login' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
-    <a href="{% url 'account_signup' %}">Sign Up</a>
-</div>
-{% endblock %}
+{% block css %} <link rel="stylesheet" href="{% static 'style/layout.css' %}"> {% endblock %}
+
+
+<body>
+    {% block sidebar %} {% endblock %}
+
+    {% block content %}
+    <div class="container">
+        <h2>Login</h2>
+        <form method="post" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        <a href="{% url 'account_signup' %}">Sign Up</a>
+    </div>
+    {% endblock %}
+</body>
