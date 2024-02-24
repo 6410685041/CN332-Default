@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.github", # github
     "allauth.socialaccount.providers.google", # google
     "phonenumber_field",
+    "django_celery_results",
     "process",
     "user",
 ]
@@ -120,7 +121,7 @@ AUTH_USER_MODEL = 'user.Profile'
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Bangkok"
 
 USE_I18N = True
 
@@ -137,6 +138,16 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Celery Configuration
+CELERY_BROKER_URL = 'filesystem://'
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'
+CELERY_BROKER_TRANSPORT_OPTIONS = {
+    'data_folder_in': os.path.join(BASE_DIR, 'celery', 'queue'),
+    'data_folder_out': os.path.join(BASE_DIR, 'celery', 'queue'),
+    'data_folder_processed': os.path.join(BASE_DIR, 'celery', 'processed')
+}
 
 # social
 AUTHENTICATION_BACKENDS = [
