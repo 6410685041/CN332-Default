@@ -4,6 +4,13 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 # Create your views here.
 
+def view_home(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('login'))
+    profile = Profile.objects.get(id=request.user)
+    data = { "profile" , profile }
+    return render("user/home.html", data)
+
 def view_profile(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('login'))
@@ -29,5 +36,5 @@ def submit_edit_profile(request):
         profile.phone_number = request.POST['phone_number']
         profile.bio = request.POST['bio']
         profile.save()
-        
+
         return reverse("profile")
