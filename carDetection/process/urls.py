@@ -24,4 +24,8 @@ urlpatterns = [
     path('edit_task/add_loop/<str:task_id>', views.add_loop, name='add_loop'),
     path('submit_task/<str:task_id>', views.submit_task, name='submit_task'),
     path('display_result/<str:result_id', views.view_display_result, name='display_result'),
+    # test celery
+    path('', views.process_view, name='process_view'),
+    path('start-task/', views.start_task, name='start-task'),
+    path('task-status/<str:task_id>/', views.task_status, name='task-status'),
 ]

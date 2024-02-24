@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Status Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<button id="startTaskBtn">Start Task</button>
+<div id="taskResult">Task result will appear here...</div>
+
+<script>
+$(document).ready(function(){
+    $('#startTaskBtn').click(function(){
+        $.ajax({
+            url: '{% url "start-task" %}',
+            success: function(data) {
+                let taskId = data.task_id;
+                let interval = setInterval(function(){
+                    $.ajax({
+                        url: 'task-status/' + taskId + '/',
+                        success: function(data) {
+                            if (data.status == 'SUCCESS') {
+                                $('#taskResult').text('Task result: ' + data.result);
+                                clearInterval(interval);
+                            }
+                        }
+                    });
+                }, 1000); // Poll every 1000 milliseconds (1 second)
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>
