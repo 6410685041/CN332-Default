@@ -64,3 +64,7 @@ def remove_task(request, task_id):
     task = Task.objects.get(id=task_id)
     task.delete()
     reverse("my_queue")
+
+def submit_task(request, task_id):
+    task = Task.objects.get(id=task_id)
+    reverse("my_queue")
