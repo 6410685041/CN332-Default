@@ -20,6 +20,8 @@ from django.contrib.sites.models import Site
 from allauth.socialaccount.models import SocialApp
 from django.core.management import call_command
 from user.models import Profile
+from process.models import Intersection
+from location_field.models.plain import PlainLocationField
 import argparse
 from django.core.exceptions import ObjectDoesNotExist
 import glob
@@ -59,6 +61,7 @@ def create_initial_data(github_cid, github_csecrets, google_cid, google_csecrets
     )
     github.sites.set([site])
     google.sites.set([site])
+    Intersection.objects.create(intersection_name="Default Intersection", location=PlainLocationField(based_fields=['city'],initial='0,0'))
     print("Initial data created.")
 
 def create_superuser():    
