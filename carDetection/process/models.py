@@ -26,6 +26,10 @@ class Intersection(models.Model):
     intersection_name = models.CharField(max_length=256)
     location = PlainLocationField()
 
+    def __str__(self):
+        return self.intersection_name
+
+
 class Road(models.Model):
     code = models.IntegerField()
     road_name = models.CharField(max_length=256)
@@ -35,7 +39,7 @@ class Road(models.Model):
 class Task(models.Model):
     status = models.TextField()
     time = models.DateTimeField()
-    video = models.FileField(upload_to='video', blank=True, null=True)
+    video = models.FileField(upload_to='static/video', blank=True, null=True)
     intersection = models.ForeignKey(Intersection, on_delete=models.CASCADE)
 
 class Loop(models.Model):

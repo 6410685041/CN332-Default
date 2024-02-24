@@ -1,2 +1,5 @@
+first time only
+mkdir -p celery/queue
+
 > run celery
 celery -A carDetection worker --loglevel=info

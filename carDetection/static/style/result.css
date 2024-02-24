@@ -1,0 +1,10 @@
+/* container */
+.container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+            "text1 text2";
+    margin: auto;
+    gap: 5%;
+}
