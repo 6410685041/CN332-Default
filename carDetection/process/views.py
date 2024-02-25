@@ -87,7 +87,7 @@ def create_task(request):
             
             # Create the task with the intersection instance
             task = Task.objects.create(
-                video=video, intersection=intersection_instance, time=time, status=status
+                video=video, intersection=intersection_instance, created_at=time, status=status
             )
             
             # Save the task
