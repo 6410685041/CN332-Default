@@ -38,9 +38,17 @@ class Road(models.Model):
 
 class Task(models.Model):
     status = models.TextField()
-    time = models.DateTimeField()
     video = models.FileField(upload_to='static/video', blank=True, null=True)
     intersection = models.ForeignKey(Intersection, on_delete=models.CASCADE)
+
+    # chat gen for fetch queue
+    task_id = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)  # Optional: to store task name or description
+    created_at = models.DateTimeField(auto_now_add=True)
+    result = models.TextField(null=True, blank=True)
+    
+    def __str__(self):
+        return self.task_id
 
 class Loop(models.Model):
     loop_name = models.CharField(max_length=256)

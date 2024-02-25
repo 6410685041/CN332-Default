@@ -1,19 +1,35 @@
 from django.shortcuts import render
 from django.urls import reverse
 from process.models import Task, Intersection, Loop, Result
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.utils import timezone
-from .tasks import abc
+from celery.result import AsyncResult
 from random import random
+from .tasks import abc
+from .models import Task
 
 # test celery
 def process_view(request):
-    return render(request, "process/process_view.html")
+    # Example list of task IDs you might be tracking
+    tracked_tasks = Task.objects.all().order_by('created_at')  # Get all tasks, newest first
+    tasks = []
+
+    for tracked_task in tracked_tasks:
+        result = AsyncResult(tracked_task.task_id)
+        tasks.append({
+            'id': tracked_task.task_id,
+            'name': tracked_task.name,  # Assuming you want to display the name/description
+            'status': result.status,
+            'result': result.result if result.ready() else 'N/A',
+        })
+    return render(request, "process/process_view.html", {'tasks': tracked_tasks})
 
     
 def start_task(request):
     """Initiate a task and return its ID to the frontend."""
     task = abc.delay(random(), random())
+    Task.objects.create(task_id=task.id, intersection_id=1)
+    
     return JsonResponse({'task_id': task.id})
 
 def task_status(request, task_id):
