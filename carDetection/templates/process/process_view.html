@@ -9,6 +9,28 @@
 <button id="startTaskBtn">Start Task</button>
 <div id="taskResult">Task result will appear here...</div>
 
+<h1>Task Queue Status</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Task ID</th>
+                <th>Name</th> <!-- Displaying task name/description -->
+                <th>Status</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.name }}</td>
+                <td>{{ task.status }}</td>
+                <td>{{ task.result }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 <script>
 $(document).ready(function(){
     $('#startTaskBtn').click(function(){

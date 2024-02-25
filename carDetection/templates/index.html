@@ -6,14 +6,7 @@
     <link rel="stylesheet" href="{% static 'style/layout.css' %}"> 
 {% endblock %}
 
-{% block navbar %}
-    <div class="container">
-      <ul class="nav-index">
-        <li><a href="{% url 'account_login' %} ">Sign in</a></li>
-        <li><a href="{% url 'account_signup' %}">Sign up</a></li>
-      </ul>
-  </div>
-{% endblock %}
+
 {% block content %}
     {% if user.is_authenticated %}
         <p>Welcome {{ user.username }} !!!</p>
@@ -22,6 +15,5 @@
         <a href="{% url 'my_queue' %}">My Queue</a>
     {% else %}
         <p>Welcome to my channel!</p>
-        <a href="{% url 'account_signup' %}">Get started</a>
     {% endif %}
 {% endblock %}
