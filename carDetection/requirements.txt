@@ -6,3 +6,4 @@ psycopg2
 django-phonenumber-field[phonenumbers]
 celery
 django-celery-results
+pytz

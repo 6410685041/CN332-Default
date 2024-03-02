@@ -142,3 +142,22 @@ def view_display_result(request, result_id):
         "JSON": result.vehicle_with_direction,
     }
     return render(request, "process/result.html", data)
+
+def view_create_intersection(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("account_login"))
+    intersections = Intersection.objects.all()
+    data = {
+            "intersections" : intersections,
+    }
+    return render(request, "process/create_intersection.html", data)
+    
+def create_intersection(request):
+    if request.method == "POST":
+        location = request.POST["location"]
+        intersection_name = request.POST["intersection_name"]
+        Intersection.objects.create(
+            location=location,
+            intersection_name=intersection_name
+        )
+        return reverse("view_create_intersection")

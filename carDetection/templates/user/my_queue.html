@@ -5,4 +5,24 @@
 {% endblock %}
 {% block content %}
 <h1>My Queue</h1>
+<table>
+    <tr>
+        <th>task id</th>
+        <th>owner</th>
+        <th>intersection</th>
+        <th>create at</th>
+        <th>status</th>
+        <th>details</th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td>{{ task.id }}</td>
+        <td>{{ task.owner }}</td>
+        <td>{{ task.intersection }}</td>
+        <td>{{ task.created_at }}</td>
+        <td>{{ task.status }}</td>
+        <td><a href="{% url 'edit_task' task.id %}">Details</a></td>
+    </tr>
+    {% endfor %}
+</table>
 {% endblock content %}
