@@ -2,6 +2,7 @@ from django.shortcuts import render
 from user.models import Profile
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from process.models import Task
 
 # Create your views here.
 
@@ -30,8 +31,10 @@ def view_my_queue(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("account_login"))
     profile = Profile.objects.get(id=request.user.id)
+    tasks = Task.objects.all()
     data = {
         "profile": profile,
+        "tasks": tasks,
     }
     return render(request, "user/my_queue.html", data)
 

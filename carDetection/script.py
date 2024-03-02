@@ -20,7 +20,9 @@ from django.contrib.sites.models import Site
 from allauth.socialaccount.models import SocialApp
 from django.core.management import call_command
 from user.models import Profile
-from process.models import Intersection
+from process.models import Intersection, Task
+from datetime import datetime
+import pytz
 from location_field.models.plain import PlainLocationField
 import argparse
 from django.core.exceptions import ObjectDoesNotExist
@@ -61,10 +63,28 @@ def create_initial_data(github_cid, github_csecrets, google_cid, google_csecrets
     )
     github.sites.set([site])
     google.sites.set([site])
-    Intersection.objects.create(
+    # create profile
+    username = 'default'
+    email = 'default@example.com'
+    password = 'default1234'
+    default_user = Profile.objects.create(
+        username=username,
+        email=email,
+    )
+    default_user.set_password(password)
+    default_user.save()
+    # create intersection
+    intersection = Intersection.objects.create(
     intersection_name="Default Intersection", 
     location="40.7128,-74.0060"
     )
+    print("Default intersection Created")
+    # create task
+    Task.objects.create(status="In process",
+    intersection=intersection,
+    owner=default_user,
+    created_at=datetime.now(pytz.timezone("Asia/Bangkok")))
+    print("Default task Created")
     print("Initial data created.")
 
 def create_superuser():    

@@ -2,6 +2,7 @@ from django.db import models
 from location_field.models.plain import PlainLocationField
 # Use the built-in JSONField for compatibility with SQLite
 from django.db.models import JSONField
+from user.models import Profile
 
 class Vehicle(models.Model):
     location = PlainLocationField(based_fields=['city'], zoom=7)
@@ -41,9 +42,7 @@ class Task(models.Model):
     video = models.FileField(upload_to='static/video', blank=True, null=True)
     intersection = models.ForeignKey(Intersection, on_delete=models.CASCADE)
 
-    # chat gen for fetch queue
-    task_id = models.CharField(max_length=255, unique=True)
-    name = models.CharField(max_length=255)  # Optional: to store task name or description
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     result = models.TextField(null=True, blank=True)
     

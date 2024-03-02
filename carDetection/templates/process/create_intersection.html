@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'style/layout.css' %}">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+crossorigin=""/>
+ <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+{% endblock %}
+{% block content %}
+<h1>Create Intersection</h1>
+    {% csrf_token %}
+
+    <div id="map"></div>
+
+
+
+    <a href="{% url 'submit_intersection' %}">Create new intersection</a>
+
+    <div class="intersection_list">
+        <table>
+            {% for intersection in intersections %}
+            <tr>
+                <th>Intersection name</th>
+                <th>Location</th>
+                <th>Details</th>
+            </tr>
+            <tr>
+                <td>{{ intersection.intersection_name }}</td>
+                <td>{{ intersection.location }}</td>
+                <td><a href="{% url 'create_intersection' %}">View</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock content %}
