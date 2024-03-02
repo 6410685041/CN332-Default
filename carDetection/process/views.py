@@ -7,6 +7,9 @@ from celery.result import AsyncResult
 from random import random
 from .tasks import abc
 from .models import Task
+from user.models import Profile
+from datetime import datetime
+import pytz
 
 # test celery
 def process_view(request):
@@ -76,7 +79,8 @@ def view_edit_task(request, task_id):
 def create_task(request):
     if request.method == "POST":
         status = "In process"
-        time = timezone.now()
+        time = datetime.now(pytz.timezone("Asia/Bangkok"))
+        owner = Profile.objects.get(id=request.user.id)
         video = request.FILES.get("video")
         intersection_name = request.POST.get("intersection")
 
@@ -87,7 +91,7 @@ def create_task(request):
             
             # Create the task with the intersection instance
             task = Task.objects.create(
-                video=video, intersection=intersection_instance, created_at=time, status=status
+                video=video, intersection=intersection_instance, created_at=time, status=status, owner=owner
             )
             
             # Save the task
