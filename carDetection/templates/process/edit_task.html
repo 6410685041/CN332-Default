@@ -89,6 +89,7 @@
     </div>
     <input class="button bttm-right" type="submit" value="CONFIRM">
 </form>
+<a href="{% url 'delete_task' task.id %}">Delete Task</a>
 <script src="{% static 'js/label.js' %}"></script> 
 
 {% endblock content %}

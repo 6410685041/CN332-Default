@@ -13,6 +13,7 @@
         <th>create at</th>
         <th>status</th>
         <th>details</th>
+        <th>delete</th>
     </tr>
     {% for task in tasks %}
     <tr>
@@ -22,6 +23,7 @@
         <td>{{ task.created_at }}</td>
         <td>{{ task.status }}</td>
         <td><a href="{% url 'edit_task' task.id %}">Details</a></td>
+        <td><a href="{% url 'delete_task' task.id %}">Delete</a></td>
     </tr>
     {% endfor %}
 </table>

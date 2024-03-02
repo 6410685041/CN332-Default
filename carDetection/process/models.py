@@ -39,7 +39,7 @@ class Road(models.Model):
 
 class Task(models.Model):
     status = models.TextField()
-    video = models.FileField(upload_to="static/video/", blank=True, null=True)
+    video = models.FileField(upload_to="static/video/", blank=False, null=False)
     intersection = models.ForeignKey(Intersection, on_delete=models.CASCADE)
 
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
