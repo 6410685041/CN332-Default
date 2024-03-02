@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from process.models import Task, Intersection, Loop, Result
 from django.http import HttpResponseRedirect, JsonResponse
@@ -125,17 +125,17 @@ def remove_loop(request, loop_id):
     loop = Loop.objects.get(id=loop_id)
     task_id = loop.task.id
     loop.delete()
-    reverse("edit_task", task_id)
+    return reverse("edit_task", task_id)
 
 
-def remove_task(request, task_id):
-    task = Task.objects.get(id=task_id)
+def delete_task(request, task_id):
+    task = Task.objects.get(id=int(task_id))
     task.delete()
-    reverse("my_queue")
+    return redirect('my_queue')
 
 def submit_task(request, task_id):
     task = Task.objects.get(id=task_id)
-    reverse("my_queue")
+    return reverse("my_queue")
 
 def view_display_result(request, result_id):
     if not request.user.is_authenticated:

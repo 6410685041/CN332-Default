@@ -81,9 +81,10 @@ def create_initial_data(github_cid, github_csecrets, google_cid, google_csecrets
     print("Default intersection Created")
     # create task
     Task.objects.create(status="In process",
-    intersection=intersection,
-    owner=default_user,
-    created_at=datetime.now(pytz.timezone("Asia/Bangkok")))
+                        video="static/video/test1.MP4",
+                        intersection=intersection,
+                        owner=default_user,
+                        created_at=datetime.now(pytz.timezone("Asia/Bangkok")))
     print("Default task Created")
     print("Initial data created.")
 
