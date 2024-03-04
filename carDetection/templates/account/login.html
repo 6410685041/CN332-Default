@@ -4,6 +4,7 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'style/layout.css' %}">
+<link rel="stylesheet" href="{% static 'style/signin.css' %}">
 {% endblock %}
 
 
@@ -20,16 +21,17 @@
     {% if user.is_authenticated %}
 
     {% else %}
-        <div class="container">
+        <div class="white_box">
             <h2>Login</h2>
             <form method="post" action="{% url 'account_login' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
-            <a href="{% url 'account_signup' %}">Sign Up</a>
-
-            <p>Sign up with Social Account</p>
+            <p> Don't have account? 
+                <a href="{% url 'account_signup' %}" class="default">Sign Up</a>
+            </p>
+            <h3>Sign up with Social Account</h3>
             <a href="{% provider_login_url 'github' %}">Login with GitHub</a>
             <a href="{% provider_login_url 'google' %}">Login with Google</a>
         </div>
