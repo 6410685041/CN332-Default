@@ -13,6 +13,7 @@ urlpatterns = [
     path('edit_task/add_loop/<int:task_id>', views.add_loop, name='add_loop'),
     # delete
     path('delete_task/<int:task_id>', views.delete_task, name='delete_task'),
+    path('delete_intersection/<int:intersection_id>', views.delete_intersection, name='delete_intersection'),
     # submit
     path('submit_task/<int:task_id>', views.submit_task, name='submit_task'),
     # test celery

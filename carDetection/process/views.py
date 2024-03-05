@@ -132,6 +132,11 @@ def delete_task(request, task_id):
     task.delete()
     return redirect('my_queue')
 
+def delete_intersection(request, intersection_id):
+    intersection = Intersection.objects.get(id=int(intersection_id))
+    intersection.delete()
+    return redirect('create_intersection')
+
 def submit_task(request, task_id):
     task = Task.objects.get(id=task_id)
     return reverse("my_queue")
