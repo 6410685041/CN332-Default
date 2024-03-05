@@ -24,3 +24,28 @@ function onMapClick(e) {
 }
 
 map.on('click', onMapClick);
+
+// view location for each intersection
+function updateMap(event, intersectionId) {
+    event.preventDefault();  // Prevent form submission
+
+    // Get the location value from the hidden input
+    var locationValue = document.getElementById('location_' + intersectionId).value;
+
+    // Assuming locationValue is in "latitude,longitude" format
+    var parts = locationValue.split(',');
+    var latitude = parseFloat(parts[0]);
+    var longitude = parseFloat(parts[1]);
+
+    // Assuming 'map' is your Leaflet map variable
+    map.setView([latitude, longitude], 13);  // 13 is the zoom level, adjust as needed
+
+    // Creating a LatLng object for the popup
+    var latLng = L.latLng(latitude, longitude);
+
+    // Creating and opening the popup
+    var popup = L.popup()
+        .setLatLng(latLng)
+        .setContent("Location: " + latitude + ", " + longitude)
+        .openOn(map);
+}

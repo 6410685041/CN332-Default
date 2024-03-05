@@ -32,6 +32,7 @@
                 <th>Intersection name</th>
                 <th>Location</th>
                 <th>Details</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -39,7 +40,13 @@
             <tr>
                 <td>{{ intersection.intersection_name }}</td>
                 <td>{{ intersection.location }}</td>
-                <td><a href="{% url 'create_intersection' %}">View Details</a></td>
+                <form onsubmit="updateMap(event, '{{ intersection.id }}')">
+                    <td>
+                        <input id="location_{{ intersection.id }}" type="hidden" value="{{ intersection.location }}" required>
+                        <input type="submit" value="View Location">
+                    </td>
+                </form>
+                <td><a href="{% url 'delete_intersection' intersection.id %}">Delete</a></td>
             </tr>
             {% empty %}
             <tr>
