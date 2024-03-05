@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from process.models import Task, Intersection, Loop, Result
 from django.http import HttpResponseRedirect, JsonResponse
-from django.utils import timezone
+from process.forms import IntersectionForm
 from celery.result import AsyncResult
 from random import random
 from .tasks import abc
@@ -49,7 +49,9 @@ def view_create_task(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("account_login"))
     intersections = Intersection.objects.all()
-    data = {"intersections": intersections}
+    form = IntersectionForm()
+    data = {"intersections": intersections,
+            "form": form}
     return render(request, "process/create_task.html", data)
 
 
