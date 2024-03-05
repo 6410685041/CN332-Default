@@ -4,6 +4,7 @@
 
 {% block css %} 
     <link rel="stylesheet" href="{% static 'style/layout.css' %}"> 
+    <link rel="stylesheet" href="{% static 'style/signin.css' %}">
 {% endblock %}
 
 {% block navbar %}
@@ -16,7 +17,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="white_box">
     <h2>Sign Up</h2>
     <form method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
