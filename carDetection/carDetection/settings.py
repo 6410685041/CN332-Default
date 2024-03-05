@@ -193,3 +193,9 @@ SOCIALACCOUNT_PROVIDERS = {
 
     }
 }
+
+LOCATION_FIELD = {
+    'map.provider': 'openstreetmap',
+    'provider.openstreetmap.max_zoom': 18,
+
+}
