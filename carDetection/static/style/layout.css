@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-body {
+html,body {
     font-family: 'Barlow', sans-serif;
-    color: #0c2f50; /* Dark Blue Text */
-    background-color: #f2f1ec; /* Off-white background */
+    color: white; /* Dark Blue Text */
+    background-color: #000000; /* Off-white background */
 }
 
 #navbar ul {
     list-style-type: none;
     display: flex;
     justify-content: space-between;
-    background-color: #004a98; /* Dark Blue Background */
+    background-color: #191c24;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Add some shadow for depth */
 }
 
@@ -31,13 +31,13 @@ body {
 #content {
     text-align: center;
     padding: 50px;
-    background-color: #2b70e4; /* Bright Blue Background */
+    background-color: #000000;
     color: #f2f1ec; /* Off-white Text */
 }
 
 #content a {
     display: inline-block;
-    background-color: #289dd2; /* Button Background */
+    background-color: #000; /* Button Background */
     color: #f2f1ec; /* Off-white Button Text */
     padding: 10px 20px;
     margin: 10px;
@@ -53,7 +53,7 @@ body {
 /* Style the navigation bar */
 .navbar {
     overflow: hidden;
-    background-color: #333;
+    background-color: #191c24;
     font-family: Arial, sans-serif;
 }
 

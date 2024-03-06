@@ -1,0 +1,35 @@
+/* #content {
+    background-color: black;
+} */
+
+#content table {
+    margin: auto;
+    margin-top: 10px;
+    width: 90%;
+    border-spacing: 5px;
+    background-color: #191c24;
+    color: #6c7293;
+}
+
+#content table tr th {
+    height: 50px;
+    border-bottom: 2px solid #2c2e33;
+}
+
+#content .delete:hover {
+    background-color: rgb(235, 115, 115);
+}
+
+#content .content-block {
+    background-color: #191c24;
+    padding: 10px;
+    border-radius: 0.25rem;
+}
+
+#content .content-block-home {
+    background-color: #191c24;
+    padding: 10px;
+    border-radius: 0.25rem;
+    margin: auto;
+    width: 700px;
+}

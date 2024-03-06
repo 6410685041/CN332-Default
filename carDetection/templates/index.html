@@ -4,16 +4,19 @@
 
 {% block css %} 
     <link rel="stylesheet" href="{% static 'style/layout.css' %}"> 
+    <link rel="stylesheet" href="{% static 'style/table_and_block.css' %}">
 {% endblock %}
 
 
 {% block content %}
+<div class="content-block-home">
     {% if user.is_authenticated %}
-        <p>Welcome {{ user.username }} !!!</p>
+        <h2>Welcome {{ user.username }} !!!</h2>
         <a href="{% url 'account_logout' %}">Sign out</a>
         <a href="{% url 'profile' %}">My Profile</a>
         <a href="{% url 'my_queue' %}">My Queue</a>
     {% else %}
         <p>Welcome to my channel!</p>
     {% endif %}
+</div>
 {% endblock %}

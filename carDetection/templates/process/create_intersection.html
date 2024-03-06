@@ -4,6 +4,7 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'style/layout.css' %}">
 <link rel="stylesheet" href="{% static 'style/intersection.css' %}">
+<link rel="stylesheet" href="{% static 'style/table_and_block.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -48,7 +49,7 @@
                         <input type="submit" value="View Location">
                     </td>
                 </form>
-                <td><a href="{% url 'delete_intersection' intersection.id %}">Delete</a></td>
+                <td><a href="{% url 'delete_intersection' intersection.id %}" class="delete">Delete</a></td>
             </tr>
             {% empty %}
             <tr>
