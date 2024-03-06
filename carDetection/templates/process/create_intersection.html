@@ -8,55 +8,62 @@
 {% endblock %}
 
 {% block content %}
-<h1>Create Intersection</h1>
 
-<form method="post" enctype="multipart/form-data" action="{% url 'submit_intersection' %}">
-    {% csrf_token %}
-    <div id="map"></div>
-    <!-- Hidden inputs for latitude and longitude -->
-    <label for="location">Location: </label>
-    <input type="text" name="location" id="location" required>
-    <label for="intersection_name">Name: </label>
-    <input type="text" name="intersection_name" id="intersection_name" required>
-    <input type="submit" value="Submit">
-</form>
+<div class="content-block">
+    <h1>Create Intersection</h1>
 
-<!-- Loading Leaflet CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <form method="post" enctype="multipart/form-data" action="{% url 'submit_intersection' %}">
+        {% csrf_token %}
+        <div class="container">
+            <div id="map" class="site-map"></div>
+            <!-- Hidden inputs for latitude and longitude -->
+            <div class="site-submit">
+                <label for="location" style="margin-top: auto; margin-bottom: auto;">Location: </label>
+                <input type="text" name="location" id="location" required>
+                <label for="intersection_name" style="margin-top: auto; margin-bottom: auto;">Name: </label>
+                <input type="text" name="intersection_name" id="intersection_name" required>
+                <input type="submit" value="Submit" class="site-submit-button">
+            </div>
+        </div>
+    </form>
 
-<!-- Leaflet's JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="{% static 'js/intersection.js' %}"></script>
+    <!-- Loading Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 
-<div class="intersection_list">
-    <table>
-        <thead>
-            <tr>
-                <th>Intersection name</th>
-                <th>Location</th>
-                <th>Details</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for intersection in intersections %}
-            <tr>
-                <td>{{ intersection.intersection_name }}</td>
-                <td>{{ intersection.location }}</td>
-                <form onsubmit="updateMap(event, '{{ intersection.id }}')">
-                    <td>
-                        <input id="location_{{ intersection.id }}" type="hidden" value="{{ intersection.location }}" required>
-                        <input type="submit" value="View Location">
-                    </td>
-                </form>
-                <td><a href="{% url 'delete_intersection' intersection.id %}" class="delete">Delete</a></td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="3">No intersections found.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <!-- Leaflet's JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="{% static 'js/intersection.js' %}"></script>
+
+    <div class="intersection_list">
+        <table>
+            <thead>
+                <tr>
+                    <th>Intersection name</th>
+                    <th>Location</th>
+                    <th>Details</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for intersection in intersections %}
+                <tr>
+                    <td>{{ intersection.intersection_name }}</td>
+                    <td>{{ intersection.location }}</td>
+                    <form onsubmit="updateMap(event, '{{ intersection.id }}')">
+                        <td>
+                            <input id="location_{{ intersection.id }}" type="hidden" value="{{ intersection.location }}" required>
+                            <input type="submit" value="View Location">
+                        </td>
+                    </form>
+                    <td><a href="{% url 'delete_intersection' intersection.id %}" class="delete">Delete</a></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No intersections found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock content %}
