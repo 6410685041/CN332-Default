@@ -11,7 +11,8 @@
     grid-template-areas: 
         "map submit";
     gap: 0px;
-    margin: 20px;
+    margin: auto;
+    max-width: 80%;
 }
 
 .site-map {
