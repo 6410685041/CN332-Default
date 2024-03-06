@@ -14,16 +14,18 @@
         <thead>
             <tr>
                 <th>Task ID</th>
-                <th>Name</th> <!-- Displaying task name/description -->
+                <th>Owner</th>
+                <th>Create at</th>
                 <th>Status</th>
                 <th>Result</th>
             </tr>
         </thead>
         <tbody>
             {% for task in tasks %}
-            <tr>
-                <td>{{ task.id }}</td>
-                <td>{{ task.name }}</td>
+            <tr style="text-align: center;">
+                <td>{{ task }}</td>
+                <td>{{ task.owner }}</td>
+                <td>{{ task.created_at }}</td>
                 <td>{{ task.status }}</td>
                 <td>{{ task.result }}</td>
             </tr>

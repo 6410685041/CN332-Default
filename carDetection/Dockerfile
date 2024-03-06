@@ -16,7 +16,7 @@ COPY . /app
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --upgrade pip && pip install -r requirements.txt
-RUN python script.py -rs
+# RUN python script.py -rs
 
 # Expose the port the app runs on
 EXPOSE 8000
