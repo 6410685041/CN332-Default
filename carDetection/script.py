@@ -103,12 +103,9 @@ if __name__ == "__main__":
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description='Script to help doing the things')
     parser.add_argument('-r', action='store_true', help='Reset')
-    parser.add_argument('-e', action='store_true', help='install requirements to environment')
     parser.add_argument('-s', action='store_true', help='Setting')
+    parser.add_argument('-a', action='store_true', help='Activate docker')
     args = parser.parse_args()
-    if args.e:
-        subprocess.run(["pip", "install", "-r", "requirements.txt"])
-        print("install requirement DONE!")
     if args.r:
         with open("reset_list.txt" , 'r') as file:
             for to_clear in file.read().split("\n"):
@@ -118,3 +115,5 @@ if __name__ == "__main__":
         run_migrations()
         create_initial_data(github_cid, github_csecrets, google_cid, google_csecrets)
         create_superuser()
+    if args.a:
+        subprocess.run(["docker", "compose", "up", "-d"])
