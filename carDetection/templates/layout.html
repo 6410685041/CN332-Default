@@ -11,7 +11,7 @@
     {% block css %}{% endblock %}
 </head>
 
-<body>
+<body style="margin:0;">
     <nav id="navbar" class="navbar">
         {% block navbar %}
         {% if not user.is_authenticated %}
@@ -29,7 +29,7 @@
             <a href="{% url 'create_intersection' %}">Intersection List</a>
             <a href="{% url 'create_task' %}">Create Task</a>
             <a href="{% url 'profile' %}">Profile</a>
-            <a href="{% url 'account_logout' %}">Logout</a>
+            <a href="{% url 'account_logout' %}">Sign out</a>
         </div>
         {% endif %}
         {% endblock %}
