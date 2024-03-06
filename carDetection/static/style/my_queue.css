@@ -4,11 +4,10 @@
 
 #content table {
     margin: auto;
-    margin-top: 50px;
+    margin-top: 10px;
     width: 90%;
     border-spacing: 5px;
     background-color: #191c24;
-    border-radius: 5px;
     color: #6c7293;
 }
 
@@ -19,4 +18,10 @@
 
 #content .delete:hover {
     background-color: rgb(235, 115, 115);
+}
+
+#content .content-block {
+    background-color: #191c24;
+    padding: 10px;
+    border-radius: 0.25rem;
 }

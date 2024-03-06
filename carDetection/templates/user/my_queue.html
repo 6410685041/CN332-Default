@@ -5,28 +5,29 @@
 <link rel="stylesheet" href="{% static 'style/my_queue.css' %}">
 {% endblock %}
 {% block content %}
-<div>
-<h1>My Queue</h1>
-<table>
-    <tr>
-        <th>Task ID</th>
-        <th>Owner</th>
-        <th>Intersection</th>
-        <th>Create at</th>
-        <th>Status</th>
-        <th>Details</th>
-        <th>Delete</th>
-    </tr>
-    {% for task in tasks %}
-    <tr>
-        <td>{{ task.id }}</td>
-        <td>{{ task.owner }}</td>
-        <td>{{ task.intersection }}</td>
-        <td>{{ task.created_at }}</td>
-        <td>{{ task.status }}</td>
-        <td><a href="{% url 'edit_task' task.id %}">Details</a></td>
-        <td><a href="{% url 'delete_task' task.id %}" class="delete">Delete</a></td>
-    </tr>
-    {% endfor %}
-</table>
+<div class="content-block">
+    <h1>My Queue</h1>
+    <table>
+        <tr>
+            <th>Task ID</th>
+            <th>Owner</th>
+            <th>Intersection</th>
+            <th>Create at</th>
+            <th>Status</th>
+            <th>Details</th>
+            <th>Delete</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.id }}</td>
+            <td>{{ task.owner }}</td>
+            <td>{{ task.intersection }}</td>
+            <td>{{ task.created_at }}</td>
+            <td>{{ task.status }}</td>
+            <td><a href="{% url 'edit_task' task.id %}">Details</a></td>
+            <td><a href="{% url 'delete_task' task.id %}" class="delete">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 {% endblock content %}
