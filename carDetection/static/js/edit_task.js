@@ -1,7 +1,30 @@
-// <!-- Video control buttons -->
 document.addEventListener('DOMContentLoaded', function() {
     const video = document.getElementById('video');
     const playButton = document.getElementById('play-button');
+    const canvas = document.getElementById('canvas');
+
+    let current = 0;
+    let points = [];
+
+    // Function to update points array with input field values
+    function updatePointsFromInputs() {
+        const x = document.getElementById(`x${current+1}`).value;
+        const y = document.getElementById(`y${current+1}`).value;
+
+        // Only add point if both coordinates are provided
+        if (x !== '' && y !== '') {
+            points.push({ x: parseFloat(x), y: parseFloat(y) });
+        }
+    }
+
+    // Call the function to initially populate the points array
+    updatePointsFromInputs();
+
+    // Optionally, listen for changes in input fields to update points array dynamically
+    for (let i = 1; i <= 4; i++) {
+        document.getElementById(`x${i}`).addEventListener('change', updatePointsFromInputs);
+        document.getElementById(`y${i}`).addEventListener('change', updatePointsFromInputs);
+    }
 
     function updatePlayButtonText() {
         playButton.textContent = video.paused ? 'Play' : 'Pause';
@@ -16,53 +39,36 @@ document.addEventListener('DOMContentLoaded', function() {
         updatePlayButtonText();
     });
 
-    stopButton.addEventListener('click', function() {
-        video.pause();
-        video.currentTime = 0;
-        updatePlayButtonText();
+    // Canvas click event for video pointing
+    canvas.addEventListener('click', function(event) {
+        
+        // Get click coordinates relative to the canvas
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        points.push({ x, y });
+
+        // Implement logic to display points on canvas or use them as needed
     });
 
-    // Update the button text initially
+    // Keydown event for resetting points
+    document.addEventListener('keydown', function(event) {
+        if(event.key === "Escape") {
+            points = [];
+        }
+        if(event.key === "1") {
+            current = 0
+        }
+        else if(event.key === "2") {
+            current = 1
+        }
+        else if(event.key === "3") {
+            current = 2
+        }
+        else if(event.key === "4") {
+            current = 3
+        }
+    });
+
     updatePlayButtonText();
-});
-
-// video pointing
-// Get the video element and video wrapper
-const video = document.getElementById('video');
-const videoWrapper = document.getElementById('video-wrapper');
-
-var count = 4
-var points = []
-
-function keyPress(e) {
-    if(e.key === "Escape") {
-        // write your logic here.
-        count = 4
-        points = []
-    }
-}
-
-video.addEventListener('click', function(event) {
-
-    // Get the canvas element
-    var canvas = document.getElementById("canvas");
-    // Get the context
-    let ctx = canvas.getContext("2d");
-
-  // Get the click coordinates
-  const { clientX, clientY } = event;
-
-  // Create a new box element
-  box = document.createElement('div');
-  box.className = 'box';
-  box.style.left = (clientX - videoWrapper.offsetLeft) + 'px';
-  box.style.top = (clientY - videoWrapper.offsetTop) + 'px';
-
-  // Create a text element for displaying the coordinates
-  const text = document.createElement('span');
-  text.textContent = `(${clientX + videoWrapper.offsetWidth/8 - videoWrapper.offsetLeft/2}, ${clientY - videoWrapper.offsetHeight/2})`;
-  box.appendChild(text);
-
-  // Append the box to the video wrapper
-  videoWrapper.appendChild(box);
 });
