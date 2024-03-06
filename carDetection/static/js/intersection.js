@@ -21,6 +21,11 @@ function onMapClick(e) {
         .setLatLng(e.latlng)
         .setContent("You clicked the map at " + e.latlng.toString())
         .openOn(map);
+
+    // Clear the location field when the popup is closed
+    popup.on('remove', function() {
+        document.getElementById('location').value = null;
+    });
 }
 
 map.on('click', onMapClick);

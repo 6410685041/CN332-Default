@@ -1,0 +1,9 @@
+#video-wrapper, #video, #video-overlay {
+    position: relative;
+    width: 600px; /* Define your fixed width */
+    height: 400px; /* Define your fixed height */
+}
+
+html {
+    color: blueviolet;
+}
