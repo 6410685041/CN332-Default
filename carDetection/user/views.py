@@ -54,8 +54,6 @@ def submit_edit_profile(request):
         profile.first_name = request.POST["first_name"]
         profile.last_name = request.POST["last_name"]
         profile.email = request.POST["email"]
-        profile.username = request.POST["username"]
-        profile.occupation = request.POST["occupation"]
         profile.phone_number = request.POST["phone_number"]
         profile.bio = request.POST["bio"]
         profile.save()

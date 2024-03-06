@@ -15,6 +15,8 @@
     <canvas id="canvas"></canvas>
 </div>
 
+<small>Press 1,2,3,4 to edit the points</small>
+
 <!-- Video control buttons -->
 <div id="video-controls">
     <button id="play-button">Play</button>
@@ -75,6 +77,7 @@
     <input class="button bttm-right" type="submit" value="CONFIRM">
 </form>
 <a href="{% url 'delete_task' task.id %}">Delete Task</a>
-<script src="{% static 'js/edit_task.js' %}"></script> 
+<script src="{% static 'js/play_video.js' %}"></script> 
+<script src="{% static 'js/loop_square.js' %}"></script> 
 
 {% endblock content %}
