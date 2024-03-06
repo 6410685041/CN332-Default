@@ -140,7 +140,7 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Celery Configuration
-CELERY_BROKER_URL = 'filesystem://'
+CELERY_BROKER_URL = 'amqp://celery:celery1234@localhost:5672/myvhost'
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'django-cache'
 CELERY_BROKER_TRANSPORT_OPTIONS = {

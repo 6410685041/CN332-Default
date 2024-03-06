@@ -17,10 +17,9 @@ def process_view(request):
     tasks = []
 
     for tracked_task in tracked_tasks:
-        result = AsyncResult(tracked_task.task_id)
+        result = AsyncResult(tracked_task.id)
         tasks.append({
-            'id': tracked_task.task_id,
-            'name': tracked_task.name,  # Assuming you want to display the name/description
+            'id': tracked_task,
             'status': result.status,
             'result': result.result if result.ready() else 'N/A',
         })
