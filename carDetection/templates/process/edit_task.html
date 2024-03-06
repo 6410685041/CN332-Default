@@ -7,14 +7,17 @@
 {% block content %}
 <h1>Edit Task</h1>
 
-<div class="border-text1 pg-left1-2">
-    <div id="video-wrapper">
-        <h3>Preview</h3>
-        <video id="video" controls autoplay>
-            <source src="{{ task.video.url }}" type="video/mp4">     
-        </video>
-        <canvas id="video-overlay"></canvas>
-    </div>
+<h3>Preview</h3>
+<div id="video-wrapper">
+    <video id="video">
+        <source src="{{ task.video.url }}" type="video/mp4">     
+    </video>
+    <canvas id="canvas"></canvas>
+</div>
+
+<!-- Video control buttons -->
+<div id="video-controls">
+    <button id="play-button">Play</button>
 </div>
 
 
@@ -28,42 +31,25 @@
         <div class="col-left">
             <label for="x1">x1</label>
             <input type="number" id="x1" name="x1" value="{{loop.x1}}" required/>
-        </div>
-        <div class="col-right">
             <label for="y1">y1</label>
             <input type="number" id="y1" name="y1" value="{{loop.y1}}" required/>
-        </div>
-        <br>
-
-        <div class="col-left">
+            <br>
             <label for="x2">x2</label>
             <input type="number" id="x2" name="x2" value="{{loop.x2}}" required/>
-        </div>
-        <div class="col-right">
             <label for="y2">y2</label>
             <input type="number" id="y2" name="y2" value="{{loop.y2}}" required/>
-        </div>
-        <br>
-
-        <div class="col-left">
+            <br>
             <label for="x3">x3</label>
             <input type="number" id="x3" name="x3" value="{{loop.x3}}" required/>
-        </div>
-        <div class="col-right">
             <label for="y3">y3</label>
             <input type="number" id="y3" name="y3" value="{{loop.y3}}" required/>
-        </div>
-        <br>
-
-        <div class="col-left">
+            <br>
             <label for="x4">x4</label>
             <input type="number" id="x4" name="x4" value="{{loop.x4}}" required/>
-        </div>
-        <div class="col-right">
             <label for="y4">y4</label>
             <input type="number" id="y4" name="y4" value="{{loop.y4}}" required/>
+            <br>
         </div>
-        <br>
         
         <p>Orientation</p>
         <div class="col-left">

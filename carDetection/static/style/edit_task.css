@@ -1,9 +1,22 @@
-#video-wrapper, #video, #video-overlay {
+#video-wrapper {
     position: relative;
-    width: 600px; /* Define your fixed width */
-    height: 400px; /* Define your fixed height */
+    width: 600px; /* Fixed width */
+    height: 400px; /* Fixed height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ensures no overflowing content */
 }
 
-html {
-    color: blueviolet;
+#video-wrapper video {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#video-wrapper canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px; /* Fixed width to match the video */
+    height: 400px; /* Fixed height to match the video */
 }
