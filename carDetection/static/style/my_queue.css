@@ -1,0 +1,24 @@
+#content table {
+    margin: auto;
+    margin-top: 50px;
+    width: 90%;
+}
+
+#content table tr th {
+    border: 5px solid;
+    border-collapse: collapse;
+}
+
+#content table tr th {
+    background-color: rgb(59, 59, 169);
+    height: 50px;
+}
+
+#content table tr td {
+    background-color: white;
+    color: black;
+}
+
+#content .delete:hover {
+    background-color: rgb(235, 115, 115);
+}
