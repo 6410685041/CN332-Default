@@ -8,11 +8,14 @@
 <h1>Edit Task</h1>
 
 <h3>Preview</h3>
-<div id="video-wrapper">
-    <video id="video">
-        <source src="{{ task.video.url }}" type="video/mp4">     
-    </video>
-    <canvas id="canvas"></canvas>
+<div class="border-text1 pg-left1-2">
+    <div id="video-wrapper">
+        <video id="video">
+            <source src="{{ task.video.url }}" type="video/mp4">     
+        </video>
+        <canvas id="canvas"></canvas>
+    </div>
+    <small>Click on the video to see location.</small>
 </div>
 
 <!-- Video control buttons -->
@@ -75,6 +78,7 @@
     <input class="button bttm-right" type="submit" value="CONFIRM">
 </form>
 <a href="{% url 'delete_task' task.id %}">Delete Task</a>
-<script src="{% static 'js/edit_task.js' %}"></script> 
+<script src="{% static 'js/play_video.js' %}"></script> 
+<script src="{% static 'js/loop_square.js' %}"></script> 
 
 {% endblock content %}
