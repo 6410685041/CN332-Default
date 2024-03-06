@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from process.models import Task, Intersection, Loop, Result
 from django.http import HttpResponseRedirect, JsonResponse
-from process.forms import IntersectionForm
 from celery.result import AsyncResult
 from random import random
 from .tasks import abc
@@ -49,9 +48,7 @@ def view_create_task(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("account_login"))
     intersections = Intersection.objects.all()
-    form = IntersectionForm()
-    data = {"intersections": intersections,
-            "form": form}
+    data = {"intersections": intersections}
     return render(request, "process/create_task.html", data)
 
 
@@ -135,6 +132,11 @@ def delete_task(request, task_id):
     task.delete()
     return redirect('my_queue')
 
+def delete_intersection(request, intersection_id):
+    intersection = Intersection.objects.get(id=int(intersection_id))
+    intersection.delete()
+    return redirect('create_intersection')
+
 def submit_task(request, task_id):
     task = Task.objects.get(id=task_id)
     return reverse("my_queue")
@@ -166,4 +168,4 @@ def create_intersection(request):
             location=location,
             intersection_name=intersection_name
         )
-        return reverse("view_create_intersection")
+        return redirect("create_intersection")
