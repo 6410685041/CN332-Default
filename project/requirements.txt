@@ -1,5 +1,0 @@
-django
-django-allauth
-django-location-field
-six
-requests
