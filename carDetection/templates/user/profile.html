@@ -4,12 +4,27 @@
 <link rel="stylesheet" href="{% static 'style/layout.css' %}">
 {% endblock %}
 {% block content %}
-<div>
-    <h1>My Profile</h1>
-    <p>Name: {{ profile.first_name }} {{ profile.last_name }}</p>
-    <p>Occupation: {{ profile.occupation }}</p>
-    <p>Bio: {{ profile.bio }}</p>
+<div class="container">
+    <div class="content">
+        <h1>My Profile</h1>
+        <div class="grid-form">
+            <label for="name">Name</label>
+            <p class="form-control" id="name" name="name" >{{ profile.first_name }} {{ profile.last_name }} </p>
+            
+            <label for="occupation">Occupation</label>
+            <p class="form-control" id="occupation" name="occupation" >{{ profile.occupation }} </p>
+
+            <label for="phone_number">Phone Number</label>
+            <p class="form-control" id="phone_number" name="phone_number" >{{ profile.phone_number }} </p>
+            
+            <label for="bio">Bio</label>
+            <p class="form-control" id="bio" name="bio" >{{ profile.bio }} </p>
+            
+            <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+
+    </div>
+
 </div>
 
-<a href="{% url 'edit_profile' %}">Edit Profile</a>
+
 {% endblock content %}

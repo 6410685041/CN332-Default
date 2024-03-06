@@ -111,15 +111,18 @@ html,body {
   }
   
   .grid-form input,
-  .grid-form textarea {
+  .grid-form textarea,
+  .grid-form p {
     grid-column: 2 / 3; 
   }
 
-  
-  .grid-form button {
-    width: 40%;
-    justify-self: center; /* Make the button extend to the full width of the column */
+  .grid-form p {
+    text-align: left;
+    background-color: white;
+    color: black; 
   }
+  
+ 
   .btn.btn-primary {
     background-color: gray; /* Initial background color */
     border: none; /* Removes the default border */
@@ -134,6 +137,8 @@ html,body {
     transition: background-color 0.3s, border 0.3s; /* Smooth transition for background and border changes */
     text-align: center;
     grid-column: 1/3; 
+    width: 40%;
+    justify-self: center;
   }
   
   .btn.btn-primary:hover {
@@ -161,4 +166,5 @@ h1 {
     text-align: center; /* Center align the heading */
     margin-bottom: 20px; /* Space below the heading */
 }
+
 
