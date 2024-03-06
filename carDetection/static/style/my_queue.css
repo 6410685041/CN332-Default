@@ -2,11 +2,7 @@
     margin: auto;
     margin-top: 50px;
     width: 90%;
-}
-
-#content table tr th {
-    border: 5px solid;
-    border-collapse: collapse;
+    border-spacing: 5px;
 }
 
 #content table tr th {
@@ -16,7 +12,8 @@
 
 #content table tr td {
     background-color: white;
-    color: black;
+    color: rgb(59, 59, 169);
+    border-radius: 7px;
 }
 
 #content .delete:hover {
