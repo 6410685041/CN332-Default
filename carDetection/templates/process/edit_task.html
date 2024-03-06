@@ -8,15 +8,14 @@
 <h1>Edit Task</h1>
 
 <h3>Preview</h3>
-<div class="border-text1 pg-left1-2">
-    <div id="video-wrapper">
-        <video id="video">
-            <source src="{{ task.video.url }}" type="video/mp4">     
-        </video>
-        <canvas id="canvas"></canvas>
-    </div>
-    <small>Click on the video to see location.</small>
+<div id="video-wrapper">
+    <video id="video">
+        <source src="{{ task.video.url }}" type="video/mp4">     
+    </video>
+    <canvas id="canvas"></canvas>
 </div>
+
+<small>Press 1,2,3,4 to edit the points</small>
 
 <!-- Video control buttons -->
 <div id="video-controls">

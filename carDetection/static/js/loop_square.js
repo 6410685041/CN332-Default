@@ -1,4 +1,7 @@
 const videoWrapper = document.getElementById('video-wrapper');
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
 
 let current = 0;
 let points = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
@@ -9,6 +12,7 @@ function updatePointsFromInputs() {
         const y = document.getElementById(`y${i}`).value;
         points[i - 1] = { x: parseInt(x, 10), y: parseInt(y, 10) };
     }
+    drawPoints();
 }
 
 for (let i = 1; i <= 4; i++) {
@@ -17,50 +21,35 @@ for (let i = 1; i <= 4; i++) {
 }
 
 videoWrapper.addEventListener('click', function(event) {
-    const rect = videoWrapper.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+    const rect = video.getBoundingClientRect(); // Use video instead of videoWrapper to get the correct scaling factor
+    const scaleX = video.videoWidth / rect.width;
+    const scaleY = video.videoHeight / rect.height;
 
-    document.getElementById(`x${current + 1}`).value = x;
-    document.getElementById(`y${current + 1}`).value = y;
+    const x = (event.clientX - rect.left) * scaleX;
+    const y = (event.clientY - rect.top) * scaleY;
 
-    points[current] = { x, y };
-});
+    document.getElementById(`x${current + 1}`).value = Math.round(x);
+    document.getElementById(`y${current + 1}`).value = Math.round(y);
 
-document.addEventListener('keydown', function(event) {
-    if (event.key === "0") {
-        points = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
-        for (let i = 1; i <= 4; i++) {
-            document.getElementById(`x${i}`).value = 0;
-            document.getElementById(`y${i}`).value = 0;
-        }
-    }
-    if (event.key >= "1" && event.key <= "4") {
-        current = parseInt(event.key, 10) - 1;
-    }
-});
-
-// Initialize points from existing input values
-updatePointsFromInputs();
-
-
-video.addEventListener('click', function(event) {
-    console.log('Video clicked'); // Check if this logs when the video is clicked
-    const rect = videoWrapper.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    console.log(`Coordinates: ${x}, ${y}`); // Check the calculated coordinates
-
-    document.getElementById(`x${current + 1}`).value = x;
-    document.getElementById(`y${current + 1}`).value = y;
-
-    points[current] = { x, y };
-    console.log(`Current point: ${current}`, points[current]); // Check the current point's value
+    points[current] = { x: Math.round(x), y: Math.round(y) };
 
     if (current < 3) {
         current++;
     } else {
         current = 0;
     }
+    drawPoints();
 });
+
+function drawPoints() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    points.forEach(point => {
+        ctx.fillStyle = '#FF0000';
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, 2, 0, 2 * Math.PI);
+        ctx.fill();
+    });
+}
+
+// Initialize points from existing input values
+updatePointsFromInputs();
