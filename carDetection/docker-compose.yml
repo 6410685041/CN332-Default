@@ -3,13 +3,27 @@ version: '3.8'
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: bash -c 
+      "
+      python script.py -rs
+      && python manage.py runserver 0.0.0.0:8000
+      "
     volumes:
       - .:/app
     ports:
       - "8000:8000"
     environment:
       - DEBUG=1
+    depends_on:
+      - db
+  
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_HOST_AUTH_METHOD=trust
 
   broker:
     image: rabbitmq:3-management
@@ -20,11 +34,3 @@ services:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
     
-  db:
-    image: postgres:12
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
-    ports:
-      - "5432:5432"

@@ -6,6 +6,9 @@
 </head>
 <body>
 
+<button id="startTaskBtn">Start Task</button>
+<div id="taskResult">Task result will appear here...</div>
+
 <h1>Task Queue Status</h1>
     <table border="1">
         <thead>
@@ -29,5 +32,30 @@
             {% endfor %}
         </tbody>
     </table>
+
+<script>
+$(document).ready(function(){
+    $('#startTaskBtn').click(function(){
+        $.ajax({
+            url: '{% url "start-task" %}',
+            success: function(data) {
+                let taskId = data.task_id;
+                let interval = setInterval(function(){
+                    $.ajax({
+                        url: 'task-status/' + taskId + '/',
+                        success: function(data) {
+                            if (data.status == 'SUCCESS') {
+                                $('#taskResult').text('Task result: ' + data.result);
+                                clearInterval(interval);
+                            }
+                        }
+                    });
+                }, 1000); // Poll every 1000 milliseconds (1 second)
+            }
+        });
+    });
+});
+</script>
+
 </body>
 </html>
