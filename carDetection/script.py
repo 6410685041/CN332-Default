@@ -76,7 +76,7 @@ def create_initial_data(github_cid, github_csecrets, google_cid, google_csecrets
     # create intersection
     intersection = Intersection.objects.create(
     intersection_name="Default Intersection", 
-    location="40.7128,-74.0060"
+    location="13.755871860300672, 100.52335739135744"
     )
     print("Default intersection Created")
     # create task
