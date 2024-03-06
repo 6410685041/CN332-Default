@@ -1,13 +1,39 @@
 {% extends "base.html" %}
 {% load static %}
+{% load socialaccount %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'style/layout.css' %}">
+<link rel="stylesheet" href="{% static 'style/signin.css' %}">
+{% endblock %}
+
+
+{% block navbar %}
+    <div class="container">
+      <ul class="nav-index">
+        <li><a href="{% url 'account_login' %} ">Sign in</a></li>
+        <li><a href="{% url 'account_signup' %}">Sign up</a></li>
+      </ul>
+  </div>
+{% endblock %}
+
 {% block content %}
-<div class="container">
-    <h2>Login</h2>
-    <form method="post" action="{% url 'account_login' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
-    <a href="{% url 'account_signup' %}">Sign Up</a>
-</div>
+    {% if user.is_authenticated %}
+
+    {% else %}
+        <div class="white_box">
+            <h2>Sign in</h2>
+            <form method="post" action="{% url 'account_login' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </form>
+            <p> Don't have account? 
+                <a href="{% url 'account_signup' %}" class="default">Sign up</a>
+            </p>
+            <h3>Sign in with Social Account</h3>
+            <a href="{% provider_login_url 'github' %}">Sign in with GitHub</a>
+            <a href="{% provider_login_url 'google' %}">Sign in with Google</a>
+        </div>
+    {% endif %}
 {% endblock %}
