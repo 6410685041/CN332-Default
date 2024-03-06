@@ -1,39 +1,13 @@
-{% extends "layout.html" %}
+{% extends "base.html" %}
 {% load static %}
-{% load socialaccount %}
-
-{% block css %}
-<link rel="stylesheet" href="{% static 'style/layout.css' %}">
-<link rel="stylesheet" href="{% static 'style/signin.css' %}">
-{% endblock %}
-
-
-{% block navbar %}
-    <div class="container">
-      <ul class="nav-index">
-        <li><a href="{% url 'account_login' %} ">Login</a></li>
-        <li><a href="{% url 'account_signup' %}">Sign up</a></li>
-      </ul>
-  </div>
-{% endblock %}
-
 {% block content %}
-    {% if user.is_authenticated %}
-
-    {% else %}
-        <div class="white_box">
-            <h2>Login</h2>
-            <form method="post" action="{% url 'account_login' %}">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Login</button>
-            </form>
-            <p> Don't have account? 
-                <a href="{% url 'account_signup' %}" class="default">Sign Up</a>
-            </p>
-            <h3>Sign up with Social Account</h3>
-            <a href="{% provider_login_url 'github' %}">Login with GitHub</a>
-            <a href="{% provider_login_url 'google' %}">Login with Google</a>
-        </div>
-    {% endif %}
+<div class="container">
+    <h2>Login</h2>
+    <form method="post" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    <a href="{% url 'account_signup' %}">Sign Up</a>
+</div>
 {% endblock %}
