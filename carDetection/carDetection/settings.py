@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-zqrgn4d+n#!+&ruqp**58xvyq3=o$@hmb#m=f$ug@4%s$g6m&!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     "allauth",  # social
     "allauth.account",  # socail
     "allauth.socialaccount",  # social
-    "allauth.socialaccount.providers.github", # github
-    "allauth.socialaccount.providers.google", # google
+    "allauth.socialaccount.providers.github",  # github
+    "allauth.socialaccount.providers.google",  # google
     "phonenumber_field",
     "django_celery_results",
     "process",
@@ -68,7 +68,7 @@ ROOT_URLCONF = "carDetection.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -88,14 +88,20 @@ WSGI_APPLICATION = "carDetection.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': 5432,
+    # Postgres
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres",
+        "USER": "postgres",
+        "PASSWORD": "postgres",
+        "HOST": "db",
+        "PORT": 5432,
     },
+    # # SQLite
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
 }
 
 
@@ -117,7 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'user.Profile'
+AUTH_USER_MODEL = "user.Profile"
 
 
 # Internationalization
@@ -144,13 +150,13 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Celery Configuration
-CELERY_BROKER_URL = 'amqp://celery:celery1234@localhost:5672/myvhost'
-CELERY_RESULT_BACKEND = 'django-db'
-CELERY_CACHE_BACKEND = 'django-cache'
+CELERY_BROKER_URL = "amqp://celery:celery1234@localhost:5672/myvhost"
+CELERY_RESULT_BACKEND = "django-db"
+CELERY_CACHE_BACKEND = "django-cache"
 CELERY_BROKER_TRANSPORT_OPTIONS = {
-    'data_folder_in': os.path.join(BASE_DIR, 'celery', 'queue'),
-    'data_folder_out': os.path.join(BASE_DIR, 'celery', 'queue'),
-    'data_folder_processed': os.path.join(BASE_DIR, 'celery', 'processed')
+    "data_folder_in": os.path.join(BASE_DIR, "celery", "queue"),
+    "data_folder_out": os.path.join(BASE_DIR, "celery", "queue"),
+    "data_folder_processed": os.path.join(BASE_DIR, "celery", "processed"),
 }
 
 # social
@@ -164,8 +170,8 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 LOGIN_REDIRECT_URL = "/"
-SOCIALACCOUNT_LOGIN_ON_GET=True
-ACCOUNT_LOGOUT_ON_GET=True
+SOCIALACCOUNT_LOGIN_ON_GET = True
+ACCOUNT_LOGOUT_ON_GET = True
 
 
 # social
@@ -175,31 +181,22 @@ SOCIALACCOUNT_PROVIDERS = {
             "client_id": github_cid,
             "secret": github_csecrets,
         },
-        'SCOPE': [
-            'user',
-            'repo',
-            'read:org',
+        "SCOPE": [
+            "user",
+            "repo",
+            "read:org",
         ],
     },
     "google": {
-        "carDetection_dome": {
+        "Django CarDetection": {
             "client_id": google_cid,
             "secret": google_csecrets,
-            'key': ''
-        },
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
+            "key": "",
         }
-
     }
 }
 
 LOCATION_FIELD = {
-    'map.provider': 'openstreetmap',
-    'provider.openstreetmap.max_zoom': 18,
-
+    "map.provider": "openstreetmap",
+    "provider.openstreetmap.max_zoom": 18,
 }
