@@ -1,0 +1,57 @@
+/* class */
+div.white_box {
+    background-color: white;
+    color: rgb(76, 116, 202);
+    padding: 10px;
+    width: 470px;
+    margin: auto;
+}
+
+/* id */
+#content form button {
+    display: inline-block;
+    background-color: #289dd2; /* Button Background */
+    color: #f2f1ec; /* Off-white Button Text */
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: none;
+    font-size: 17px;
+    width: 110px;
+    height: 39px;
+}
+
+#content form button:hover {
+    background-color: #2b70e4; /* Brighter Blue on Hover */
+}
+
+#content .white_box p .default {
+    background-color: white;
+    color: rgb(76, 116, 202);
+    padding: 0;
+    margin: 0;
+    text-decoration-line: underline;
+}
+
+
+
+/* elements */
+h3 {
+    margin-top: 50px;
+}
+
+/* function เสริม */
+#content .helptext a {
+    color: #289dd2;
+    background-color: white;
+    text-decoration-line: underline;
+    margin: 0;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#content div.white_box form ul {
+    text-align: left;
+}
