@@ -94,14 +94,15 @@ html,body {
 
 .grid-form {
     display: grid;
-    grid-template-columns: auto auto; /* Defines two columns */
-    gap: 10px; /* Space between grid items */
+    grid-template-columns: 1fr 2fr; /* Defines two columns */
+    gap: 20px; /* Space between grid items */
     max-width: 500px; /* Maximum width of the form */
     margin: auto; /* Center the form horizontally */
-    /* place-items: center;
-    justify-items: center;
-  align-items: center;  */
+    align-items: center;
+
+
   }
+
   
   .grid-form label {
     grid-column: 1 / 2; /* Position labels in the first column */
@@ -110,12 +111,54 @@ html,body {
   }
   
   .grid-form input,
-  .grid-form textarea,
-  .grid-form button {
+  .grid-form textarea {
     grid-column: 2 / 3; 
   }
+
   
   .grid-form button {
-    width: 100%; /* Make the button extend to the full width of the column */
+    width: 40%;
+    justify-self: center; /* Make the button extend to the full width of the column */
+  }
+  .btn.btn-primary {
+    background-color: gray; /* Initial background color */
+    border: none; /* Removes the default border */
+    border-radius: 5px; /* Rounded corners with a radius of 5px */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding inside the button */
+    text-align: center; /* Center the text inside the button */
+    text-decoration: none; /* Remove any text decoration */
+    display: inline-block; /* Allow setting dimensions */
+    font-size: 16px; /* Set font size */
+    cursor: pointer; /* Change cursor to indicate it's clickable */
+    transition: background-color 0.3s, border 0.3s; /* Smooth transition for background and border changes */
+    text-align: center;
+    grid-column: 1/3; 
   }
   
+  .btn.btn-primary:hover {
+    background-color: #007bff; /* Background color on hover */
+    border: 1px solid #007bff; /* Red border on hover */
+  }
+
+.container {
+    max-width: 800px; /* Max width for the container */
+    margin: auto; /* Center the container */
+    background: #191c24; /* White background for the content area */
+    padding: 20px; /* Padding inside the container */
+    border-radius: 8px; /* Rounded corners for the container */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  */
+}
+
+.form-control {
+    width: 100%; /* Full width for form controls */
+    padding: 8px; /* Padding inside the form controls */
+    border: 1px solid #ccc; /* Border for the form controls */
+    border-radius: 4px; /* Rounded corners for the form controls */
+}
+
+h1 {
+    text-align: center; /* Center align the heading */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
