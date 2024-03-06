@@ -8,7 +8,7 @@
 <form action="{% url 'upload_video' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <label for="video">Video:</label>
-    <input type="file" id="video" name="video" accept="video/*" required><br><br>
+    <input type="file" id="video" name="video" accept="video/*" required>
     
     <label for="intersection">Intersection:</label>
     <select id="intersection" name="intersection">

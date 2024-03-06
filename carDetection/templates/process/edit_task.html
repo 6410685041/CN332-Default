@@ -2,19 +2,18 @@
 {% load static %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'style/layout.css' %}">
+<link rel="stylesheet" href="{% static 'style/edit_task.css' %}">
 {% endblock %}
 {% block content %}
 <h1>Edit Task</h1>
 
-<!-- Display the image to be labeled
-<img id="imageToLabel" src="{% static 'images/mountain.jpeg' %}" alt="Image to label"> -->
 <div class="border-text1 pg-left1-2">
-    <div id="video-wrapper" >
+    <div id="video-wrapper">
         <h3>Preview</h3>
         <video id="video" controls autoplay>
-            <source src="{{ task.video.url }}" type="video/mp4">
-            Your browser does not support the video tag.          
+            <source src="{{ task.video.url }}" type="video/mp4">     
         </video>
+        <canvas id="video-overlay"></canvas>
     </div>
 </div>
 
@@ -90,6 +89,6 @@
     <input class="button bttm-right" type="submit" value="CONFIRM">
 </form>
 <a href="{% url 'delete_task' task.id %}">Delete Task</a>
-<script src="{% static 'js/label.js' %}"></script> 
+<script src="{% static 'js/edit_task.js' %}"></script> 
 
 {% endblock content %}
