@@ -25,3 +25,11 @@
     padding: 10px;
     border-radius: 0.25rem;
 }
+
+#content .content-block-home {
+    background-color: #191c24;
+    padding: 10px;
+    border-radius: 0.25rem;
+    margin: auto;
+    width: 700px;
+}
