@@ -1,6 +1,5 @@
 from django.db import models
 from location_field.models.plain import PlainLocationField
-# Use the built-in JSONField for compatibility with SQLite
 from django.db.models import JSONField
 from user.models import Profile
 
@@ -50,8 +49,6 @@ class Task(models.Model):
         return str(self.id)
 
 class Loop(models.Model):
-    loop_name = models.CharField(max_length=256)
-    # Replace ArrayField with JSONField
     points = JSONField(default=list)  # Example: [[x1, y1], [x2, y2], ...]
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
