@@ -5,24 +5,24 @@
 {% endblock %}
 {% block content %}
 <div class="container">
-    <div class="content">
+    <div class="content-block">
         <h1>My Profile</h1>
         <div class="grid-form">
             <label for="name">Name</label>
-            <p class="form-control" id="name" name="name" >{{ profile.first_name }} {{ profile.last_name }} </p>
+            <p class="form-control" id="name">{{ profile.first_name|default:"None" }} {{ profile.last_name|default:"None" }}</p>
             
             <label for="occupation">Occupation</label>
-            <p class="form-control" id="occupation" name="occupation" >{{ profile.occupation }} </p>
-
+            <p class="form-control" id="occupation">{{ profile.occupation|default:"None" }}</p>
+        
             <label for="phone_number">Phone Number</label>
-            <p class="form-control" id="phone_number" name="phone_number" >{{ profile.phone_number }} </p>
+            <p class="form-control" id="phone_number">{{ profile.phone_number|default:"None" }}</p>
             
             <label for="bio">Bio</label>
-            <p class="form-control" id="bio" name="bio" >{{ profile.bio }} </p>
+            <p class="form-control" id="bio">{{ profile.bio|default:"None" }}</p>
             
             <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
-
-    </div>
+        </div>
+        
 
 </div>
 

@@ -4,24 +4,30 @@
 <link rel="stylesheet" href="{% static 'style/layout.css' %}">
 {% endblock %}
 {% block content %}
-<h1>Upload Task</h1>
-<form action="{% url 'upload_video' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <label for="video">Video:</label>
-    <input type="file" id="video" name="video" accept="video/*" required>
-    
-    <label for="intersection">Intersection:</label>
-    <select id="intersection" name="intersection">
-      {% for intersection in intersections %}
-      <option value="{{ intersection.id }}">{{ intersection }}</option>
-      {% endfor %}
-    </select>
+<div class="container">
+  <div class="content-block">
+    <h1>Upload Task</h1>
     <br>
-    
-    <br>
-    <a href="{% url 'create_intersection' %}">Create new intersection</a>
-    <br><br>
-    <button type="submit">Upload</button>
-    
-  </form>
+
+      <form action="{% url 'upload_video' %}" method="post" enctype="multipart/form-data" class="grid-form">
+          {% csrf_token %}
+          <label for="video">Video</label>
+          <input type="file" id="video" name="video" accept="video/*" required>
+          
+          <label for="intersection">Intersection</label>
+          <select id="intersection" name="intersection">
+            {% for intersection in intersections %}
+            <option value="{{ intersection.id }}">{{ intersection }}</option>
+            {% endfor %}
+          </select>
+        
+          <a href="{% url 'create_intersection' %}" class="btn btn-primary">Create new intersection</a>
+          
+          <button type="submit" class="btn btn-primary">Upload</button>
+          
+        </form>
+    </div>
+
+</div>
+
 {% endblock content %}

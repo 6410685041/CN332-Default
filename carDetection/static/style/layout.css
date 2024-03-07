@@ -97,7 +97,7 @@ html,body {
     grid-template-columns: 1fr 2fr; /* Defines two columns */
     gap: 20px; /* Space between grid items */
     max-width: 500px; /* Maximum width of the form */
-    margin: auto; /* Center the form horizontally */
+    margin: auto; 
     align-items: center;
 
 
@@ -159,7 +159,8 @@ html,body {
     width: 100%; /* Full width for form controls */
     padding: 8px; /* Padding inside the form controls */
     border: 1px solid #ccc; /* Border for the form controls */
-    border-radius: 4px; /* Rounded corners for the form controls */
+    border-radius: 4px;
+    margin: 5px 0; /* Rounded corners for the form controls */
 }
 
 h1 {
