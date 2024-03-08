@@ -11,27 +11,24 @@
 </head>
 <body style="margin:0;">
     <nav id="navbar" class="navbar">
-        {% block navbar %}
-            {% if not user.is_authenticated %}
-                <div class="container">
-                    <ul class="nav-index">
-                        <li><a href="{% url 'account_login' %} ">Sign in</a></li>
-                        <li><a href="{% url 'account_signup' %}">Sign up</a></li>
-                    </ul>
-                </div>
-            {% else %}
-                <a class="logo" href="#">Logo</a>
-                <div class="navbar-right">
-                    <a href="{% url 'home' %}">Home</a>
-                    <a href="{% url 'my_queue' %}">My Queue</a>
-                    <a href="{% url 'create_intersection' %}">Intersection List</a>
-                    <a href="{% url 'create_task' %}">Create Task</a>
-                    <a href="{% url 'profile' %}">Profile</a>
-                    <a href="{% url 'account_logout' %}">Sign out</a>
-                </div>
-            {% endif %}
-        {% endblock %}
-    </nav>
+        {% if not user.is_authenticated %}
+                <ul class="nav-index">
+                    <li><a href="{% url 'account_login' %} ">Sign in</a></li>
+                    <li><a href="{% url 'account_signup' %}">Sign up</a></li>
+                </ul> 
+        {% else %}
+            <a class="logo" href="{% url 'home' %}">Logo</a>
+            <div class="navbar-right">
+                <!-- <a href="{% url 'home' %}">Home</a> -->
+                <a class="nav01" href="{% url 'my_queue' %}">My Queue</a>
+                <a class="nav01" href="{% url 'create_intersection' %}">Intersection List</a>
+                <a class="nav01" href="{% url 'create_task' %}">Create Task</a>
+                <a class="nav01" href="{% url 'profile' %}">Profile</a>
+                <a class="nav01" href="{% url 'account_logout' %}">Sign out</a>
+            </div>
+        {% endif %}
+</nav>
+
 
     <div id="content">
         {% block content %}{% endblock %}
