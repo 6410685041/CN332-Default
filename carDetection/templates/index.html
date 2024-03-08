@@ -12,9 +12,28 @@
 <div class="content-block-home">
     {% if user.is_authenticated %}
         <h2>Welcome {{ user.username }} !!!</h2>
-        <a href="{% url 'account_logout' %}">Sign out</a>
-        <a href="{% url 'profile' %}">My Profile</a>
-        <a href="{% url 'my_queue' %}">My Queue</a>
+        <table>
+            <tr>
+                <th>result name</th>
+                <th>intersection</th>
+                <th>owner</th>
+                <th>details</th>
+                <th>delete</th>
+            </tr>
+            {% for result in results %}
+            <tr>
+                <td>{{ result }}</td>
+                <td>{{ result.intersection }}</td>
+                <td>{{ result.owner }}</td>
+                <td><a href="{% url 'display_result' result.id %}"></a></td>
+                <td><a href="{% url 'delete_result' result.id %}"></a></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td>No result found.</td>
+            </tr>
+            {% endfor %}
+        </table>
     {% else %}
         <p>Welcome to my channel!</p>
     {% endif %}

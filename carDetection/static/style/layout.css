@@ -14,18 +14,33 @@ html,body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Add some shadow for depth */
 }
 
-#navbar ul li {
+/* #navbar ul li {
     padding: 15px 20px;
-}
+} */
 
 #navbar ul li a {
-    color: #f2f1ec; /* Off-white links */
+    color: #f2f1ec; 
     text-decoration: none;
     font-weight: bold;
 }
 
 #navbar ul li a:hover {
-    color: #289dd2; /* Lighter Blue on Hover */
+    color: #289dd2; 
+}
+#navbar ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically in the center */
+    background-color: #191c24;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+#navbar li {
+    padding: 10px;
+    
 }
 
 #content {
@@ -63,28 +78,32 @@ html,body {
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 20px;
+    padding: 18px 20px 14px;
     text-decoration: none;
 }
 
-/* The logo */
+
 .logo {
     font-size: 22px;
     font-weight: bold;
 }
+.nav01{
+    height: 26px;; 
+    
+}
 
-/* Right-aligned link container */
+
 .navbar-right {
     float: right;
 }
 
-/* Change color on hover */
+
 .navbar a:hover {
     background-color: #ddd;
     color: black;
 }
 
-/* Clear floats */
+
 .navbar::after {
     content: "";
     clear: both;

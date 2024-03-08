@@ -60,20 +60,6 @@ def view_edit_task(request, task_id):
     }
     return render(request, "process/edit_task.html", data)
 
-
-# def create_task(request):
-#     if request.method == "POST":
-#         status = "In process"
-#         time = timezone.now()
-#         video = request.POST["video"]
-#         intersection = request.POST["intersection"]
-#         Intersection.objects.get_or_create(intersection_name=intersection)
-#         task = Task.objects.create(
-#             video=video, intersection=intersection, time=time, status=status
-#         )
-#         task.save()
-#         reverse("edit_task", task.id)
-
 def create_task(request):
     if request.method == "POST":
         status = "In process"
@@ -103,10 +89,6 @@ def create_task(request):
             return HttpResponseRedirect(reverse("upload_task"))  # Example redirect to an error page
 
 
-
-# receive loop points
-#       data - points
-#       task_id - for specific task
 def add_loop(request, data, task_id):
     if request.method == "POST":
 
@@ -127,9 +109,12 @@ def remove_loop(request, loop_id):
 
 
 def delete_task(request, task_id):
-    task = Task.objects.get(id=int(task_id))
-    task.delete()
+    task = Task.objects.delete(id=task_id)
     return redirect('my_queue')
+
+def delete_result(request, result_id):
+    task = Task.objects.delete(id=result_id)
+    return redirect('home')
 
 def delete_intersection(request, intersection_id):
     intersection = Intersection.objects.get(id=int(intersection_id))
@@ -145,8 +130,9 @@ def view_display_result(request, result_id):
         return HttpResponseRedirect(reverse("account_login"))
     result = Result.objects.get(id=result_id)
     data = {
-        "count": result.vehicle_count,
-        "JSON": result.vehicle_with_direction,
+        "count": result.vehicle_count(),
+        "loops": result.loop_list(),
+        "result": result
     }
     return render(request, "process/result.html", data)
 
