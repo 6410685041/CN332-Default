@@ -116,4 +116,5 @@ if __name__ == "__main__":
         create_initial_data(github_cid, github_csecrets, google_cid, google_csecrets)
         create_superuser()
     if args.a:
+        subprocess.run(["docker", "compose", "down"])
         subprocess.run(["docker", "compose", "up", "-d"])
