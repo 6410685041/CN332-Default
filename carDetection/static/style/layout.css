@@ -124,7 +124,7 @@ html,body {
   
  
   .btn.btn-primary {
-    background-color: gray; /* Initial background color */
+    background-color: black; /* Initial background color */
     border: none; /* Removes the default border */
     border-radius: 5px; /* Rounded corners with a radius of 5px */
     color: white; /* Text color */
@@ -143,7 +143,28 @@ html,body {
   
   .btn.btn-primary:hover {
     background-color: #007bff; /* Background color on hover */
-    border: 1px solid #007bff; /* Red border on hover */
+    
+  }
+#uploadButton {
+    background-color: black; /* Initial background color */
+    border: none; /* Removes the default border */
+    border-radius: 5px; /* Rounded corners with a radius of 5px */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding inside the button */
+    text-align: center; /* Center the text inside the button */
+    text-decoration: none; /* Remove any text decoration */
+    display: inline-block; /* Allow setting dimensions */
+    font-size: 16px; /* Set font size */
+    cursor: pointer; /* Change cursor to indicate it's clickable */
+    transition: background-color 0.3s, border 0.3s; /* Smooth transition for background and border changes */
+    text-align: center;
+    grid-column: 1/3; 
+    width: 40%;
+    justify-self: center;
+  }
+
+  #uploadButton:hover {
+    background-color: rgb(2, 158, 95); /* Green background on hover */
   }
 
 .container {
@@ -166,6 +187,9 @@ html,body {
 h1 {
     text-align: center; /* Center align the heading */
     margin-bottom: 20px; /* Space below the heading */
+}
+select{
+    padding:10px;
 }
 
 
