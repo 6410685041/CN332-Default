@@ -30,6 +30,11 @@
           {{ form.as_p }}
           <button type="submit" class="btn btn-primary">Sign up</button>
       </form>
+      <div class="form-check text-start my-3">
+        <p> Have an account already? 
+          <a href="{% url 'account_login' %}" class="sign-up">Sign in</a>
+        </p>
+      </div>
   </div>
 </body>
 </html>
