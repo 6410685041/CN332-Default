@@ -20,7 +20,7 @@ from django.contrib.sites.models import Site
 from allauth.socialaccount.models import SocialApp
 from django.core.management import call_command
 from user.models import Profile
-from process.models import Intersection, Task
+from process.models import Intersection, Task, Result
 from datetime import datetime
 import pytz
 from location_field.models.plain import PlainLocationField
@@ -86,6 +86,31 @@ def create_initial_data(github_cid, github_csecrets, google_cid, google_csecrets
                         owner=default_user,
                         created_at=datetime.now(pytz.timezone("Asia/Bangkok")))
     print("Default task Created")
+    # create result
+    Result.objects.create(result_name="Default result"
+                          , video="static/video/test1.MP4"
+                          , owner=default_user.username
+                          , intersection = intersection
+                          , created_at=datetime.now(pytz.timezone("Asia/Bangkok"))
+                          , result_json = {
+                            "loop1": {
+                                "in": 1,
+                                "out": 2
+                            },
+                            "loop2": {
+                                "in": 3,
+                                "out": 4
+                            },
+                            "loop3": {
+                                "in": 5,
+                                "out": 6
+                            },
+                            "loop4": {
+                                "in": 7,
+                                "out": 8
+                            }
+                            })
+    print("Default result Created")
     print("Initial data created.")
 
 def create_superuser():    

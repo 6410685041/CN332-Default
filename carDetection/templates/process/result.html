@@ -6,23 +6,19 @@
 {% block content %}
 <h1>Result</h1>
 
-<p> Vehicle count : {{count}} </p>
-{% for lib in JSON%}
+<p> Vehicle count : {{ vehicle_count }} </p>
+{% for loop in result.result_json %}
 <table>
     <tr>
-        <th>{{lib.loop}}</th>
+        <th>{{ loop.key }}</th>
         <th>North</th>
         <th>East</th>
         <th>West</th>
         <th>South</th>
     </tr>
-    {% for di in lib.data  %}
     <tr>
-        {% for i in di %}
-        <td>{{ i.value }}</td>
-        {% endfor %}
+        <td>{{ loop.value }}</td>
     </tr>
-    {% endfor %}
 
 </table>
 {% endfor %}
