@@ -11,7 +11,8 @@
     grid-template-areas: 
         "map submit";
     gap: 0px;
-    margin: 20px;
+    margin: auto;
+    max-width: 90%;
 }
 
 .site-map {
@@ -96,4 +97,14 @@ input.site-submit-button:hover {
 
 #content table {
     max-height: 500px;
+}
+
+/* scroll bar */
+
+.intersection_list {
+    margin: 20px;
+    height: 500px;
+    overflow: scroll;
+    scrollbar-color: #6c7293 #191c24;
+    scrollbar-width: thin;
 }
