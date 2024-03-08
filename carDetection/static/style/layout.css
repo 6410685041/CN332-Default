@@ -14,18 +14,33 @@ html,body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Add some shadow for depth */
 }
 
-#navbar ul li {
+/* #navbar ul li {
     padding: 15px 20px;
-}
+} */
 
 #navbar ul li a {
-    color: #f2f1ec; /* Off-white links */
+    color: #f2f1ec; 
     text-decoration: none;
     font-weight: bold;
 }
 
 #navbar ul li a:hover {
-    color: #289dd2; /* Lighter Blue on Hover */
+    color: #289dd2; 
+}
+#navbar ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically in the center */
+    background-color: #191c24;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+#navbar li {
+    padding: 10px;
+    
 }
 
 #content {
@@ -63,28 +78,32 @@ html,body {
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 20px;
+    padding: 18px 20px 14px;
     text-decoration: none;
 }
 
-/* The logo */
+
 .logo {
     font-size: 22px;
     font-weight: bold;
 }
+.nav01{
+    height: 26px;; 
+    
+}
 
-/* Right-aligned link container */
+
 .navbar-right {
     float: right;
 }
 
-/* Change color on hover */
+
 .navbar a:hover {
     background-color: #ddd;
     color: black;
 }
 
-/* Clear floats */
+
 .navbar::after {
     content: "";
     clear: both;
@@ -124,7 +143,7 @@ html,body {
   
  
   .btn.btn-primary {
-    background-color: gray; /* Initial background color */
+    background-color: black; /* Initial background color */
     border: none; /* Removes the default border */
     border-radius: 5px; /* Rounded corners with a radius of 5px */
     color: white; /* Text color */
@@ -143,7 +162,28 @@ html,body {
   
   .btn.btn-primary:hover {
     background-color: #007bff; /* Background color on hover */
-    border: 1px solid #007bff; /* Red border on hover */
+    
+  }
+#uploadButton {
+    background-color: black; /* Initial background color */
+    border: none; /* Removes the default border */
+    border-radius: 5px; /* Rounded corners with a radius of 5px */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding inside the button */
+    text-align: center; /* Center the text inside the button */
+    text-decoration: none; /* Remove any text decoration */
+    display: inline-block; /* Allow setting dimensions */
+    font-size: 16px; /* Set font size */
+    cursor: pointer; /* Change cursor to indicate it's clickable */
+    transition: background-color 0.3s, border 0.3s; /* Smooth transition for background and border changes */
+    text-align: center;
+    grid-column: 1/3; 
+    width: 40%;
+    justify-self: center;
+  }
+
+  #uploadButton:hover {
+    background-color: rgb(2, 158, 95); /* Green background on hover */
   }
 
 .container {
@@ -166,6 +206,9 @@ html,body {
 h1 {
     text-align: center; /* Center align the heading */
     margin-bottom: 20px; /* Space below the heading */
+}
+select{
+    padding:10px;
 }
 
 
