@@ -69,7 +69,13 @@ class Result(models.Model):
         count_vin = 0
         for _, loops in self.result_json.items():
             count_vin += loops['in']
+        return count_vin
 
+    def loop_list(self):
+        list = []
+        for name, _ in self.result_json.items():
+            list.append(name)
+        return list
 
 
 class Weather(models.Model):

@@ -131,6 +131,7 @@ def view_display_result(request, result_id):
     result = Result.objects.get(id=result_id)
     data = {
         "count": result.vehicle_count(),
+        "loops": result.loop_list(),
         "result": result
     }
     return render(request, "process/result.html", data)
