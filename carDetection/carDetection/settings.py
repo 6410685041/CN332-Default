@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     "allauth.socialaccount",  # social
     "allauth.socialaccount.providers.github",  # github
     "allauth.socialaccount.providers.google",  # google
-     'allauth.socialaccount.providers.facebook', # facebook
+    'allauth.socialaccount.providers.facebook', # facebook
+    'allauth.socialaccount.providers.microsoft', # microsoft
     "phonenumber_field",
     "django_celery_results",
     "process",
@@ -217,6 +218,15 @@ SOCIALACCOUNT_PROVIDERS = {
         'LOCALE_FUNC': lambda request: 'en_US',
         'VERIFIED_EMAIL': False,
         'VERSION': 'v7.0',
+    },
+    'microsoft': {
+        'APP': {
+            'client_id': '9ff4cc2f-aa4c-4ef7-88b7-b655da7546e2',
+            'secret': 'xOj8Q~mCE3Y2guO20wA_DWX0RFbyJ08YSjmBxaoB',
+            'settings': {
+                'tenant': 'common',
+            }
+        }
     },
 }
 
