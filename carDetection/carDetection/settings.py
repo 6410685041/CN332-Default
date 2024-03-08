@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from key import github_cid, github_csecrets, google_cid, google_csecrets
+from key import github_cid, github_csecrets, google_cid, google_csecrets, facebook_cid, facebook_csecrets, ms_cid, ms_csecrets
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -221,8 +221,8 @@ SOCIALACCOUNT_PROVIDERS = {
     },
     'microsoft': {
         'APP': {
-            'client_id': '9ff4cc2f-aa4c-4ef7-88b7-b655da7546e2',
-            'secret': 'xOj8Q~mCE3Y2guO20wA_DWX0RFbyJ08YSjmBxaoB',
+            'client_id': ms_cid,
+            'secret': ms_csecrets,
             'settings': {
                 'tenant': 'common',
             }
