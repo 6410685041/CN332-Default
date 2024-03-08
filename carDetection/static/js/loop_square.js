@@ -53,3 +53,15 @@ function drawPoints() {
 
 // Initialize points from existing input values
 updatePointsFromInputs();
+
+document.addEventListener('keypress', function(event) {
+    if (event.key === '1') {
+        current = 0;
+    } else if (event.key === '2') {
+        current = 1;
+    } else if (event.key === '3') {
+        current = 2;
+    } else if (event.key === '4') {
+        current = 3;
+    }
+});
