@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",  # social
     "allauth.socialaccount.providers.github",  # github
     "allauth.socialaccount.providers.google",  # google
+     'allauth.socialaccount.providers.facebook', # facebook
     "phonenumber_field",
     "django_celery_results",
     "process",
@@ -168,6 +169,7 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1  # social
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 LOGIN_REDIRECT_URL = "/"
 SOCIALACCOUNT_LOGIN_ON_GET = True
@@ -193,7 +195,29 @@ SOCIALACCOUNT_PROVIDERS = {
             "secret": google_csecrets,
             "key": "",
         }
-    }
+    },
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'email',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'name',
+            'name_format',
+            'picture',
+            'short_name'
+        ],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'en_US',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v7.0',
+    },
 }
 
 LOCATION_FIELD = {

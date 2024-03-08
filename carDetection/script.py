@@ -4,7 +4,7 @@ import subprocess
 
 try:
     # Set up Django environment
-    from key import github_cid, github_csecrets, google_cid, google_csecrets
+    from key import github_cid, github_csecrets, google_cid, google_csecrets, facebook_cid, facebook_csecrets
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "carDetection.settings")
     django.setup()
 except Exception as e:
@@ -37,7 +37,7 @@ def run_migrations():
     call_command("migrate")
     print("Migrations complete.")
 
-def create_initial_data(github_cid, github_csecrets, google_cid, google_csecrets):
+def create_initial_data(github_cid, github_csecrets, google_cid, google_csecrets, facebook_cid, facebook_csecrets):
     print("Creating initial data...")
     # Create some initial data
     try:
@@ -61,8 +61,16 @@ def create_initial_data(github_cid, github_csecrets, google_cid, google_csecrets
         client_id=google_cid,
         secret=google_csecrets
     )
+    facebook = SocialApp.objects.create(
+        provider='facebook',
+        name='Facebook',
+        client_id=facebook_cid,
+        secret=facebook_csecrets
+    )
     github.sites.set([site])
     google.sites.set([site])
+    facebook.sites.set([site])
+    
     # create profile
     username = 'default'
     email = 'default@example.com'
@@ -138,7 +146,7 @@ if __name__ == "__main__":
         print("clear file in reset_list DONE!")
     if args.s:
         run_migrations()
-        create_initial_data(github_cid, github_csecrets, google_cid, google_csecrets)
+        create_initial_data(github_cid, github_csecrets, google_cid, google_csecrets, facebook_cid, facebook_csecrets)
         create_superuser()
     if args.a:
         subprocess.run(["docker", "compose", "down"])
