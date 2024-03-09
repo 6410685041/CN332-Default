@@ -3,13 +3,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const playButton = document.getElementById('play-button');
 
     function updatePlayButtonText() {
-        playButton.textContent = video.paused ? 'Play' : 'Pause';
+        playButton.textContent = video.paused ? '\u23F5Play' : '\u275A\u275A Pause';
         playButton.style
 
         if (video.paused) {
-            playButton.style.background = "green";
+            playButton.style.background = "#" + hexFromRGB(2, 158, 95);
          } else {
-            playButton.style.background = "skyblue";
+            playButton.style.background = "#" + hexFromRGB(235, 115, 115);
          }
     }
 
@@ -23,4 +23,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     updatePlayButtonText();
+
+    /* use for color */
+    function hexFromRGB(r, g, b) {
+        var hex = [
+          r.toString( 16 ),
+          g.toString( 16 ),
+          b.toString( 16 )
+        ];
+        $.each( hex, function( nr, val ) {
+          if ( val.length === 1 ) {
+            hex[ nr ] = "0" + val;
+          }
+        });
+        return hex.join( "" ).toUpperCase();
+      }
 });
