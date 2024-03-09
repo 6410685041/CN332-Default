@@ -34,3 +34,12 @@
     border: none;
     border-radius: 0.25rem;
 }
+
+/* table */
+#content table {
+    width: auto;
+}
+
+#content table tr th {
+    width: 100px;
+}
