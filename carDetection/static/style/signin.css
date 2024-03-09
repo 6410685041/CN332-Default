@@ -17,6 +17,13 @@ div.form_box {
     color: #f2f1ec;
 }
 
+/* Password Requirement */
+ul:not(.browser-default)>li {
+    color: #f8baba;
+    font-size: 10px;
+    /* list-style-type: none; */
+}
+
 /* id */
 #content form button {
     display: inline-block;
