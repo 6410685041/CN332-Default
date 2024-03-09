@@ -7,26 +7,25 @@
     <link rel="stylesheet" href="{% static 'style/table_and_block.css' %}">
 {% endblock %}
 
-
 {% block content %}
 <div class="content-block-home">
     {% if user.is_authenticated %}
         <h2>Welcome {{ user.username }} !!!</h2>
         <table>
             <tr>
-                <th>result name</th>
-                <th>intersection</th>
-                <th>owner</th>
-                <th>details</th>
-                <th>delete</th>
+                <th>Result name</th>
+                <th>Intersection</th>
+                <th>Owner</th>
+                <th>Details</th>
+                <th>Delete</th>
             </tr>
             {% for result in results %}
             <tr>
                 <td>{{ result }}</td>
                 <td>{{ result.intersection }}</td>
                 <td>{{ result.owner }}</td>
-                <td><a href="{% url 'view_result' result.id %}"></a></td>
-                <td><a href="{% url 'delete_result' result.id %}"></a></td>
+                <td><a href="{% url 'view_result' result.id %}">Details</a></td>
+                <td><a href="{% url 'delete_result' result.id %}" class="delete">Delete</a></td>
             </tr>
             {% empty %}
             <tr>
