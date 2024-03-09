@@ -45,4 +45,26 @@
     grid-area: display1;
 }
 
-/* Overide Button */
+/* Button */
+.video-button {
+    width: 80px;
+    height: 25px;
+    border: none;
+    border-radius: 0.25rem;
+}
+
+input.button.bttm-right {
+    background-color: black;
+    color: white;
+    padding: 10px 30px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: none;
+    font-size: 14px;
+}
+
+input.button.bttm-right:hover {
+    background-color: rgb(2, 158, 95);
+}
