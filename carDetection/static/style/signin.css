@@ -160,3 +160,12 @@ h6 {
 .bd-mode-toggle .dropdown-menu .active .bi {
     display: block !important;
 }
+
+.social-icon {
+    color: #495057; /* Default icon color, you can choose any */
+    transition: color 0.3s;
+}
+
+.social-icon:hover {
+    color: #0d6efd; /* Bootstrap's primary color for hover, you can choose any */
+}
