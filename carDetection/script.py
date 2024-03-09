@@ -68,8 +68,6 @@ def create_initial_data(
     google_csecrets,
     facebook_cid,
     facebook_csecrets,
-    ms_cid,
-    ms_csecrets,
 ):
     print("Creating initial data...")
     # Create some initial data
@@ -100,13 +98,9 @@ def create_initial_data(
         client_id=facebook_cid,
         secret=facebook_csecrets,
     )
-    microsoft = SocialApp.objects.create(
-        provider="microsoft", name="Microsoft", client_id=ms_cid, secret=ms_csecrets
-    )
     github.sites.set([site])
     google.sites.set([site])
     facebook.sites.set([site])
-    microsoft.sites.set([site])
 
     # create profile
     username = "default"
@@ -184,8 +178,6 @@ if __name__ == "__main__":
             google_csecrets,
             facebook_cid,
             facebook_csecrets,
-            ms_cid,
-            ms_csecrets
         )
         create_superuser()
     if args.a:
