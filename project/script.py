@@ -46,10 +46,9 @@ from user.models import Profile
 from process.models import Intersection, Task, Result
 from datetime import datetime
 import pytz
-from location_field.models.plain import PlainLocationField
 import argparse
 from django.core.exceptions import ObjectDoesNotExist
-import glob
+import json
 
 
 def run_migrations():
@@ -128,18 +127,18 @@ def create_initial_data(
     )
     print("Default task Created")
     # create result
+    loop_open = open('static/json/example_loop.json')
+    loop = json.load(loop_open)
+    result_open = open('static/json/example_result.json')
+    result = json.load(result_open)
     Result.objects.create(
         result_name="Default result",
         video="static/video/test1.MP4",
         owner=default_user.username,
         intersection=intersection,
         created_at=datetime.now(pytz.timezone("Asia/Bangkok")),
-        result_json={
-            "loop1": {"in": 1, "out": 2},
-            "loop2": {"in": 3, "out": 4},
-            "loop3": {"in": 5, "out": 6},
-            "loop4": {"in": 7, "out": 8},
-        },
+        loop_json=loop,
+        result_json=result,
     )
     print("Default result Created")
     print("Initial data created.")

@@ -7,12 +7,19 @@
 {% block content %}
 <div class="content-block">
     <h1>Result</h1>
-    <div class="border-text1 pg-left1-2">
+
+    <div class="site-video">
         <h3>Preview</h3>
-        <video id="video" controls autoplay>
-            <source src='{{ video }}' type="video/mp4">
-            Your browser does not support the video tag.          
-        </video>
+        <div id="video-wrapper">
+            <video id="video">
+                <source src="{{ result.video.url }}" type="video/mp4">     
+            </video>
+        </div>
+        
+        <!-- Video control buttons -->
+        <div id="video-controls">
+            <button id="play-button" class="video-button">Play</button>
+        </div>
     </div>
 
     {% if summary == None %}
@@ -111,4 +118,7 @@
     {% endfor %}
     {% endif %}
 </div>
+{% endfor %}
+{% endif %}
+<script src="{% static 'js/play_video.js' %}"></script> 
 {% endblock content %}
