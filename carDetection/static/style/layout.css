@@ -43,6 +43,7 @@ html,body {
     
 }
 
+
 #content {
     text-align: center;
     padding: 50px;
@@ -93,6 +94,7 @@ html,body {
 }
 
 
+
 .navbar-right {
     float: right;
 }
@@ -110,17 +112,19 @@ html,body {
     display: table;
 }
 
-
-.grid-form {
+  .grid-form {
     display: grid;
     grid-template-columns: 1fr 2fr; /* Defines two columns */
-    gap: 20px; /* Space between grid items */
-    max-width: 500px; /* Maximum width of the form */
+    gap: 20px; 
+    max-width: 500px;
     margin: auto; 
     align-items: center;
+}
 
-
-  }
+.grid-form div {
+    display: flex;
+    align-items: center;
+}
 
   
   .grid-form label {
@@ -209,6 +213,6 @@ h1 {
 }
 select{
     padding:10px;
+    width: 250px;
 }
-
 
