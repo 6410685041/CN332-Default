@@ -5,11 +5,11 @@
 {% endblock %}
 {% block content %}
 <div class="container">
-  <div class="content-block">
+  
     <h1>Upload Task</h1>
     <br>
 
-      <form action="{% url 'create_task' %}" method="post" enctype="multipart/form-data" class="grid-form">
+      <!-- <form action="{% url 'create_task' %}" method="post" enctype="multipart/form-data" class="grid-form">
           {% csrf_token %}
           <label for="video">Video</label>
           <input type="file" id="video" name="video" accept="video/*" required>
@@ -20,13 +20,33 @@
             <option value="{{ intersection.id }}">{{ intersection }}</option>
             {% endfor %}
           </select>
-        
-          <a href="{% url 'view_create_intersection' %}" class="btn btn-primary">Create new intersection</a>
+          <a href="{% url 'view_create_intersection' %}" style="font-size: 15px; background-color: transparent;"><i class="fa fa-plus-circle" title="Create Intersection" ></i></a>
           
           <button type="submit" class="btn btn-primary" id="uploadButton">Upload</button>
           
         </form>
-    </div>
+     -->
+
+     <form action="{% url 'create_task' %}" method="post" enctype="multipart/form-data" class="grid-form">
+      {% csrf_token %}
+      <label for="video">Video</label>
+      <input type="file" id="video" name="video" accept="video/*" required>
+      
+      <label for="intersection">Intersection</label>
+      <div style="display: flex; align-items: center;">
+          <select id="intersection" name="intersection">
+              {% for intersection in intersections %}
+              <option value="{{ intersection.id }}">{{ intersection }}</option>
+              {% endfor %}
+          </select>
+          <a href="{% url 'view_create_intersection' %}" style="font-size: 15px; background-color: transparent; padding-left: 0px;">
+              <i class="fa fa-plus-circle" title="Create Intersection"></i>
+          </a>
+      </div>
+      
+      <button type="submit" class="btn btn-primary" id="uploadButton">Upload</button>
+  </form>
+  
 
 </div>
 
