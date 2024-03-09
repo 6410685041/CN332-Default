@@ -29,7 +29,9 @@
         <form method="post" action="{% url 'account_signup' %}">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Sign up</button>
+            <div class="button-div">
+              <button type="submit" class="btn btn-primary">Sign up</button>
+            </div>
         </form>
         <div class="form-check text-start my-3">
           <p> Have an account already? 
