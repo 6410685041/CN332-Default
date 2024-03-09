@@ -1,0 +1,43 @@
+{
+    "loops":[
+        {
+            "name":"loop1",
+            "id":"0",
+            "points":[
+                {"x":900,"y":600},
+                {"x":900,"y":300},
+                {"x":400,"y":300},
+                {"x":400,"y":600}
+            ],
+            "orientation":"counterclockwise",
+            "summary_location":{"x":20,"y":"20"}
+        },
+        {
+            "name":"loop2",
+            "id":"1",
+            "points":[
+                {"x":280,"y":450},
+                {"x":280,"y":200},
+                {"x":600,"y":200},
+                {"x":600,"y":450}
+                
+            ],
+            "orientation":"clockwise",
+            "summary_location":{"x":20,"y":"380"}
+        }
+        ,
+        {
+            "name":"loop3",
+            "id":"2",
+            "points":[
+                {"x":600,"y":80},
+                {"x":850,"y":80},
+                {"x":900,"y":600},
+                {"x":600,"y":600}
+                
+            ],
+            "orientation":"clockwise",
+            "summary_location":{"x":950,"y":"20"}
+        }
+    ]
+}

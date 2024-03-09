@@ -5,26 +5,108 @@
 {% endblock %}
 {% block content %}
 <h1>Result</h1>
+<div class="border-text1 pg-left1-2">
+    <h3>Preview</h3>
+    <video id="video" controls autoplay>
+        <source src='{{ video }}' type="video/mp4">
+        Your browser does not support the video tag.          
+    </video>
+</div>
 
-<p> Vehicle count : {{ count }} </p>
-{% for loop in loops %}
-<table>
-    <tr>
-        <td>
-            {{ loop }}
-        </td>
-    </tr>
-    <tr>
-        <th>North</th>
-        <th>East</th>
-        <th>West</th>
-        <th>South</th>
-    </tr>
-    <tr>
-        <td>{{ loop.value }}</td>
-    </tr>
+{% if summary == None %}
+<div class="border-text2 pg1-2">
+<h3>Processing</h3>
+<div class="loop-table">
+    <p>Still Processing ...</p>
+</div></div>
 
-</table>
+
+{% else %}
+
+<div class="border-text2 pg1-2">
+    <h3>Summary</h3>
+    <table class="loop-table">
+        <tr>
+            <th></th>
+            <th>Left</th>
+            <th>Right</th>
+            <th>Straight</th>
+            <th>Total</th>
+        </tr>
+        <tr>
+            <th>Car</th>
+            <td>{{summary.summary.0.type.0.1}}</td>
+            <td>{{summary.summary.0.type.0.2}}</td>
+            <td>{{summary.summary.0.type.0.3}}</td>
+            <td>{{summary.summary.0.type.0.4}}</td>
+        </tr>
+        <tr>
+            <th>Truck</th>
+            <td>{{summary.summary.0.type.1.1}}</td>
+            <td>{{summary.summary.0.type.1.2}}</td>
+            <td>{{summary.summary.0.type.1.3}}</td>
+            <td>{{summary.summary.0.type.1.4}}</td>
+        </tr>
+        <tr>
+            <th>Bike</th>
+            <td>{{summary.summary.0.type.2.1}}</td>
+            <td>{{summary.summary.0.type.2.2}}</td>
+            <td>{{summary.summary.0.type.2.3}}</td>
+            <td>{{summary.summary.0.type.2.4}}</td>
+        </tr>
+        <tr>
+            <th>Total</th>
+            <td>{{summary.summary.0.type.3.1}}</td>
+            <td>{{summary.summary.0.type.3.2}}</td>
+            <td>{{summary.summary.0.type.3.3}}</td>
+            <td>{{summary.summary.0.type.3.4}}</td>
+        </tr>
+    </table>
+</div>
+
+{% for loop in summary.loops %}
+
+<div class="border-text2 pg1-2">
+    <h3>{{ loop.name }}</h3>
+    <table class="loop-table">
+        <tr>
+            <th></th>
+            <th>Left</th>
+            <th>Right</th>
+            <th>Straight</th>
+            <th>Total</th>
+        </tr>
+        <tr>
+            <th>Car</th>
+            <td>{{ loop.type.0.1 }}</td>
+            <td>{{ loop.type.0.2 }}</td>
+            <td>{{ loop.type.0.3 }}</td>
+            <td>{{ loop.type.0.4 }}</td>
+        </tr>
+        <tr>
+            <th>Truck</th>
+            <td>{{ loop.type.1.1 }}</td>
+            <td>{{ loop.type.1.2 }}</td>
+            <td>{{ loop.type.1.3 }}</td>
+            <td>{{ loop.type.1.4 }}</td>
+        </tr>
+        <tr>
+            <th>Bike</th>
+            <td>{{ loop.type.2.1 }}</td>
+            <td>{{ loop.type.2.2 }}</td>
+            <td>{{ loop.type.2.3 }}</td>
+            <td>{{ loop.type.2.4 }}</td>
+        </tr>
+        <tr>
+            <th>Total</th>
+            <td>{{ loop.type.3.1 }}</td>
+            <td>{{ loop.type.3.2 }}</td>
+            <td>{{ loop.type.3.3 }}</td>
+            <td>{{ loop.type.3.4 }}</td>
+        </tr>
+    </table>
+</div>
 {% endfor %}
+{% endif %}
 
 {% endblock content %}

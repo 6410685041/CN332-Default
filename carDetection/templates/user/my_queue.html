@@ -24,7 +24,7 @@
             <td>{{ task.intersection }}</td>
             <td>{{ task.created_at }}</td>
             <td>{{ task.status }}</td>
-            <td><a href="{% url 'edit_task' task.id %}">Details</a></td>
+            <td><a href="{% url 'view_edit_task' task.id %}">Details</a></td>
             <td><a href="{% url 'delete_task' task.id %}" class="delete">Delete</a></td>
         </tr>
         {% endfor %}
