@@ -7,4 +7,4 @@ def home(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("account_login"))
     results = Result.objects.all()
-    return render(request, "index.html", {'results': results})
+    return render(request, "home.html", {'results': results})

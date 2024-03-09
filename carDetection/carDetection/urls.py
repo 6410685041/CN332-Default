@@ -18,14 +18,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .views import home
-# from django.views.generic import TemplateView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # path("", TemplateView.as_view(template_name="index.html"), name="home"), # homepage
     path("", home, name="home"),
     path("accounts/", include("allauth.urls")),  # social
-    path("user/", include("user.urls")),
-    path("process/", include("process.urls")),
+    # user app
+    path("user/", include("user.view_urls")),
+    path("user/function", include("user.function_urls")),
+    # process app
+    path("process/", include("process.view_urls")),
+    path("process/function", include("process.function_urls")),
 ]
 
