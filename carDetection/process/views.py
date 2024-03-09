@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from celery.result import AsyncResult
 from . import functions
 import json
-from user.models import Profile
+from django.contrib.auth.decorators import login_required
 
 '''
 render
@@ -28,17 +28,15 @@ def process_view(request):
 
 
 # go to upload page (for upload video)
+@login_required
 def view_create_task(request):
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse("account_login"))
     intersections = Intersection.objects.all()
     data = {"intersections": intersections}
     return render(request, "process/create_task.html", data)
 
 # view edit task
+@login_required
 def view_edit_task(request, task_id):
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse("account_login"))
     task = Task.objects.get(id=task_id)
     data = {
         "task": task,
@@ -46,9 +44,8 @@ def view_edit_task(request, task_id):
     return render(request, "process/edit_task.html", data)
 
 # view result
+@login_required
 def view_display_result(request, result_id):
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse("account_login"))
     result = Result.objects.get(id=result_id)
     loop_path = result.loop_json
     summary_path = functions.create_summary(result_id, loop_path)
@@ -62,9 +59,8 @@ def view_display_result(request, result_id):
     return render(request, "process/result.html", data)
 
 
+@login_required
 def view_create_intersection(request):
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse("account_login"))
     intersections = Intersection.objects.all()
     data = {
             "intersections" : intersections,

@@ -5,4 +5,5 @@ urlpatterns = [
     path('profile', views.view_profile, name='profile'),
     path('my_queue', views.view_my_queue, name='my_queue'),
     path('edit_profile', views.view_edit_profile, name='view_edit_profile'),
+    path('occupation', views.view_occupation_selection, name='view_occupation_selection'),
 ]
