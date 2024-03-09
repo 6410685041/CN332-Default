@@ -7,9 +7,21 @@ body {
     background-color: #2b3035;
 }
 
+/* input box */
+input#id_email {
+    color: #ffffff;
+}
+
 /* class */
 div.form_box {
     color: #f2f1ec;
+}
+
+/* Password Requirement */
+ul:not(.browser-default)>li {
+    color: #f8baba;
+    font-size: 10px;
+    /* list-style-type: none; */
 }
 
 /* id */
@@ -52,7 +64,7 @@ h6 {
     text-align: center;
 }
 
-/* Sign up button */
+/* signup-singin button */
 .btn, .btn-large, .btn-small {
     text-decoration: none;
     color: #f2f1ec;
@@ -69,6 +81,7 @@ h6 {
     border-radius: 3px;
     display: inline-block;
     height: 40px;
+    width: 80%;
     line-height: 36px;
     padding: 0 0;
     text-transform: uppercase;

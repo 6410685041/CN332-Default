@@ -18,23 +18,27 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 
-  <!-- Custom styles for this template -->
-  <link rel="stylesheet" href="{% static 'style/signup.css' %}">
+  <!-- Custom styles for this template : use the same style with signin -->
+  <link rel="stylesheet" href="{% static 'style/signin.css' %}">
 </head>
 
 <body>
-  <div class="white_box">
-      <h2>Sign Up</h2>
-      <form method="post" action="{% url 'account_signup' %}">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button type="submit" class="btn btn-primary">Sign up</button>
-      </form>
-      <div class="form-check text-start my-3">
-        <p> Have an account already? 
-          <a href="{% url 'account_login' %}" class="sign-up">Sign in</a>
-        </p>
-      </div>
-  </div>
+  <main class="form-signin w-100 m-auto">
+    <div class="form_box">
+        <h2>Sign Up</h2>
+        <form method="post" action="{% url 'account_signup' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="button-div">
+              <button type="submit" class="btn btn-primary">Sign up</button>
+            </div>
+        </form>
+        <div class="form-check text-start my-3">
+          <p> Have an account already? 
+            <a href="{% url 'account_login' %}" class="sign-up">Sign in</a>
+          </p>
+        </div>
+    </div>
+</main>
 </body>
 </html>
