@@ -1,6 +1,6 @@
 #video-wrapper {
     position: relative;
-    width: 400px;
+    width: 500px;
     height: 300px;
 }
 
@@ -14,6 +14,35 @@
 }
 
 #video-wrapper canvas {
-    border: 1px solid #000000;
+    /* border: 1px solid #000000; */
     z-index: 2; /* Ensures canvas is above the video */
 }
+
+/* container */
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+        "video video"
+        "display display";
+        /* "display1 display2" */
+    gap: 10px;
+    padding: 0;
+}
+
+.site-video {
+    grid-area: video;
+    margin: auto;
+}
+
+.site-set-loop {
+    grid-area: display;
+    margin: auto;
+}
+
+.site-status {
+    grid-area: display1;
+}
+
+/* Overide Button */
