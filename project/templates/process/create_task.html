@@ -24,8 +24,8 @@
           
           <button type="submit" class="btn btn-primary" id="uploadButton">Upload</button>
           
-        </form>
-     -->
+        </form> -->
+    
 
      <form action="{% url 'create_task' %}" method="post" enctype="multipart/form-data" class="grid-form">
       {% csrf_token %}
@@ -34,7 +34,7 @@
       
       <label for="intersection">Intersection</label>
       <div style="display: flex; align-items: center;">
-          <select id="intersection" name="intersection">
+          <select id="intersection" name="intersection" required>
               {% for intersection in intersections %}
               <option value="{{ intersection.id }}">{{ intersection }}</option>
               {% endfor %}
