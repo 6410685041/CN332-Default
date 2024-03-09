@@ -8,3 +8,29 @@
     margin: auto;
     gap: 5%;
 }
+
+/* video */
+
+#video-wrapper {
+    position: relative;
+    width: 500px;
+    height: 300px;
+    margin: auto;
+}
+
+#video-wrapper video, #video-wrapper canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Ensures video is under the canvas */
+}
+
+/* Button */
+.video-button {
+    width: 80px;
+    height: 25px;
+    border: none;
+    border-radius: 0.25rem;
+}

@@ -3,6 +3,7 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'style/layout.css' %}">
 <link rel="stylesheet" href="{% static 'style/table_and_block.css' %}">
+<link rel="stylesheet" href="{% static 'style/result.css' %}">
 {% endblock %}
 {% block content %}
 <div class="content-block">
@@ -118,7 +119,5 @@
     {% endfor %}
     {% endif %}
 </div>
-{% endfor %}
-{% endif %}
 <script src="{% static 'js/play_video.js' %}"></script> 
 {% endblock content %}
