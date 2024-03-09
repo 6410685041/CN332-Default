@@ -7,6 +7,11 @@ body {
     background-color: #2b3035;
 }
 
+/* input box */
+input#id_email {
+    color: #ffffff;
+}
+
 /* class */
 div.form_box {
     color: #f2f1ec;
