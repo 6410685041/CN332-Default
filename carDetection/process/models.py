@@ -50,7 +50,7 @@ class Task(models.Model):
         return str(self.task_name)
 
 class Loop(models.Model):
-    points = JSONField(default=list)  # Example: [[x1, y1], [x2, y2], ...]
+    points = JSONField(default=list)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
 class Result(models.Model):
@@ -59,23 +59,11 @@ class Result(models.Model):
     intersection = models.TextField()
     owner = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-
+    loop_json = JSONField(default=list)
     result_json = JSONField(default=list)
 
     def __str__(self):
         return str(self.result_name)
-    
-    def vehicle_count(self):
-        count_vin = 0
-        for _, loops in self.result_json.items():
-            count_vin += loops['in']
-        return count_vin
-
-    def loop_list(self):
-        list = []
-        for name, _ in self.result_json.items():
-            list.append(name)
-        return list
 
 
 class Weather(models.Model):

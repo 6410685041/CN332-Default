@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from django.urls import reverse
-from process.models import Task, Intersection, Loop, Result
-from django.http import HttpResponseRedirect, JsonResponse
+from process.models import Task, Intersection, Result
+from django.http import HttpResponseRedirect
 from celery.result import AsyncResult
+from . import functions
+import json
+from user.models import Profile
 
 '''
 render
@@ -47,12 +50,17 @@ def view_display_result(request, result_id):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("account_login"))
     result = Result.objects.get(id=result_id)
+    loop_path = result.loop_json
+    summary_path = functions.create_summary(result_id, loop_path)
+    with open(summary_path, 'r') as file:
+            json_data = file.read()
+            summary = json.loads(json_data)
     data = {
-        "count": result.vehicle_count(),
-        "loops": result.loop_list(),
-        "result": result
+        'result': result,
+        'summary': summary,
     }
     return render(request, "process/result.html", data)
+
 
 def view_create_intersection(request):
     if not request.user.is_authenticated:
