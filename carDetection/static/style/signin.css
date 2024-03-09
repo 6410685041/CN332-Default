@@ -64,7 +64,7 @@ h6 {
     text-align: center;
 }
 
-/* Sign up button */
+/* signup-singin button */
 .btn, .btn-large, .btn-small {
     text-decoration: none;
     color: #f2f1ec;
@@ -81,6 +81,7 @@ h6 {
     border-radius: 3px;
     display: inline-block;
     height: 40px;
+    width: 80%;
     line-height: 36px;
     padding: 0 0;
     text-transform: uppercase;
