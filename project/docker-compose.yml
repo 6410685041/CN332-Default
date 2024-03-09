@@ -2,20 +2,27 @@ version: '3.8'
 
 services:
   web:
-    build: .
+    build: ./web
     command: bash -c 
       "
       python script.py -rs
       && python manage.py runserver 0.0.0.0:8000
       "
     volumes:
-      - .:/app
+      - ./web:/app
     ports:
       - "8000:8000"
     environment:
       - DEBUG=1
     depends_on:
       - db
+
+  ai:
+    build: ./ai
+    volumes:
+      - ./ai:/ai
+    ports:
+      - "8888:8888"
   
   db:
     image: postgres:latest
