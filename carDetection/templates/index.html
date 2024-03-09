@@ -25,7 +25,7 @@
                 <td>{{ result }}</td>
                 <td>{{ result.intersection }}</td>
                 <td>{{ result.owner }}</td>
-                <td><a href="{% url 'display_result' result.id %}"></a></td>
+                <td><a href="{% url 'view_result' result.id %}"></a></td>
                 <td><a href="{% url 'delete_result' result.id %}"></a></td>
             </tr>
             {% empty %}

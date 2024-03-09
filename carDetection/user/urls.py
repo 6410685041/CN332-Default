@@ -19,8 +19,12 @@ from django.urls import path, include  # social
 from . import views
 
 urlpatterns = [
+    # Create
+    # Read
     path('profile', views.view_profile, name='profile'),
     path('my_queue', views.view_my_queue, name='my_queue'),
-    path('edit_profile', views.view_edit_profile, name='edit_profile'),
-    path('edit_profile/submit', views.submit_edit_profile, name='submit_profile'),
+    path('edit_profile', views.view_edit_profile, name='view_edit_profile'),
+    # Update
+    path('edit_profile/submit', views.edit_profile, name='edit_profile'),
+    # Delete
 ]

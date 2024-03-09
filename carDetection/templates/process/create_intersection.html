@@ -12,7 +12,7 @@
 <div class="content-block">
     <h1>Create Intersection</h1>
 
-    <form method="post" enctype="multipart/form-data" action="{% url 'submit_intersection' %}">
+    <form method="post" enctype="multipart/form-data" action="{% url 'create_intersection' %}">
         {% csrf_token %}
         <div class="container">
             <div id="map" class="site-map"></div>

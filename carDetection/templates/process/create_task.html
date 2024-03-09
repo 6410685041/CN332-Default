@@ -9,7 +9,7 @@
     <h1>Upload Task</h1>
     <br>
 
-      <form action="{% url 'upload_video' %}" method="post" enctype="multipart/form-data" class="grid-form">
+      <form action="{% url 'create_task' %}" method="post" enctype="multipart/form-data" class="grid-form">
           {% csrf_token %}
           <label for="video">Video</label>
           <input type="file" id="video" name="video" accept="video/*" required>
@@ -21,7 +21,7 @@
             {% endfor %}
           </select>
         
-          <a href="{% url 'create_intersection' %}" class="btn btn-primary">Create new intersection</a>
+          <a href="{% url 'view_create_intersection' %}" class="btn btn-primary">Create new intersection</a>
           
           <button type="submit" class="btn btn-primary" id="uploadButton">Upload</button>
           

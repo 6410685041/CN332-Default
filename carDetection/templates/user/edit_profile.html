@@ -9,7 +9,7 @@
 <div class="container">
     <div class="content">
     <h1>Edit Profile</h1>
-    <form method="post" action="{% url 'submit_profile' %}" class="grid-form">
+    <form method="post" action="{% url 'edit_profile' %}" class="grid-form">
         {% csrf_token %}
 
         <label for="first_name">First Name</label>
