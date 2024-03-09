@@ -38,14 +38,16 @@
             <form method="post" action="{% url 'account_login' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit" class="btn btn-primary w-100 py-2">Sign in</button>
+                <div class="button-div">
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </div>
             </form>
             <div class="form-check text-start my-3">
                 <p> Don't have account?
                     <a href="{% url 'account_signup' %}" class="sign-up">Sign up</a>
                 </p>
             </div>
-
+    
             <div class="social-sign-in text-center my-3">
                 <h6 class="mb-4">Sign in with Social Account</h6>
                 <div class="d-flex justify-content-center mt-2">
@@ -59,11 +61,6 @@
                             class="fab fa-microsoft fa-3x"></i></a>
                 </div>
             </div>
-
-
-
-
-
         </div>
         {% endif %}
     </main>
