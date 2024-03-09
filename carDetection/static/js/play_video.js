@@ -4,6 +4,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updatePlayButtonText() {
         playButton.textContent = video.paused ? 'Play' : 'Pause';
+        playButton.style
+
+        if (video.paused) {
+            playButton.style.background = "green";
+         } else {
+            playButton.style.background = "skyblue";
+         }
     }
 
     playButton.addEventListener('click', function() {
