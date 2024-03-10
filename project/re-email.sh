@@ -10,7 +10,7 @@ OLD_EMAIL=$1
 NEW_EMAIL=$2
 
 # Apply the filter-branch command to change the commit author email
-git filter-branch --env-filter "
+git filter-branch -f --env-filter "
 if [ \"\$GIT_COMMITTER_EMAIL\" = \"$OLD_EMAIL\" ]; then
     export GIT_COMMITTER_EMAIL=\"$NEW_EMAIL\"
 fi
