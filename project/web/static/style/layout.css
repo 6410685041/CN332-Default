@@ -6,6 +6,7 @@ html,body {
     background-color: #000000; /* Off-white background */
 }
 
+/* navbar */
 #navbar ul {
     list-style-type: none;
     display: flex;
@@ -13,10 +14,6 @@ html,body {
     background-color: #191c24;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Add some shadow for depth */
 }
-
-/* #navbar ul li {
-    padding: 15px 20px;
-} */
 
 #navbar ul li a {
     color: #f2f1ec; 
@@ -27,6 +24,7 @@ html,body {
 #navbar ul li a:hover {
     color: #289dd2; 
 }
+
 #navbar ul {
     list-style-type: none;
     display: flex;
@@ -40,10 +38,49 @@ html,body {
 
 #navbar li {
     padding: 10px;
-    
 }
 
+.align-items-center {
+    align-items: center !important;
+}
 
+/* navbar-button */
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn-outline-light {
+    color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.btn-warning {
+    color: #000;
+    background-color: #289dd2;
+    border-color: #289dd2;
+}
+
+.text-end {
+    text-align: right !important;
+}
+
+/* content */
 #content {
     text-align: center;
     padding: 50px;
@@ -83,14 +120,12 @@ html,body {
     text-decoration: none;
 }
 
-
 .logo {
     font-size: 22px;
     font-weight: bold;
 }
 .nav01{
     height: 26px;; 
-    
 }
 
 
