@@ -38,3 +38,16 @@ thop  # FLOPs computation
 # albumentations>=1.0.3
 # pycocotools>=2.0  # COCO mAP
 # roboflow
+
+# Base ----------------------------------------
+matplotlib
+numpy
+opencv-python
+Pillow
+PyYAML
+requests
+scipy
+torch
+torchvision
+tqdm
+##protobuf
