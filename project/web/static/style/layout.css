@@ -116,7 +116,8 @@ html,body {
     display: block;
     color: white;
     text-align: center;
-    padding: 18px 20px 14px;
+    align-items: center;
+    padding: 6px 12px;
     text-decoration: none;
 }
 
