@@ -2,7 +2,7 @@ django-allauth==0.60.0
 Django
 django-location-field
 six
-psycopg2
+psycopg2-binary
 django-phonenumber-field[phonenumbers]
 celery
 django-celery-results

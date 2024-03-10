@@ -12,7 +12,7 @@
             <p class="form-control" id="name">{{ profile.first_name|default:"None" }} {{ profile.last_name|default:"None" }}</p>
             
             <label for="occupation">Occupation</label>
-            <p class="form-control" id="occupation">{{ profile.occupation|default:"None" }}</p>
+            <p class="form-control" id="occupation">{{ profile.get_occupation_display|default:"None" }}</p>
         
             <label for="phone_number">Phone Number</label>
             <p class="form-control" id="phone_number">{{ profile.phone_number|default:"None" }}</p>
