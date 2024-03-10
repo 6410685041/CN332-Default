@@ -6,11 +6,6 @@ body {
     background-color: #2b3035;
 }
 
-/* input box */
-input#id_email {
-    color: #ffffff;
-}
-
 /* class */
 div.form_box {
     color: #f2f1ec;
@@ -111,8 +106,6 @@ div.button-div {
 }
 
 /* Bootstrap */
-
-  
 .bg-body-tertiary {
     --bs-bg-opacity: 1;
     background-color: #2b3035;
@@ -131,13 +124,22 @@ div.button-div {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
+    color: #ffffff;
 }
   
-  .form-signin input[type="password"] {
+.form-signin input[type="password"] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-  }
+    color: #ffffff;
+}
+
+.form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    color: #ffffff;
+}
   
 .bd-placeholder-img {
     font-size: 1.125rem;
