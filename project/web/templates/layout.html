@@ -18,10 +18,9 @@
             <header class="p-3 bg-dark text-white">
                 <div class="container">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <a class="logo" href="{% url 'home' %}">Home</a>
                     <div class="text-end">
-                        <button type="button" href="{% url 'account_login' %}" class="btn btn-outline-light me-2">Sign-in</button>
-                        <button type="button" href="{% url 'account_signup' %}" class="btn btn-warning">Sign-up</button>
+                        <button type="button" onclick="window.location.href='{% url 'account_login' %}'" class="btn btn-outline-light me-2">Sign-in</button>
+                        <button type="button" onclick="window.location.href='{% url 'account_signup' %}'" class="btn btn-warning">Sign-up</button>
                     </div>
                 </div>
                 </div>

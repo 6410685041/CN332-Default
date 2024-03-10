@@ -70,10 +70,22 @@ html,body {
     border-color: #f8f9fa;
 }
 
+.btn-outline-light:hover {
+    background-color: #2980b9;
+    border-color: #289dd2;
+    /* Button background color on hover */
+}
+
 .btn-warning {
     color: #000;
     background-color: #289dd2;
     border-color: #289dd2;
+}
+
+.btn-warning:hover {
+    background-color: #f8f9fa;
+    border-color: #f8f9fa; 
+    /* Button background color on hover */
 }
 
 .text-end {
@@ -116,8 +128,7 @@ html,body {
     display: block;
     color: white;
     text-align: center;
-    align-items: center;
-    padding: 6px 12px;
+    padding: 18px 20px 14px;
     text-decoration: none;
 }
 
@@ -129,12 +140,9 @@ html,body {
     height: 26px;; 
 }
 
-
-
 .navbar-right {
     float: right;
 }
-
 
 .navbar a:hover {
     background-color: #ddd;
