@@ -1,0 +1,111 @@
+---
+title: Draw Factory
+---
+classDiagram
+    
+    class configparser {
+        +read()
+        +get()
+    }
+
+    class json {
+        +read()
+        +get()
+    }
+
+    INIAdapter o-- configparser
+    class INIAdapter {
+        Adaptee adaptee
+        +read()
+        +get()
+    }
+
+    JSONAdapter o-- json
+    class JSONAdapter {
+        Adaptee adaptee
+        +read()
+        +get()
+    }
+
+    Configuration <|-- INIAdapter
+    Configuration <|-- JSONAdapter
+    Configuration <--o Factory : use
+    class Configuration {
+
+    }
+
+    class Factory {
+        getDrawing() Drawing
+    }
+
+    Drawing <-- Factory : create
+    Drawing <|-- V1Drawing
+    Drawing <|-- V2Drawing
+    class Drawing {
+        +drawLine()
+        +drawCircle()
+    }
+
+    Shape o-- Drawing
+    class Shape {
+        +draw()
+        #drawLine()
+        #drawCircle()
+    }
+
+    Rectangle --|> Shape
+    class Rectangle {
+        +draw()
+    }
+
+    Circle --|> Shape
+    class Circle {
+        +draw()
+    }
+
+    Triangle --|> Shape
+    class Triangle {
+        +draw()
+    }
+
+    Color o-- Drawing
+    class Color {
+        +fill()
+    }
+
+    Red --|> Color
+    class Red {
+        +fill()
+    }
+
+    Green --|> Color
+    class Green {
+        +fill()
+    }
+
+    Blue --|> Color
+    class Blue {
+        +fill()
+    }
+
+    V1Drawing --> DP1 : use
+    class V1Drawing {
+        +drawLine()
+        +drawCircle()
+    }
+
+    class DP1 {
+        +draw_a_line()
+        +draw_a_circle()
+    }
+
+    V2Drawing --> DP2 : use
+    class V2Drawing {
+        +drawLine()
+        +drawCircle()
+    }
+
+    class DP2 {
+        +drawline()
+        +drawcircle()
+    }
