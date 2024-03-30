@@ -23,7 +23,7 @@ class V1Drawing(Drawing):
     def drawLine(self, coordinates):
         t.begin_fill()
         t.penup()
-        t.goto(coordinates[0][0], coordinates[0][1])
+        t.teleport(coordinates[0][0], coordinates[0][1])
         t.pendown()
  
         for (x, y) in coordinates:
@@ -35,7 +35,7 @@ class V1Drawing(Drawing):
         t.begin_fill()
         radius = float(radius)
         t.penup()
-        t.goto(coordinates[0][0], coordinates[0][1]-radius)
+        t.teleport(coordinates[0][0], coordinates[0][1]-radius)
         t.pendown()
         t.circle(radius)
         t.end_fill()
@@ -63,11 +63,10 @@ class V1Drawing(Drawing):
                     Circle(self, radius=section_value["radius"], coordinates=section_value["coordinate"]).draw()
                 case _:
                     print("Shape not found")
-
+        t.hideturtle()
         if path:
             file_name = '.'.join(path.split('.')[:-1])
             file_extension = path.split('.')[-1]
-            print(file_extension)
 
             # Save the drawing to a PostScript file
             canvas = screen.getcanvas()

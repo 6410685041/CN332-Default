@@ -17,9 +17,3 @@ class Factory:
     def getDrawing(self):
         details = self.config.get_all()
         return V1Drawing(details)
-        
-    
-
-
-            
-f=Factory('../myhouse.json')
