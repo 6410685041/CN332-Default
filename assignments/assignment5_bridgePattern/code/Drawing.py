@@ -39,13 +39,23 @@ class V1Drawing(Drawing):
         screen = t.Screen()
         for _, section_value in self.details.items():
             t.color(section_value["color"])
+            t.begin_fill
             match section_value["shape"]:
                 case 'triangle':
                     # Assuming Triangle is a properly defined class or function
-                    Triangle(self, coordinates=section_value["coordinate"]).draw()
+                    coordinates = section_value["coordinate"]
+                    coordinates.append(coordinates[0])
+                    Triangle(self, coordinates=coordinates).draw()
                 case 'rectangle':
                     # Assuming Rectangle is a properly defined class or function
-                    Rectangle(self, coordinates=section_value["coordinate"]).draw()
+                    coordinates = section_value["coordinate"]
+                    coordinates.sort()
+                    coordinate_1 = (coordinates[1][0],coordinates[0][1])
+                    coordinate_2 = (coordinates[0][0],coordinates[1][1])
+                    coordinates.insert(1, coordinate_1)
+                    coordinates.append(coordinate_2)
+                    coordinates.append(coordinates[0])
+                    Rectangle(self, coordinates=coordinates).draw()
                 case "circle":
                     # Assuming Circle is a properly defined class or function
                     Circle(self, radius=section_value["radius"], coordinates=section_value["coordinate"]).draw()
