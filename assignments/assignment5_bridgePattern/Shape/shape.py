@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import turtle as t
-from .extension import parse_points, calculate_angle
+from .extension import parse_points
 
 class Shape(ABC):
     @abstractmethod
@@ -50,13 +50,7 @@ class Triangle(Shape):
         coordinates = [(num1 * self.BOUND, num2 * self.BOUND) for (num1, num2) in coordinates]
         coordinates.append(coordinates[0])
 
-        angle = []
-        angle.append(calculate_angle(coordinates[0],coordinates[1],coordinates[2]))
-        angle.append(calculate_angle(coordinates[1],coordinates[2],coordinates[0]))
-        angle.append(calculate_angle(coordinates[2],coordinates[0],coordinates[1]))
-
         self.coordinates = coordinates
-        self.angle = angle
         self.color = color
 
     def drawline(self, distance):
