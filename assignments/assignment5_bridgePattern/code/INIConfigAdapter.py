@@ -8,22 +8,16 @@ class INIConfigAdapter(Configuration):
         self.adaptee.read(file_path)
 
     def get_sections(self):
-        for section in self.adaptee.sections():
-            print(section)
+        return self.adaptee.sections()
 
     def get_all(self):
-        # Iterate over all sections
+        data = {}
         for section in self.adaptee.sections():
-            print(f"[{section}]")
-            # Iterate over all keys in each section
-            for key in self.adaptee[section]:
-                # Accessing each value by key
-                value = self.adaptee[section][key]
-                print(f"{key} = {value}")
-            print()
+            data[section] = {}
+            for key, val in self.adaptee.items(section):
+                data[section][key] = val
     
-    def draw():
-        pass
+        return data
     
     def get(self, section, key):
         return self.adaptee.get(section, key)
