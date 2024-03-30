@@ -43,6 +43,8 @@ adapter = ConfigAdapter(ini_reader)
 coordinate_rectangle = adapter.get(query={'section':'house', 'key':'coordinate'})
 rectangleCoordinate = parse_points(coordinate_rectangle)
 print(rectangleCoordinate)
+rectangleCoordinate.sort()
+print(rectangleCoordinate)
 
 width = abs(rectangleCoordinate[0][0]-rectangleCoordinate[1][0])*BOUND
 height = abs(rectangleCoordinate[0][1]-rectangleCoordinate[1][1])*BOUND
