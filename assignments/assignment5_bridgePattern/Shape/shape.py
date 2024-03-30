@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import turtle as t
-import Drawing.Drawing as d
+import assignments.assignment5_bridgePattern.Drawing as d
 
 class Shape(ABC):
     def __init__(self, drawing):
