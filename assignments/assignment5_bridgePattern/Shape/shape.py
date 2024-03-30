@@ -1,56 +1,35 @@
 from abc import ABC, abstractmethod
 import turtle as t
+import assignments.assignment5_bridgePattern.Drawing as d
 
 class Shape(ABC):
-    @abstractmethod
-    def draw(self):
-        pass
+    def __init__(self, drawing):
+        self.myDrawing = drawing
 
     @abstractmethod
-    def drawline(self, distance):
+    def draw(self):
         pass
 
 class Rectangle(Shape):
-    def __init__(self, coordinates):
+    def __init__(self, drawing, coordinates):
+        super().__init__(drawing)
         self.coordinates = coordinates
 
-    def drawline(self, distance):
-        t.fd(distance)
-
-    def draw(self):
-        t.penup()
-        t.goto(self.coordinates[0][0], self.coordinates[0][1])
-        t.pendown()
-
-        for (x, y) in self.coordinates:
-           t.goto(x, y)
+    def draw(self): 
+        self.myDrawing.drawLine(self.coordinates)
 
 class Triangle(Shape):
-    def __init__(self, coordinates):
+    def __init__(self, drawing, coordinates):
         self.coordinates = coordinates
 
-    def drawline(self, distance):
-        t.fd(distance)
-
     def draw(self):
-        t.penup()
-        t.goto(self.coordinates[0][0], self.coordinates[0][1])
-        t.pendown()
- 
-        for (x, y) in self.coordinates:
-           t.goto(x, y)
-
+        self.myDrawing.drawLine(self.coordinates)
+     
 class Circle(Shape):
-    def __init__(self,radius,coordinates):
+    def __init__(self,drawing,radius,coordinates):
+        super().__init__(drawing)
         self.radius = radius
         self.coordinates = coordinates
 
-    def drawline(self, distance):
-        t.fd(distance)
-
     def draw(self):
-        t.penup()
-        t.goto(self.coordinates[0][0], self.coordinates[0][1]-self.radius)
-        t.pendown()
- 
-        t.circle(self.radius)
+        self.myDrawing.drawCircle(self.radius, self.coordinates)
