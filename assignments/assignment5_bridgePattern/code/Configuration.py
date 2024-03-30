@@ -4,3 +4,6 @@ class Configuration:
     
     def get(self, section, key):
         pass
+    
+    def get_all():
+        pass
