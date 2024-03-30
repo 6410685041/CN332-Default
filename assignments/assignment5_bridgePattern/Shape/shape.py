@@ -10,19 +10,22 @@ class Shape(ABC):
     @abstractmethod
     def drawline(self, distance):
         pass
+
 class Rectangle(Shape):
     BOUND = 100
 
-    def __init__(self, coordinate):
-        coordinates = parse_points(coordinate).sort()
+    def __init__(self, coordinate, color):
+        coordinates = parse_points(coordinate)
+        coordinates.sort()
         coordinates = [(num1 * self.BOUND, num2 * self.BOUND) for (num1, num2) in coordinates]
         coordinate_1 = (coordinates[1][0],coordinates[0][1])
         coordinate_2 = (coordinates[0][0],coordinates[1][1])
         coordinates.insert(1, coordinate_1)
         coordinates.append(coordinate_2)
         coordinates.append(coordinates[0])
+        self.coordinates = coordinates
 
-        # self.color = color
+        self.color = color
 
     def drawline(self, distance):
         t.fd(distance)
