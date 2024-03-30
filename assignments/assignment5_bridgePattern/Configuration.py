@@ -1,7 +1,7 @@
 from ConfigAdapter import ConfigAdapter
 from ConfigAdaptee import IniConfigAdaptee, JsonConfigAdaptee
 
-class Factory:
+class Configuration:
     def __init__(self, config_file):
         try:
             if config_file.endswith('.ini'):
@@ -18,14 +18,3 @@ class Factory:
     
     def draw(self):
         pass
-
-
-            
-f=Factory('myhouse.json')
-data = f.get()
-
-for i in data:
-    # for j in data[i]:
-    #     print(j, data[i][j])
-    #     print('-----------------')
-    print(i, data[i])
