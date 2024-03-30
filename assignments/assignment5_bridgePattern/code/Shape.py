@@ -20,6 +20,7 @@ class Rectangle(Shape):
 
 class Triangle(Shape):
     def __init__(self, drawing, coordinates):
+        super().__init__(drawing)
         self.coordinates = coordinates
 
     def draw(self):

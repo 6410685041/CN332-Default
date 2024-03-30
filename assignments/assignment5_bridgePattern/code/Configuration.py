@@ -1,6 +1,6 @@
 class Configuration:
     def __init__(self, config_file):
-        self.shape = []
+        pass
     
     def get(self, section, key):
         pass

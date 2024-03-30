@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import turtle as t
 from Shape import Triangle, Rectangle, Circle
+from PIL import Image
 
 # Abstract Drawing class
 class Drawing(ABC):
@@ -14,43 +15,41 @@ class Drawing(ABC):
 
 # Concrete Drawing implementations
 class V1Drawing(Drawing):
-    def __init__(self, shapes, colors):
-        self.shapes = shapes
-        self.colors = colors
+    def __init__(self, details):
+        self.details = details
 
     def drawLine(self, coordinates):
         t.penup()
-        t.goto(self.coordinates[0][0], self.coordinates[0][1])
+        t.goto(coordinates[0][0], coordinates[0][1])
         t.pendown()
  
-        for (x, y) in self.coordinates:
+        for (x, y) in coordinates:
            t.goto(x, y)
 
 
     def drawCircle(self, radius, coordinates):
+        radius = float(radius)
         t.penup()
-        t.goto(self.coordinates[0][0], self.coordinates[0][1]-self.radius)
+        t.goto(coordinates[0][0], coordinates[0][1]-radius)
         t.pendown()
-        t.circle(self.radius)
+        t.circle(radius)
 
     def draw(self, path):
-        for index, shape, coordinate in self.shapes.items().enumerate():
-            match shape:
-                case 'Triangle':
-                    Triangle(coordinate, self.colors[index]).draw()
-                case 'Rectangle':
-                    Rectangle(coordinate, self.colors[index]).draw()
-                case "Circle":
-                    Circle(coordinate, self.colors[index]).draw()
+        t.setup(width=600, height=500)
+        screen = t.Screen()
+        for _, section_value in self.details.items():
+            t.color(section_value["color"])
+            match section_value["shape"]:
+                case 'triangle':
+                    Triangle(self, coordinates=section_value["coordinate"]).draw()
+                case 'rectangle':
+                    Rectangle(self, coordinates=section_value["coordinate"]).draw()
+                case "circle":
+                    Circle(self, radius=section_value["radius"], coordinates=section_value["coordinate"]).draw()
                 case _:
                     print("Shape not found")
-        turtle.done()
-        # Setup the screen
-        turtle.setup(width=600, height=500)
-        screen = turtle.Screen()
-
-        # Draw something
-        create_drawing()
+            t.end_fill()
+        t.done()
 
         # Save the drawing to a PostScript file
         canvas = screen.getcanvas()
@@ -58,10 +57,12 @@ class V1Drawing(Drawing):
 
         # Convert the PostScript file to PNG
         img = Image.open("drawing.ps")
-        img.save("drawing.png", "png")
 
-        # Convert the PostScript file to JPG
-        img.save("drawing.jpg", "jpeg")
+        if path.endswith("png"):
+            img.save(path, "png")
+        if path.endswith("jpg"):
+            img.save(path, "jpg")
+        
 
 
 # class V2Drawing(Drawing):

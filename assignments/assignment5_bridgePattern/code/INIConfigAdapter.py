@@ -15,11 +15,17 @@ class INIConfigAdapter(Configuration):
         for section in self.adaptee.sections():
             data[section] = {}
             for key, val in self.adaptee.items(section):
+                if key=="coordinate":
+                    val = self.get(section, 'coordinate')
                 data[section][key] = val
     
         return data
     
     def get(self, section, key):
-        return self.adaptee.get(section, key)
+        data = self.adaptee.get(section, key)
+        if key == "coordinate":
+            points = data.strip('()').split('),(')
+            return [tuple(map(float, point.split(','))) for point in points]
+        return data
         
 

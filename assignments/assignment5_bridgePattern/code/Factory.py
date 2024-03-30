@@ -15,12 +15,8 @@ class Factory:
             print(f"Error: {e}")
     
     def getDrawing(self):
-        shapes = {}
-        colors = []
-        for object in self.config.get_section:
-            shapes[self.config.get(object,"shape")] = self.config.get(object, "coordinate")
-            colors.append(self.config.get(object, "color"))
-        return V1Drawing(shapes, colors)
+        details = self.config.get_all()
+        return V1Drawing(details)
         
     
 
