@@ -11,15 +11,17 @@ class IniConfigAdaptee(ConfigAdapter):
         except configparser.Error as e:
             print(f"Error reading INI file {self.config_file}: {e}")
 
-    def get(self, query, default=None):
+    def get(self, query=None):
         """Retrieves a value from a specific section in the INI configuration data."""
         try:
-            # return self.config_data.get(section, key)
-            section = query['section']
-            key = query['key']
-            return self.config_data.get(section, key)
-        except (configparser.NoSectionError, configparser.NoOptionError):
-            return default
+            if query:
+                section = query['section']
+                key = query['key']
+                return self.config_data.get(section, key)
+            else:
+                return self.config_data
+        except (configparser.NoSectionError, configparser.NoOptionError) as e:
+            return e
 
 class JsonConfigAdaptee(ConfigAdapter):
     def read_config(self):
@@ -32,10 +34,12 @@ class JsonConfigAdaptee(ConfigAdapter):
         except json.JSONDecodeError:
             print(f"Error: The file {self.config_file} contains invalid JSON.")
             
-    def get(self, query, default=None):
+    def get(self, query=None):
         """Retrieves a value from a specific section in the JSON configuration data."""
         try:
-            # return self.config_data.get(section, key)
-            return self.config_data.get(query['key'])
-        except KeyError:
-            return default
+            if query:
+                return self.config_data[query['key']]
+            else:
+                return self.config_data
+        except KeyError as e:
+            return e

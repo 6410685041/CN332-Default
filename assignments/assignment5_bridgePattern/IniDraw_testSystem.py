@@ -8,5 +8,12 @@ adapter = ConfigAdapter(ini_reader)
 
 coordinate = adapter.get(query={'section':'house', 'key':'coordinate'})
 color = adapter.get(query={'section':'house', 'key':'color'})
+all = adapter.get()
 rectangle = Rectangle(coordinate=coordinate, color=color)
-rectangle.draw()
+# rectangle.draw()
+
+for i in all:
+    print(i)
+    for j in all[i]:
+        print(j, all[i][j])
+    print('-----------------')

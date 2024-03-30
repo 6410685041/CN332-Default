@@ -7,6 +7,6 @@ class ConfigAdapter:
     def read_config(self):
         self.config_file.read_config()
     
-    def get(self, query, default=None):
+    def get(self, query=None):
         """Retrieves a value from the configuration data."""
-        return self.config_file.get(query, default)
+        return self.config_file.get(query)
