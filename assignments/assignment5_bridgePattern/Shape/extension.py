@@ -4,7 +4,7 @@ def parse_points(input_str):
     # Removing parentheses and splitting by commas
     points = input_str.strip('()').split('),(')
     # Converting each point from string to a tuple of integers
-    return [tuple(map(int, point.split(','))) for point in points]
+    return [tuple(map(float, point.split(','))) for point in points]
 
 # for calculate angle
 def calculate_angle(A, B, C):
