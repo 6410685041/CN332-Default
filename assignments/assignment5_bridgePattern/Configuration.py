@@ -4,3 +4,6 @@ class Configuration:
     
     def get(self, query=None):
         return self.config.get()
+    
+    def get_all(self):
+        pass
