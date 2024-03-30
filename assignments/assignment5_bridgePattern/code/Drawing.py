@@ -34,34 +34,47 @@ class V1Drawing(Drawing):
         t.pendown()
         t.circle(radius)
 
-    def draw(self, path):
+    def draw(self, path=None):
         t.setup(width=600, height=500)
         screen = t.Screen()
         for _, section_value in self.details.items():
             t.color(section_value["color"])
             match section_value["shape"]:
                 case 'triangle':
+                    # Assuming Triangle is a properly defined class or function
                     Triangle(self, coordinates=section_value["coordinate"]).draw()
                 case 'rectangle':
+                    # Assuming Rectangle is a properly defined class or function
                     Rectangle(self, coordinates=section_value["coordinate"]).draw()
                 case "circle":
+                    # Assuming Circle is a properly defined class or function
                     Circle(self, radius=section_value["radius"], coordinates=section_value["coordinate"]).draw()
                 case _:
                     print("Shape not found")
             t.end_fill()
-        t.done()
+
+        if path:
+            file_name = '.'.join(path.split('.')[:-1])
+            file_extension = path.split('.')[-1]
+            # Save the drawing to a PostScript file
+            canvas = screen.getcanvas()
+            canvas.postscript(file="drawing.ps", colormode='color')
+            
+            # Convert the PostScript file to PNG or JPG
+            with Image.open("drawing.ps") as img:
+                img.save(file_name+"."+file_extension)
+        else:
+            t.done()
+            # print("Done")
 
         # Save the drawing to a PostScript file
         canvas = screen.getcanvas()
         canvas.postscript(file="drawing.ps", colormode='color')
 
-        # Convert the PostScript file to PNG
-        img = Image.open("drawing.ps")
-
-        if path.endswith("png"):
-            img.save(path, "png")
-        if path.endswith("jpg"):
-            img.save(path, "jpg")
+        # Convert the PostScript file to PNG or JPG
+        with Image.open("drawing.ps") as img:
+            if path.endswith("png") or path.endswith("jpg"):
+                img.save(path)
         
 
 
