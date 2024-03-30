@@ -23,8 +23,8 @@ class Rectangle(Shape):
         coordinates.insert(1, coordinate_1)
         coordinates.append(coordinate_2)
         coordinates.append(coordinates[0])
-        self.coordinates = coordinates
 
+        self.coordinates = coordinates
         self.color = color
 
     def drawline(self, distance):
@@ -32,9 +32,13 @@ class Rectangle(Shape):
 
     def draw(self):
         # t.color(self.color)
-        t.begin_fill() 
+        t.begin_fill()
+        t.penup()
+        t.goto(self.coordinates[0][0], self.coordinates[0][1])
+        t.pendown()
 
         for (x, y) in self.coordinates:
            t.goto(x, y)
 
-        t.end_fill() 
+        t.end_fill()
+
