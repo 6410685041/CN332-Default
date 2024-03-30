@@ -6,7 +6,9 @@ config_json_path = "../myhouse.json"
 f = Factory(config_ini_path)
 
 d = f.getDrawing()
-d.draw("my_house.jpg")
+# d.draw("my_house.png")
+# d.draw("my_house.jpg")
+d.draw()
 # coordinate_roof = json_config.get(query={'key':'house'})['roof']['coordinate']
 # color_roof = json_config.get(query={'key':'house'})['roof']['color']
 # roof = Triangle(coordinate=coordinate_roof, color=color_roof)
