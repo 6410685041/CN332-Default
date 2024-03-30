@@ -13,11 +13,21 @@ class Factory:
         except Exception as e:
             print(f"Error: {e}")
 
-    def draw(self):
-        pass
+    def draw(self, save_as=None):
+        file_name = save_as.split('.')[0:]
+        file_extension = save_as.split('.')[-1]
+        
+        match file_extension:
+            case 'json':
+                pass
+            case 'ini':
+                pass
+            case _:
+                pass
+
 
 f=Factory('myhouse.json')
-data = f.get()
+data = f.config.get()
 
 for i in data:
     # for j in data[i]:
