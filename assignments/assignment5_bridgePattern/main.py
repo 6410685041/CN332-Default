@@ -1,9 +1,9 @@
 from src.Factory import Factory
 
-config_ini_path = "myhouse.ini"
-# config_json_path = "../config_file/myhouse.json"
+config_path = "myhouse.ini"
+# config_path = "./myhouse.json"
 
-f = Factory(config_json_path)
+f = Factory(config_path)
 
 d = f.getDrawing()
 # d.draw("my_house.png")
