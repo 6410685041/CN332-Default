@@ -1,6 +1,6 @@
-from INIConfigAdapter import INIConfigAdapter
-from JSONConfigAdapter import JSONConfigAdapter
-from Drawing import V1Drawing
+from .INIConfigAdapter import INIConfigAdapter
+from .JSONConfigAdapter import JSONConfigAdapter
+from .Drawing import V1Drawing
 
 class Factory:
     def __init__(self, config_file):

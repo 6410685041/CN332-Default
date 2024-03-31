@@ -1,4 +1,4 @@
-from Configuration import Configuration
+from .Configuration import Configuration
 import configparser
 
 class INIConfigAdapter(Configuration):
