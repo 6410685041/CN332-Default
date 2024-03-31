@@ -1,0 +1,29 @@
+{
+    "tree_trunk": {
+        "shape": "rectangle",
+        "coordinate": "(300,0),(350,150)",
+        "color": "brown"
+    },
+    "tree_foliage": {
+        "shape": "circle",
+        "coordinate": "(325,175)",
+        "radius": "75",
+        "color": "green"
+    },
+    "sun": {
+        "shape": "circle",
+        "coordinate": "(500,350)",
+        "radius": "50",
+        "color": "yellow"
+    },
+    "river": {
+        "shape": "rectangle",
+        "coordinate": "(0,0),(100,400)",
+        "color": "blue"
+    },
+    "bridge": {
+        "shape": "rectangle",
+        "coordinate": "(25,150),(75,200)",
+        "color": "gray"
+    }
+}

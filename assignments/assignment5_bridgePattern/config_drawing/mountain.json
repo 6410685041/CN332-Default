@@ -1,0 +1,29 @@
+{
+    "sky": {
+        "shape": "rectangle",
+        "coordinate": "(0,300),(400,600)",
+        "color": "lightblue"
+    },
+    "sun": {
+        "shape": "circle",
+        "coordinate": "(350,550)",
+        "radius": "50",
+        "color": "yellow"
+    },
+    "mountain": {
+        "shape": "triangle",
+        "coordinate": "(50,300),(150,450),(250,300)",
+        "color": "grey"
+    },
+    "tree": {
+        "shape": "rectangle",
+        "coordinate": "(100,100),(120,300)",
+        "color": "brown"
+    },
+    "tree_foliage": {
+        "shape": "circle",
+        "coordinate": "(110,350)",
+        "radius": "50",
+        "color": "green"
+    }
+}
