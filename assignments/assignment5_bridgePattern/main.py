@@ -1,6 +1,6 @@
 from src.Factory import Factory
 
-config_ini_path = "myhouse.ini"
+config_ini_path = "myhouse.json"
 # config_json_path = "../config_file/myhouse.json"
 
 f = Factory(config_ini_path)
