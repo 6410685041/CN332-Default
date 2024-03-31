@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 import turtle as t
 from .Shape import Triangle, Rectangle, Circle
 from PIL import Image, EpsImagePlugin
+import os
 
 EpsImagePlugin.gs_mac_path = '/usr/local/bin/gs'  # Example for macOS
 
@@ -73,8 +74,16 @@ class V1Drawing(Drawing):
             canvas.postscript(file="drawing.ps", colormode='color')
             
             # Convert the PostScript file to PNG or JPG
-            with Image.open("drawing.ps") as img:
+            postscript_file = "drawing.ps"
+            with Image.open(postscript_file) as img:
                 img.save(file_name+"."+file_extension)
+                
+            # remove the PostScript file
+            if os.path.isfile(postscript_file):
+                os.remove(postscript_file)
+            else:
+                print(f"The file {postscript_file} does not exist.")
+            
         else:
             t.done()
 
