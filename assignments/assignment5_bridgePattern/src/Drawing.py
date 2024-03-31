@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import turtle as t
-from Shape import Triangle, Rectangle, Circle
+from .Shape import Triangle, Rectangle, Circle
 from PIL import Image, EpsImagePlugin
 
 EpsImagePlugin.gs_mac_path = '/usr/local/bin/gs'  # Example for macOS
