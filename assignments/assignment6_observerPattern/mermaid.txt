@@ -1,0 +1,42 @@
+classDiagram
+    class VehicleDetectionSystem {
+        -observers: list
+        -vehicles_count: int
+        +attach(observer: Observer)
+        +detach(observer: Observer)
+        +notify()
+        +detect_vehicle()
+    }
+
+    class Observer {
+        <<interface>>
+        +update(count: int)
+    }
+
+    class TrafficManagementSystem {
+        +update(count: int)
+    }
+
+    class SecurityMonitoringSystem {
+        +update(count: int)
+    }
+
+    class DataAnalyticsSystem {
+        +update(count: int)
+    }
+    
+    TrafficManagementSystem <.. Client : sets up
+    SecurityMonitoringSystem <.. Client : sets up
+    DataAnalyticsSystem <.. Client : sets up
+    class Client {
+        +detection_system: VehicleDetectionSystem
+        +setup_observers()
+        +start_detection()
+    }
+
+    VehicleDetectionSystem "1" --> "*" Observer : notifies
+    Observer <|-- TrafficManagementSystem
+    Observer <|-- SecurityMonitoringSystem
+    Observer <|-- DataAnalyticsSystem
+    Client --> VehicleDetectionSystem : uses
+
