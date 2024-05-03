@@ -1,0 +1,75 @@
+classDiagram
+    class Clock {
+        +State state
+        +buttonInput(press_type: string)
+        +run()
+        +display()
+    }
+
+    class State {
+        <<interface>>
+        +handleInput(clock: Clock, press_type: string)
+        +enterState(clock: Clock)
+        +exitState(clock: Clock)
+        +onShortPress(clock: Clock)
+        +onLongPress(clock: Clock)
+        +display(clock: Clock)
+    }
+
+    class NormalMode {
+        - clock
+
+        +handleInput(clock: Clock, press_type: string)
+        +enterState(clock: Clock)
+        +exitState(clock: Clock)
+        +onShortPress(clock: Clock)
+        +onLongPress(clock: Clock)
+        +display(clock: Clock)
+    }
+
+    class PresetMode {
+        - clock
+
+        +handleInput(clock: Clock, press_type: string)
+        +enterState(clock: Clock)
+        +exitState(clock: Clock)
+        +onShortPress(clock: Clock)
+        +onLongPress(clock: Clock)
+        +display(clock: Clock)
+    }
+
+    class CountdownMode {
+        - clock
+        
+        +handleInput(clock: Clock, press_type: string)
+        +enterState(clock: Clock)
+        +exitState(clock: Clock)
+        +onShortPress(clock: Clock)
+        +onLongPress(clock: Clock)
+        +display(clock: Clock)
+    }
+
+    class Button {
+        +List observers
+        +attach(observer: ButtonObserver)
+        +detach(observer: ButtonObserver)
+        +notifyObservers(press_type: string)
+    }
+
+    class Subject {
+        <<interface>>
+    }
+
+    class Observer {
+        <<interface>>
+        +update(press_type: string)
+    }
+
+    Clock o--> State
+    State <|.. NormalMode
+    State <|.. PresetMode
+    State <|.. CountdownMode
+    Observer <-- Subject : update
+    Button <-- Clock : listen
+    Subject <|.. Button
+    Observer <|.. Clock
