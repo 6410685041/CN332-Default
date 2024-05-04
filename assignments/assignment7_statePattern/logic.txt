@@ -1,0 +1,19 @@
+N: Normal Mode
+P: Preset Mode
+C: Countdown Mode
+s: short press
+l: long press
+
+N # initial
+|s \l
+C   P__
+|   |   \l
+|   |s    N
+|   |
+|   plus min
+|
+time left
+| alarm(True)
+|s
+| alarm(False)
+N
