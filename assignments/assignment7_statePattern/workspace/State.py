@@ -27,16 +27,19 @@ class NormalMode(State):
 class PresetMode(State):
     def __init__(self, clock: Clock):
         self.clock = clock
+        self.clock.on_preset()
 
     def __str__(self):
         return "PresetMode"
         
     def long_press(self):
         print("Switching to Normal Mode")
+        self.clock.set_time(self.clock.temp)
         return NormalMode(clock=self.clock)
 
     def short_press(self):
         print("Increasing time")
+        self.clock.increase_temp()
         return PresetMode(clock=self.clock)
 
 class CountdownMode(State):

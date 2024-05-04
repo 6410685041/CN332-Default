@@ -13,7 +13,7 @@ def display_time(clock, delay):
             case "NormalMode":
                 clock.print_time()
             case "PresetMode":
-                clock.print_time()
+                clock.print_temp()
             case "CountdownMode":
                 if clock.is_alarm():
                     print("Alarm!")

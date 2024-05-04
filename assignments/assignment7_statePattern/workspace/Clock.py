@@ -15,6 +15,7 @@ class Clock(Subscriber):
         self.time = 0
         self.countdown_time = 60
         self.start_tick()
+        self.temp = self.time
 
     def update(self, press_type: str):
         if press_type == "s":
@@ -41,6 +42,9 @@ class Clock(Subscriber):
         
     def get_time(self):
         return self.time
+    
+    def set_time(self, time):
+        self.time = time
         
     def start_tick(self):
         time_thread = threading.Thread(target=self.tick)
@@ -79,3 +83,18 @@ class Clock(Subscriber):
         
     def get_countdown_time(self):
         return self.countdown_time
+    
+    def on_preset(self):
+        self.temp = self.time
+
+    def increase_temp(self):
+        # add 1 minute
+        self.temp += 60
+
+    def print_temp(self):
+        hours = (self.temp // 3600) % 24
+        minutes = (self.temp // 60) % 60
+        seconds = self.temp % 60
+        
+        # Print in hh:mm:ss format
+        print(f"{hours:02}:{minutes:02}:{seconds:02}")
