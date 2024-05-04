@@ -12,12 +12,9 @@ class Clock(Subscriber):
         self.state = initial_state
         self.observers = []
         self.alarm = False
-        self.time = time.time()
+        self.time = 0
         self.countdown_time = 60
-        
-        # time_thread = threading.Thread(target=self.countdown, args=(self, ))
-        # time_thread.daemon = True
-        # time_thread.start()
+        self.start_tick()
 
     def update(self, press_type: str):
         if press_type == "s":
@@ -35,10 +32,25 @@ class Clock(Subscriber):
         self.change_state(self.state.short_press())
         
     def print_time(self):
-        print(time.ctime(self.time))
+        hours = (self.time // 3600) % 24
+        minutes = (self.time // 60) % 60
+        seconds = self.time % 60
         
-    def print_countdown_time(self):
-        print(time.ctime(self.countdown_time))
+        # Print in hh:mm:ss format
+        print(f"{hours:02}:{minutes:02}:{seconds:02}")
+        
+    def get_time(self):
+        return self.time
+        
+    def start_tick(self):
+        time_thread = threading.Thread(target=self.tick)
+        time_thread.daemon = True
+        time_thread.start()
+    
+    def tick(self):
+        while True:
+            time.sleep(1)
+            self.time += 1
         
     # Alarm related methods    
     def alarm_on(self):
@@ -61,3 +73,9 @@ class Clock(Subscriber):
             time.sleep(1)
             self.countdown_time -= 1
         self.alarm_on()
+        
+    def print_countdown_time(self):
+        print(f"Countdown: {self.countdown_time}")
+        
+    def get_countdown_time(self):
+        return self.countdown_time
