@@ -40,7 +40,3 @@ if __name__ == "__main__":
     tasks_thread = threading.Thread(target=listen_input, args=(button, 1))
     tasks_thread.daemon = True
     tasks_thread.start()
-
-    # Main thread keeps running
-    while True:
-        pass
