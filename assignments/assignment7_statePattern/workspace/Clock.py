@@ -15,25 +15,15 @@ class Clock(Subscriber):
 
     def update(self, press_type: str):
         if press_type == "s":
-            self.state.short_press()
+            self.short_press()
         elif press_type == "l":
-            self.state.long_press()
-
-    def attach(self, observer: Button):
-        self.observers.append(observer)
-
-    def detach(self, observer: Button):
-        self.observers.remove(observer)
-
-    # def notify(self):
-    #     for observer in self.observers:
-    #         observer.update(self)
+            self.long_press()
 
     # def change_state(self, state: State):
     #     self.state = state
 
-    # def long_press(self):
-    #     self.state.long_press()
+    def long_press(self):
+        self.state = self.state.long_press()
 
-    # def short_press(self):
-    #     self.state.short_press()
+    def short_press(self):
+        self.state = self.state.short_press()
