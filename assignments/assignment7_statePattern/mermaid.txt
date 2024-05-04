@@ -1,75 +1,58 @@
 classDiagram
+
+    class Button {
+        -myObserver: Clock[]
+
+        +Attach(clock: Clock)
+        +Detach(clock: Clock)
+        +Notify()
+    }
+
+    class Subscriber {
+        <<interface>>
+        + Update(context)
+    }
+
     class Clock {
-        +State state
-        +buttonInput(press_type: string)
-        +run()
-        +display()
+        -state: State
+
+        + Clock(initialState)
+        + changeState(state)
+        + longPress()
+        + shortPress()
     }
 
     class State {
         <<interface>>
-        +handleInput(clock: Clock, press_type: string)
-        +enterState(clock: Clock)
-        +exitState(clock: Clock)
-        +onShortPress(clock: Clock)
-        +onLongPress(clock: Clock)
-        +display(clock: Clock)
+        + longPress()
+        + shortPress()
     }
 
     class NormalMode {
-        - clock
+        - clock: Clock
 
-        +handleInput(clock: Clock, press_type: string)
-        +enterState(clock: Clock)
-        +exitState(clock: Clock)
-        +onShortPress(clock: Clock)
-        +onLongPress(clock: Clock)
-        +display(clock: Clock)
+        + longPress()
+        + shortPress()
     }
 
     class PresetMode {
-        - clock
+        - clock: Clock
 
-        +handleInput(clock: Clock, press_type: string)
-        +enterState(clock: Clock)
-        +exitState(clock: Clock)
-        +onShortPress(clock: Clock)
-        +onLongPress(clock: Clock)
-        +display(clock: Clock)
+        + longPress()
+        + shortPress()
     }
 
     class CountdownMode {
-        - clock
+        - clock: Clock
         
-        +handleInput(clock: Clock, press_type: string)
-        +enterState(clock: Clock)
-        +exitState(clock: Clock)
-        +onShortPress(clock: Clock)
-        +onLongPress(clock: Clock)
-        +display(clock: Clock)
-    }
-
-    class Button {
-        +List observers
-        +attach(observer: ButtonObserver)
-        +detach(observer: ButtonObserver)
-        +notifyObservers(press_type: string)
-    }
-
-    class Subject {
-        <<interface>>
-    }
-
-    class Observer {
-        <<interface>>
-        +update(press_type: string)
+        + longPress()
+        + shortPress()
     }
 
     Clock o--> State
     State <|.. NormalMode
     State <|.. PresetMode
     State <|.. CountdownMode
-    Observer <-- Subject : update
-    Button <-- Clock : listen
-    Subject <|.. Button
-    Observer <|.. Clock
+    Button <-- Clock : subject
+    Subscriber <--o Button: notify
+    Subscriber <|.. Clock
