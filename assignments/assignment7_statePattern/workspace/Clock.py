@@ -1,5 +1,3 @@
-import State
-import Button
 import time
 
 # Interface for the Subscriber
@@ -9,11 +7,11 @@ class Subscriber:
 
 # Clock class
 class Clock(Subscriber):
-    def __init__(self, initial_state: State):
+    def __init__(self, initial_state=None):
         self.state = initial_state
         self.observers = []
         self.alarm = False
-        self.time = 0
+        self.time = time.time()
 
     def update(self, press_type: str):
         if press_type == "s":
@@ -21,7 +19,7 @@ class Clock(Subscriber):
         elif press_type == "l":
             self.long_press()
 
-    def change_state(self, state: State):
+    def change_state(self, state):
         self.state = state
 
     def long_press(self):

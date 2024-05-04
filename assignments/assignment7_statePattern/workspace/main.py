@@ -26,8 +26,9 @@ def listen_input(button, delay):
 
 if __name__ == "__main__":
     button = Button()
-    normal_mode = NormalMode()
-    clock = Clock(normal_mode)
+    clock = Clock()
+    normal_mode = NormalMode(clock)
+    clock.change_state(normal_mode)
     button.attach(clock)
 
     # do display_time every 1 sec
