@@ -28,6 +28,7 @@ class PresetMode(State):
     def __init__(self, clock: Clock):
         self.clock = clock
         self.clock.on_preset()
+        self.clock.set = True
 
     def __str__(self):
         return "PresetMode"
@@ -35,6 +36,7 @@ class PresetMode(State):
     def long_press(self):
         print("Switching to Normal Mode")
         self.clock.set_time(self.clock.temp)
+        self.clock.set = False
         return NormalMode(clock=self.clock)
 
     def short_press(self):

@@ -16,6 +16,7 @@ class Clock(Subscriber):
         self.countdown_time = 60
         self.start_tick()
         self.temp = self.time
+        self.set = False
 
     def update(self, press_type: str):
         if press_type == "s":
@@ -85,7 +86,8 @@ class Clock(Subscriber):
         return self.countdown_time
     
     def on_preset(self):
-        self.temp = self.time
+        if not self.set:
+            self.temp = self.time
 
     def increase_temp(self):
         # add 1 minute
