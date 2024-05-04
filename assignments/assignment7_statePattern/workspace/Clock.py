@@ -11,29 +11,26 @@ class Clock(Subscriber):
     def __init__(self, initial_state: State):
         self.state = initial_state
         self.observers = []
+        self.alarm = False
         self.time = 0
 
     def update(self, press_type: str):
         if press_type == "s":
-            self.state.short_press()
+            self.short_press()
         elif press_type == "l":
-            self.state.long_press()
+            self.long_press()
 
-    def attach(self, observer: Button):
-        self.observers.append(observer)
+    def change_state(self, state: State):
+        self.state = state
 
-    def detach(self, observer: Button):
-        self.observers.remove(observer)
+    def long_press(self):
+        self.change_state(self.state.long_press())
 
-    # def notify(self):
-    #     for observer in self.observers:
-    #         observer.update(self)
-
-    # def change_state(self, state: State):
-    #     self.state = state
-
-    # def long_press(self):
-    #     self.state.long_press()
-
-    # def short_press(self):
-    #     self.state.short_press()
+    def short_press(self):
+        self.change_state(self.state.short_press())
+        
+    def alarm_on(self):
+        self.alarm = True
+        
+    def alarm_off(self):
+        self.alarm = False
