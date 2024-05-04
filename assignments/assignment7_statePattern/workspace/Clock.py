@@ -19,11 +19,11 @@ class Clock(Subscriber):
         elif press_type == "l":
             self.long_press()
 
-    # def change_state(self, state: State):
-    #     self.state = state
+    def change_state(self, state: State):
+        self.state = state
 
     def long_press(self):
-        self.state = self.state.long_press()
+        self.change_state(self.state.long_press())
 
     def short_press(self):
-        self.state = self.state.short_press()
+        self.change_state(self.state.short_press())
