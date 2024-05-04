@@ -1,4 +1,5 @@
-from datetime import datetime
+import time
+import threading
 
 # Interface for the Subscriber
 class Subscriber:
@@ -11,7 +12,12 @@ class Clock(Subscriber):
         self.state = initial_state
         self.observers = []
         self.alarm = False
-        self.time = datetime.now()
+        self.time = time.time()
+        self.countdown_time = 60
+        
+        time_thread = threading.Thread(target=self.countdown, args=(self, ))
+        time_thread.daemon = True
+        time_thread.start()
 
     def update(self, press_type: str):
         if press_type == "s":
@@ -28,6 +34,13 @@ class Clock(Subscriber):
     def short_press(self):
         self.change_state(self.state.short_press())
         
+    def print_time(self):
+        print(time.ctime(self.time))
+        
+    def print_countdown_time(self):
+        print(time.ctime(self.countdown_time))
+        
+    # Alarm related methods    
     def alarm_on(self):
         self.alarm = True
         
@@ -36,3 +49,15 @@ class Clock(Subscriber):
         
     def is_alarm(self):
         return self.alarm
+    
+    def start_countdown(self):
+        self.countdown_time = 60
+        time_thread = threading.Thread(target=self.countdown, args=(self, ))
+        time_thread.daemon = True
+        time_thread.start()
+    
+    def countdown(self):
+        while self.countdown_time > 0:
+            time.sleep(1)
+            self.countdown_time -= 1
+        self.alarm_on()

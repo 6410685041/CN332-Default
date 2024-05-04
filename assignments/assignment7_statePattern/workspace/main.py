@@ -11,13 +11,13 @@ def display_time(clock, delay):
         time.sleep(delay)
         match str(clock.state):
             case "NormalMode":
-                print("Time:", clock.time.strftime("%H:%M:%S"))
+                clock.print_time()
             case "PresetMode":
-                print("Time:", clock.time.strftime("%H:%M:%S"))
+                clock.print_time()
             case "CountdownMode":
-                if clock.is_alarm() == False:
-                    print("Time:", clock.countdown_time.strftime("%H:%M:%S"))
-                elif clock.is_alarm() == True:
+                if ~clock.is_alarm():
+                    clock.print_countdown_time()
+                elif clock.is_alarm():
                     print("Alarm!")
             case _:
                 print("match None")

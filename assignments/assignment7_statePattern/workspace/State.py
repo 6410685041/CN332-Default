@@ -18,11 +18,11 @@ class NormalMode(State):
     
     def long_press(self):
         print("Switching to Preset Mode")
-        return PresetMode
+        return PresetMode(clock=self.clock)
 
     def short_press(self):
         print("Switching to Countdown mode and start count down")
-        return CountdownMode
+        return CountdownMode(clock=self.clock)
 
 class PresetMode(State):
     def __init__(self, clock: Clock):
@@ -33,26 +33,28 @@ class PresetMode(State):
         
     def long_press(self):
         print("Switching to Normal Mode")
-        return NormalMode
+        return NormalMode(clock=self.clock)
 
     def short_press(self):
         print("Increasing time")
-        return PresetMode
+        return PresetMode(clock=self.clock)
 
 class CountdownMode(State):
     def __init__(self, clock: Clock):
         self.clock = clock
+        self.clock.start_countdown()
 
     def __str__(self):
         return "CountdownMode"
     
     def long_press(self):
         print("Didn't do anything")
-        return CountdownMode
+        return CountdownMode(clock=self.clock)
 
     def short_press(self):
         print("After alarm is activate, it will stop alarm and switch to NormalMode")
-        if self.clock.is_alarm() :
-            return NormalMode
+        if self.clock.is_alarm():
+            self.clock.alarm_off()
+            return NormalMode(clock=self.clock)
         else :
-            return CountdownMode
+            return CountdownMode(clock=self.clock)
