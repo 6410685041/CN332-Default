@@ -9,8 +9,10 @@ from Button import Button
 def display_time(clock, delay):
     while True:
         time.sleep(delay)
-        clock.time += 1
-        print("Time:", clock.time)
+        if clock.is_alarm() == False:
+            print("Time:", clock.time)
+        elif clock.is_alarm() == True:
+            print("Alarm!")
 
 # Function to simulate other tasks
 def listen_input(button, delay):
