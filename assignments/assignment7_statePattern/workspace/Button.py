@@ -1,13 +1,15 @@
-# Button class
+from Clock import Clock
+
 class Button:
-    def __init__(self, clock):
-        self.clock = clock
+    def __init__(self):
+        self.myObservers = []
+        
+    def attach(self, observer) -> None:
+        self.myObservers.append(observer)
 
-    def attach(self, observer):
-        self.clock.attach(observer)
+    def detach(self, observer: Clock) -> None:
+        self.myObservers.remove(observer)
 
-    def detach(self, observer):
-        self.clock.detach(observer)
-
-    def notify(self):
-        self.clock.notify()
+    def notify(self, press_type: str) -> None:
+        for observer in self.myObservers:
+            observer.update(press_type)
