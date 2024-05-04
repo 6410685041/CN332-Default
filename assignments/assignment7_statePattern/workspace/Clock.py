@@ -4,11 +4,14 @@ class Subscriber:
         pass
 
 # Clock class
-class Clock:
+class Clock(Subscriber):
     def __init__(self, initial_state):
         self.state = initial_state
         self.observers = []
         self.time = 0
+
+    def update(self):
+        pass
 
     def attach(self, observer):
         self.observers.append(observer)
