@@ -15,10 +15,10 @@ def display_time(clock, delay):
             case "PresetMode":
                 clock.print_time()
             case "CountdownMode":
-                if ~clock.is_alarm():
-                    clock.print_countdown_time()
-                elif clock.is_alarm():
+                if clock.is_alarm():
                     print("Alarm!")
+                else:
+                    clock.print_countdown_time()
             case _:
                 print("match None")
 

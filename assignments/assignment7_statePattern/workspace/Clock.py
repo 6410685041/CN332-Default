@@ -15,9 +15,9 @@ class Clock(Subscriber):
         self.time = time.time()
         self.countdown_time = 60
         
-        time_thread = threading.Thread(target=self.countdown, args=(self, ))
-        time_thread.daemon = True
-        time_thread.start()
+        # time_thread = threading.Thread(target=self.countdown, args=(self, ))
+        # time_thread.daemon = True
+        # time_thread.start()
 
     def update(self, press_type: str):
         if press_type == "s":
@@ -51,8 +51,8 @@ class Clock(Subscriber):
         return self.alarm
     
     def start_countdown(self):
-        self.countdown_time = 60
-        time_thread = threading.Thread(target=self.countdown, args=(self, ))
+        self.countdown_time = 5
+        time_thread = threading.Thread(target=self.countdown)
         time_thread.daemon = True
         time_thread.start()
     
