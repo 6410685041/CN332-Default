@@ -10,7 +10,7 @@ def display_time(clock, delay):
     while True:
         time.sleep(delay)
         if clock.is_alarm() == False:
-            print("Time:", clock.time)
+            print("Time:", clock.time.strftime("%H:%M:%S"))
         elif clock.is_alarm() == True:
             print("Alarm!")
 
@@ -41,3 +41,6 @@ if __name__ == "__main__":
     tasks_thread = threading.Thread(target=listen_input, args=(button, 1))
     tasks_thread.daemon = True
     tasks_thread.start()
+    
+    while True:
+        pass

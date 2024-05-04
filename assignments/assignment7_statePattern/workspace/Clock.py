@@ -1,4 +1,4 @@
-import time
+from datetime import datetime
 
 # Interface for the Subscriber
 class Subscriber:
@@ -11,7 +11,7 @@ class Clock(Subscriber):
         self.state = initial_state
         self.observers = []
         self.alarm = False
-        self.time = time.time()
+        self.time = datetime.now()
 
     def update(self, press_type: str):
         if press_type == "s":
