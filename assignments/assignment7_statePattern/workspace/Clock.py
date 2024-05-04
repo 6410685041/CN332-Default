@@ -36,5 +36,5 @@ class Clock(Subscriber):
     def alarm_off(self):
         self.alarm = False
         
-    def is_alarm_on(self):
+    def is_alarm(self):
         return self.alarm
