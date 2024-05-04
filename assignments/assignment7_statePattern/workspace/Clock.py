@@ -1,5 +1,6 @@
 import State
 import Button
+import time
 
 # Interface for the Subscriber
 class Subscriber:
@@ -34,3 +35,6 @@ class Clock(Subscriber):
         
     def alarm_off(self):
         self.alarm = False
+        
+    def is_alarm_on(self):
+        return self.alarm
