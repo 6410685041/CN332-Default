@@ -11,6 +11,7 @@ class Clock(Subscriber):
     def __init__(self, initial_state: State):
         self.state = initial_state
         self.observers = []
+        self.alarm = False
         self.time = 0
 
     def update(self, press_type: str):
@@ -27,3 +28,9 @@ class Clock(Subscriber):
 
     def short_press(self):
         self.change_state(self.state.short_press())
+        
+    def alarm_on(self):
+        self.alarm = True
+        
+    def alarm_off(self):
+        self.alarm = False
