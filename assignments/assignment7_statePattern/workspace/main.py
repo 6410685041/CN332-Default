@@ -1,36 +1,41 @@
 import threading
 import time
-from State import NormalMode
+from State import *
 from Clock import Clock
 from Button import Button
 
 
 # Function to simulate time ticking
-def time_ticker(clock):
+def display_time(clock, delay):
     while True:
-        time.sleep(1)
+        time.sleep(delay)
         clock.time += 1
         print("Time:", clock.time)
-        clock.notify()
 
 # Function to simulate other tasks
-def other_tasks(button):
+def listen_input(button, delay):
+    print("press 's' for short press and 'l' for long press: ")
     while True:
-        time.sleep(5)
-        button.notify()
+        time.sleep(delay)
+        press_type = input()
+        if press_type=="s" or press_type=="l":
+            button.notify(press_type)
+            press_type = ""
 
 if __name__ == "__main__":
+    button = Button()
     normal_mode = NormalMode()
     clock = Clock(normal_mode)
-    button = Button(clock)
+    button.attach(clock)
 
-    # Starting the time ticker thread
-    time_thread = threading.Thread(target=time_ticker, args=(clock,))
+    # do display_time every 1 sec
+    time_thread = threading.Thread(target=display_time, args=(clock, 1))
     time_thread.daemon = True
     time_thread.start()
 
-    # Starting the other tasks thread
-    tasks_thread = threading.Thread(target=other_tasks, args=(button,))
+    time.sleep(0.5)
+    # do listen_input every 1 sec
+    tasks_thread = threading.Thread(target=listen_input, args=(button, 1))
     tasks_thread.daemon = True
     tasks_thread.start()
 
