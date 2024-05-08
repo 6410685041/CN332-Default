@@ -6,7 +6,7 @@ import argparse
 from pathlib import Path
 from numpy import random
 from random import randint
-import torch.backends.cudnn as cudnn
+# import torch.backends.cudnn as cudnn
 
 from models.experimental import attempt_load
 from utils.datasets import LoadStreams, LoadImages

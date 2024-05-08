@@ -1,7 +1,11 @@
+import os
 import sys
-sys.path.append('../ai')
-from .functions import edit_status
-from detect_and_track_ooad import Detection
+# Assuming 'detect_and_track_ooad' module is one directory above the current directory
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'ai')))
+
+
+# from .functions import edit_status
+# from detect_and_track_ooad import Detection
 from celery import shared_task
 
 # from django.core.mail import send_mail
@@ -9,8 +13,8 @@ from celery import shared_task
 
 @shared_task()
 def celery_start_task(url, id):
-    edit_status(1, id)
+    # edit_status(1, id)
     call_detect = Detection()
     call_detect.detect(url)
-    edit_status(2, id)
+    # edit_status(2, id)
     return "Detect Finish"

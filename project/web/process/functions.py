@@ -1,9 +1,13 @@
+import os
+import sys
+# Assuming 'detect_and_track_ooad' module is one directory above the current directory
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
+
 from django.shortcuts import redirect
 from django.urls import reverse
 from process.models import Task, Intersection, Loop
 from django.http import HttpResponseRedirect, JsonResponse
 from random import random
-from .tasks import abc
 from .models import Task
 from user.models import Profile
 from datetime import datetime
@@ -70,20 +74,20 @@ def create_task(request):
 '''
 test
 '''
-def start_task(request):
-    """Initiate a task and return its ID to the frontend."""
-    task = abc.delay(random(), random())
-    Task.objects.create(task_id=task.id, intersection_id=1)
+# def start_task(request):
+#     """Initiate a task and return its ID to the frontend."""
+#     task = abc.delay(random(), random())
+#     Task.objects.create(task_id=task.id, intersection_id=1)
     
-    return JsonResponse({'task_id': task.id})
+#     return JsonResponse({'task_id': task.id})
 
-def task_status(request, task_id):
-    """Check the task status and return the result if completed."""
-    task = abc.AsyncResult(task_id)
-    if task.ready():
-        return JsonResponse({'status': 'SUCCESS', 'result': task.result})
-    else:
-        return JsonResponse({'status': 'PENDING'})
+# def task_status(request, task_id):
+#     """Check the task status and return the result if completed."""
+#     task = abc.AsyncResult(task_id)
+#     if task.ready():
+#         return JsonResponse({'status': 'SUCCESS', 'result': task.result})
+#     else:
+#         return JsonResponse({'status': 'PENDING'})
         
 # in process
 def add_loop(request, data, task_id):

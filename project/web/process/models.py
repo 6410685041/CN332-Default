@@ -3,23 +3,25 @@ from location_field.models.plain import PlainLocationField
 from django.db.models import JSONField
 from user.models import Profile
 
-class Vehicle(models.Model):
+class myVehicle(models.Model):
     location = PlainLocationField(based_fields=['city'], zoom=7)
     speed = models.FloatField()
     color = models.TextField()
     license_plate = models.TextField()
     brand = models.TextField()
     
+    class Meta:
+        app_label = 'process'
     # class Meta:
     #     abstract = True
 
-class Car(Vehicle):
+class Car(myVehicle):
     model = models.TextField()
 
-class Motorbike(Vehicle):
+class Motorbike(myVehicle):
     model = models.TextField()
 
-class Truck(Vehicle):
+class Truck(myVehicle):
     model = models.TextField()
 
 class Intersection(models.Model):
