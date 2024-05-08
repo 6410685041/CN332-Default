@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const playButton = document.getElementById('play-button');
 
     function updatePlayButtonText() {
-        playButton.textContent = video.paused ? '\u23F5Play' : '\u275A\u275A Pause';
+        playButton.textContent = video.paused ? '\u23F5 Play' : '\u275A\u275A Pause';
         playButton.style
 
         if (video.paused) {

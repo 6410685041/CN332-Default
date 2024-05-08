@@ -22,14 +22,19 @@ for (let i = 1; i <= 4; i++) {
 
 videoWrapper.addEventListener('click', function(event) {
     const rect = video.getBoundingClientRect(); // Use video instead of videoWrapper to get the correct scaling factor
-    const scaleX = video.videoWidth / rect.width;
-    const scaleY = video.videoHeight / rect.height;
+    // const scaleX = video.videoWidth / rect.width;
+    // const scaleY = video.videoHeight / rect.height;
+    
+    // const x = (event.clientX - rect.left);
+    // const y = (event.clientY - rect.top);
 
+    const scaleX = (rect.width+75) / video.videoWidth;
+    const scaleY = (rect.height-30) / video.videoHeight;
     const x = (event.clientX - rect.left) * scaleX;
     const y = (event.clientY - rect.top) * scaleY;
 
-    document.getElementById(`x${current + 1}`).value = Math.round(x);
-    document.getElementById(`y${current + 1}`).value = Math.round(y);
+    document.getElementById(`x${current + 1}`).value = Math.ceil(x);
+    document.getElementById(`y${current + 1}`).value = Math.ceil(y);
 
     points[current] = { x: Math.round(x), y: Math.round(y) };
 
@@ -49,6 +54,19 @@ function drawPoints() {
         ctx.arc(point.x, point.y, 2, 0, 2 * Math.PI);
         ctx.fill();
     });
+
+    const firstPoint = points[0];
+    const lastPoint = points[points.length - 1];
+
+    // Ensure both points have coordinates (not zero)
+    if (firstPoint.x !== 0 || firstPoint.y !== 0 || lastPoint.x !== 0 || lastPoint.y !== 0) {
+        ctx.strokeStyle = '#00FF00'; // Green color for the line
+        ctx.lineWidth = 2; // Adjust line width if needed
+        ctx.beginPath();
+        ctx.moveTo(firstPoint.x, firstPoint.y);
+        ctx.lineTo(lastPoint.x, lastPoint.y);
+        ctx.stroke();
+    }
 }
 
 // Initialize points from existing input values
