@@ -92,5 +92,5 @@ document.addEventListener('keypress', function(event) {
             document.getElementById(`y${i}`).value = null;
         }
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
+    }  
 });
