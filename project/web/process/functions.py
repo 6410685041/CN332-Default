@@ -35,6 +35,9 @@ def delete_loop(request, loop_id):
     Loop.objects.get(id=loop_id).delete()
     return redirect('view_edit_task')
     
+'''
+create
+'''
 # create interaection
 def create_intersection(request):
     if request.method == "POST":
@@ -62,7 +65,7 @@ def create_task(request):
         
         # Redirect to the edit page of the created task
         return HttpResponseRedirect(reverse("view_edit_task", args=(task.id,)))
-    
+
 '''
 test
 '''
@@ -95,8 +98,11 @@ def add_loop(request, data, task_id):
     
 # in process
 def submit_task(request, task_id):
-    task = Task.objects.get(id=task_id)
-    return reverse("my_queue")
+    input = Input.objects.get(id=id)
+    print(input.video.url)
+    h,media, url = input.video.url.split('/')
+    result = call_detect.delay('./media/uploads/video/' + url, input.pk)
+    return HttpResponseRedirect(reverse('home'))
 
 # utils
 def create_summary(task_id, loop_path=None):

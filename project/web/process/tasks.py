@@ -1,12 +1,17 @@
-# myapp/tasks.py
+import sys
+sys.path.append('./arial-car-track')
+# from django.core.mail import send_mail
+from .functions import edit_status
+from detect_and_track_ooad import Detection
 from celery import shared_task
-import time
+from time import sleep
 
-@shared_task
-def abc(x, y):
-    for i in range(1000000):
-        for i in range(1000000):
-            for i in range(1000000):
-                for i in range(1000000):
-                    z = x*y*i
-    return z
+
+
+@shared_task()
+def celery_start_task(url, id):
+    edit_status(1, id)
+    call_detect = Detection()
+    call_detect.detect(url)
+    edit_status(2, id)
+    return "Detect Finish"
