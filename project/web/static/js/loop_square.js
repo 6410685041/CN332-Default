@@ -5,6 +5,7 @@ const ctx = canvas.getContext('2d');
 
 let current = 0;
 let points = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
+let check = false;
 
 function updatePointsFromInputs() {
     for (let i = 1; i <= 4; i++) {
@@ -40,8 +41,10 @@ videoWrapper.addEventListener('click', function(event) {
 
     if (current < 3) {
         current++;
+        check = false;
     } else {
         current = 0;
+        check = true;
     }
     drawPoints();
 });
@@ -59,7 +62,8 @@ function drawPoints() {
     const lastPoint = points[points.length - 1];
 
     // Ensure both points have coordinates (not zero)
-    if (firstPoint.x !== 0 || firstPoint.y !== 0 || lastPoint.x !== 0 || lastPoint.y !== 0) {
+    // if (firstPoint.x !== 0 || firstPoint.y !== 0 || lastPoint.x !== 0 || lastPoint.y !== 0) {
+    if (check) {
         ctx.strokeStyle = '#00FF00'; // Green color for the line
         ctx.lineWidth = 2; // Adjust line width if needed
         ctx.beginPath();
@@ -81,5 +85,12 @@ document.addEventListener('keypress', function(event) {
         current = 2;
     } else if (event.key === '4') {
         current = 3;
+    } else if (event.key = 'q') {
+        points = [{x: null, y: null}, {x: null, y: null}, {x: null, y: null}, {x: null, y: null}];
+        for (let i = 1; i <= 4; i++) {
+            document.getElementById(`x${i}`).value = null;
+            document.getElementById(`y${i}`).value = null;
+        }
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 });
