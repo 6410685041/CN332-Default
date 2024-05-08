@@ -11,30 +11,56 @@
 <div class="content-block-home">
     {% if user.is_authenticated %}
         <h2>Welcome {{ user.username }} !!!</h2>
-        <table>
-            <tr>
-                <th>Result name</th>
-                <th>Intersection</th>
-                <th>Owner</th>
-                <th>Details</th>
-                <th>Delete</th>
-            </tr>
-            {% for result in results %}
-            <tr>
+        <label>Show my tasks</label>
+        <input type="checkbox" id="toggle-switch">
+        <table id="tasks-table">
+    <tr>
+        <th>Result name</th>
+        <th>Intersection</th>
+        <th>Owner</th>
+        <th>Details</th>
+        <th>Delete</th>
+    </tr>
+    {% if results %}
+        {% for result in results %}
+            <tr class="{% if user == result.owner %}my-task{% endif %}">
                 <td>{{ result }}</td>
                 <td>{{ result.intersection }}</td>
                 <td>{{ result.owner }}</td>
                 <td><a href="{% url 'view_result' result.id %}">Details</a></td>
                 <td><a href="{% url 'delete_result' result.id %}" class="delete">Delete</a></td>
             </tr>
-            {% empty %}
-            <tr>
-                <td>No result found.</td>
-            </tr>
-            {% endfor %}
-        </table>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="5">No result found.</td>
+        </tr>
+    {% endif %}
+</table>
+
     {% else %}
         <p>Welcome to my channel!</p>
     {% endif %}
 </div>
+
+<script>
+    window.onload = function() {
+        var toggleSwitch = document.getElementById('toggle-switch');
+        var rows = document.querySelectorAll('#tasks-table tr');
+        
+        toggleSwitch.addEventListener('change', function() {
+            var isChecked = this.checked;
+            for (var i = 0; i < rows.length; i++) {
+                var ownerCell = rows[i].getElementsByTagName('td')[2];
+                if (isChecked && ownerCell && ownerCell.textContent !== "{{ user.username }}") {
+                    rows[i].style.display = 'none';
+                } else {
+                    rows[i].style.display = 'table-row';
+                }
+            }
+        });
+    };
+</script>
+
 {% endblock %}
+
