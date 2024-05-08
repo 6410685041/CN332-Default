@@ -16,13 +16,6 @@ services:
       - DEBUG=1
     depends_on:
       - db
-
-  ai:
-    build: ./ai
-    volumes:
-      - ./ai:/ai
-    ports:
-      - "8888:8888"
   
   db:
     image: postgres:latest

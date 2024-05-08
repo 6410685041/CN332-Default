@@ -11,6 +11,7 @@ import pytz
 import os
 import json
 from django.conf import settings
+from tasks import celery_start_task
 
 '''
 delete
@@ -96,12 +97,10 @@ def add_loop(request, data, task_id):
         loop.save()
         reverse("edit_task", task.id)
     
-# in process
+# submit task and call celery_start_task
 def submit_task(request, task_id):
-    input = Input.objects.get(id=id)
-    print(input.video.url)
-    h,media, url = input.video.url.split('/')
-    result = call_detect.delay('./media/uploads/video/' + url, input.pk)
+    task = Task.objects.get(id=task_id)
+    celery_start_task.delay('../static/video/' + task.video.url, task_id)
     return HttpResponseRedirect(reverse('home'))
 
 # utils
