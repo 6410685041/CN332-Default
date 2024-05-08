@@ -17,22 +17,22 @@ delete
 '''
 # delete task
 def delete_task(request, task_id):
-    task = Task.objects.delete(id=task_id)
+    task = Task.objects.get(id=task_id).delete()
     return redirect('my_queue')
 
 # delete result
 def delete_result(request, result_id):
-    Task.objects.delete(id=result_id)
+    Task.objects.get(id=result_id).delete()
     return redirect('home')
 
 # delete intersection
 def delete_intersection(request, intersection_id):
-    Intersection.objects.delete(id=intersection_id)
+    Intersection.objects.get(id=intersection_id).delete()
     return redirect('view_create_intersection')
 
 # delete loop
 def delete_loop(request, loop_id):
-    Loop.objects.delete(id=int(loop_id))
+    Loop.objects.get(id=loop_id).delete()
     return redirect('view_edit_task')
     
 # create interaection
