@@ -27,7 +27,7 @@ def delete_result(request, result_id):
 
 # delete intersection
 def delete_intersection(request, intersection_id):
-    Intersection.objects.delete(id=int(intersection_id))
+    Intersection.objects.delete(id=intersection_id)
     return redirect('view_create_intersection')
 
 # delete loop
