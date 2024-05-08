@@ -28,6 +28,6 @@ urlpatterns = [
     path("user/function", include("user.function_urls")),
     # process app
     path("process/", include("process.view_urls")),
-    path("process/function", include("process.function_urls")),
+    path("process/function/", include("process.function_urls")),
 ]
 
