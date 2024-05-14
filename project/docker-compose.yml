@@ -16,6 +16,7 @@ services:
       - DEBUG=1
     depends_on:
       - db
+      - broker
   
   db:
     image: postgres:latest
@@ -33,4 +34,15 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
+
+  celery:
+    build: ./web
+    command: celery -A carDetection worker --loglevel=info
+    volumes:
+      - ./web:/app
+    environment:
+      - DEBUG=1
+    depends_on:
+      - web
+      - broker
     
