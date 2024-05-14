@@ -33,3 +33,31 @@
     margin: auto;
     width: 800px;
 }
+
+/* style for each status */
+/* styles.css */
+
+#content .status-pending {
+    border: 1px solid #6C7293;  /* Example border color */
+    color: #6C7293;
+    background-color: transparent; /* Ensure the background is transparent */
+}
+
+#content .status-in-progress {
+    border: 1px solid #FFAB00; /* Example border color */
+    color: #FFAB00;
+    background-color: transparent; /* Ensure the background is transparent */
+}
+
+#content .status-completed {
+    border: 1px solid #00D25B; /* Example border color */
+    color: #00D25B;
+    background-color: transparent; /* Ensure the background is transparent */
+}
+
+#content .status-failed {
+    border: 1px solid #FC424A; /* Example border color */
+    color: #FC424A;
+    background-color: transparent; /* Ensure the background is transparent */
+}
+

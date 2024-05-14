@@ -12,7 +12,7 @@
             <th>Task ID</th>
             <th>Owner</th>
             <th>Intersection</th>
-            <th>Create at</th>
+            <th>Create Date</th>
             <th>Status</th>
             <th>Details</th>
             <th>Delete</th>
@@ -23,7 +23,21 @@
             <td>{{ task.owner }}</td>
             <td>{{ task.intersection }}</td>
             <td>{{ task.created_at }}</td>
-            <td>{{ task.status }}</td>
+            <td>
+                <a class=" 
+                    {% if task.status == "Pending" %}
+                        status-pending
+                    {% elif task.status == "In process" %}
+                        status-in-progress
+                    {% elif task.status == "Completed" %}
+                        status-completed
+                    {% elif task.status == "Failed" %}
+                        status-failed
+                    {% endif %}
+                ">
+                    {{ task.status }}
+                </a>       
+            </td>
             <td><a href="{% url 'view_edit_task' task.id %}">Details</a></td>
             <td><a href="{% url 'delete_task' task.id %}" class="delete">Delete</a></td>
         </tr>
