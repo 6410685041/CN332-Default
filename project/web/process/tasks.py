@@ -1,11 +1,11 @@
 import os
 import sys
 # Assuming 'detect_and_track_ooad' module is one directory above the current directory
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'ai')))
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'ai')))
 
 
 # from .functions import edit_status
-# from detect_and_track_ooad import Detection
+from web.ai.detect_and_track_ooad import Detection
 from celery import shared_task
 
 # from django.core.mail import send_mail
