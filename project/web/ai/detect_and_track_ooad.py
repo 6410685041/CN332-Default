@@ -21,10 +21,10 @@ from ai.utils.download_weights import download
 
 #For SORT tracking
 import skimage
-from ai.sort import *
-from ai.line_intersect import isIntersect
+from sort import *
+from line_intersect import isIntersect
 import json
-import ai.count_table
+import count_table
 
 count_boxes = []
 loop_boxes = [] #loop statistics
@@ -35,8 +35,9 @@ names = ""
 palette = (2 ** 11 - 1, 2 ** 15 - 1, 2 ** 20 - 1)
 
 class Opt:
-    def __init__(self, source):
-        self.source =  source
+    def __init__(self, video_path, loop_path):
+        self.source =  video_path
+        self.loop = loop_path
 
     weights = './yolov7.pt'
     download = True
@@ -57,7 +58,6 @@ class Opt:
     exist_ok = True
     no_trace = True
     colored_trk = True
-    loop = 'ai/loop.json'
     loop_txt = True
     summary_txt = True
     img_size = 640
@@ -67,9 +67,9 @@ class Detection:
     def __init__(self):
         pass
 
-    def detect(save_img=False, source ='a'):
+    def detect(self, source ='???', loop_path="???"):
         
-        opt = Opt(source)
+        opt = Opt(video_path=source, loop_path=loop_path)
         f = open(opt.loop)
         count_boxes = json.load(f)
         f.close()
@@ -512,7 +512,7 @@ if __name__ == '__main__':
     parser.add_argument('--source', type=str, default='inference/images', help='source')  # file/folder, 0 for webcam
     # parser.add_argument('--project', default='results', help='save results to project/name')
     # parser.add_argument('--name', help='save results to project/name', required=True)
-    parser.add_argument('--loop', default="loop.json", type=str, help='loop setting file')
+    parser.add_argument('--loop', default="./loop.json", type=str, help='loop setting file')
     parser.add_argument('--loop-txt', action='store_true', help='save history for each loop')
     parser.add_argument('--summary-txt', action='store_true', help='save summary for each loop') #todo later
        
@@ -534,9 +534,9 @@ if __name__ == '__main__':
         if opt.update:  # update all models (to fix SourceChangeWarning)
             for opt.weights in ['yolov7.pt']:
                 detect = Detection()
-                detect.detect(source=opt.source)
+                detect.detect(source=opt.source, loop_path=opt.loop)
                 strip_optimizer(opt.weights)
         else:
             detect = Detection()
-            detect.detect(source=opt.source)
+            detect.detect(source=opt.source, loop_path=opt.loop)
            
