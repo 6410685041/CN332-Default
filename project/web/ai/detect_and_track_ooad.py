@@ -1,5 +1,5 @@
 import os
-# import cv2
+import cv2
 import time
 import torch
 import argparse
@@ -8,23 +8,23 @@ from numpy import random
 from random import randint
 # import torch.backends.cudnn as cudnn
 
-# from models.experimental import attempt_load
-from utils.datasets import LoadStreams, LoadImages
-from utils.general import check_img_size, check_requirements, \
+from ai.models.experimental import attempt_load
+from ai.utils.datasets import LoadStreams, LoadImages
+from ai.utils.general import check_img_size, check_requirements, \
                 check_imshow, non_max_suppression, apply_classifier, \
                 scale_coords, xyxy2xywh, strip_optimizer, set_logging, \
                 increment_path
-from utils.plots import plot_one_box
-from utils.torch_utils import select_device, load_classifier, \
+from ai.utils.plots import plot_one_box
+from ai.utils.torch_utils import select_device, load_classifier, \
                 time_synchronized, TracedModel
-from utils.download_weights import download
+from ai.utils.download_weights import download
 
 #For SORT tracking
 import skimage
-from sort import *
-from line_intersect import isIntersect
+from ai.sort import *
+from ai.line_intersect import isIntersect
 import json
-import count_table
+import ai.count_table
 
 count_boxes = []
 loop_boxes = [] #loop statistics
@@ -57,7 +57,7 @@ class Opt:
     exist_ok = True
     no_trace = True
     colored_trk = True
-    loop = './loop.json'
+    loop = 'ai/loop.json'
     loop_txt = True
     summary_txt = True
     img_size = 640
@@ -318,7 +318,7 @@ class Detection:
                         else:  # stream
                             fps, w, h = 30, im0.shape[1], im0.shape[0]
                             save_path += '.mp4'
-                        vid_writer = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'VP09'), fps, (w, h))
+                        vid_writer = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'avc1'), fps, (w, h))
                     vid_writer.write(im0)
 
         #if save_txt or save_img:
@@ -534,9 +534,9 @@ if __name__ == '__main__':
         if opt.update:  # update all models (to fix SourceChangeWarning)
             for opt.weights in ['yolov7.pt']:
                 detect = Detection()
-                detect.detect()
+                detect.detect(source=opt.source)
                 strip_optimizer(opt.weights)
         else:
             detect = Detection()
-            detect.detect()
+            detect.detect(source=opt.source)
            

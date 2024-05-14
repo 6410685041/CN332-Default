@@ -7,10 +7,10 @@
 </head>
 <body>
     <h1>Test Celery Add Task</h1>
-    <form action="{% url 'add_numbers' %}" method="post">
+    <form action="{% url 'celery_start_task' %}" method="post">
         {% csrf_token %}
-        <input type="number" name="num1" placeholder="Enter first number" required>
-        <input type="number" name="num2" placeholder="Enter second number" required>
+        <input type="number" name="num1" placeholder="Enter first number" >
+        <input type="number" name="num2" placeholder="Enter second number" >
         <button type="submit">Add Numbers</button>
     </form>
 </body>
