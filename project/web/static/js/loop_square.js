@@ -23,16 +23,27 @@ for (let i = 1; i <= 4; i++) {
 
 videoWrapper.addEventListener('click', function(event) {
     const rect = video.getBoundingClientRect(); // Use video instead of videoWrapper to get the correct scaling factor
+    
+    // make point it smaller than real
+    // const scaleX = rect.width / video.videoWidth;
+    // const scaleY = rect.height / video.videoHeight;
+
+    // make point bigger than real
     // const scaleX = video.videoWidth / rect.width;
     // const scaleY = video.videoHeight / rect.height;
     
-    // const x = (event.clientX - rect.left);
-    // const y = (event.clientY - rect.top);
+    
+    // const scaleX = 500 / video.videoWidth;
+    // const scaleY = 300 / video.videoHeight;
 
-    const scaleX = (rect.width+75) / video.videoWidth;
-    const scaleY = (rect.height-30) / video.videoHeight;
-    const x = (event.clientX - rect.left) * scaleX;
-    const y = (event.clientY - rect.top) * scaleY;
+    // use this 2 code
+    const x = (event.clientX - rect.left);
+    const y = (event.clientY - rect.top);
+
+    // const scaleX = (rect.width+75) / video.videoWidth;
+    // const scaleY = (rect.height-30) / video.videoHeight;
+    // const x = (event.clientX - rect.left) * scaleX;
+    // const y = (event.clientY - rect.top) * scaleY;
 
     document.getElementById(`x${current + 1}`).value = Math.ceil(x);
     document.getElementById(`y${current + 1}`).value = Math.ceil(y);
@@ -54,7 +65,7 @@ function drawPoints() {
     points.forEach(point => {
         ctx.fillStyle = '#FF0000';
         ctx.beginPath();
-        ctx.arc(point.x, point.y, 2, 0, 2 * Math.PI);
+        ctx.arc(point.x*0.6, point.y*0.5, 2, 0, 2 * Math.PI);
         ctx.fill();
     });
 
@@ -67,8 +78,8 @@ function drawPoints() {
         ctx.strokeStyle = '#00FF00'; // Green color for the line
         ctx.lineWidth = 2; // Adjust line width if needed
         ctx.beginPath();
-        ctx.moveTo(firstPoint.x, firstPoint.y);
-        ctx.lineTo(lastPoint.x, lastPoint.y);
+        ctx.moveTo(firstPoint.x*0.6, firstPoint.y*0.5);
+        ctx.lineTo(lastPoint.x*0.6, lastPoint.y*0.5);
         ctx.stroke();
     }
 }
@@ -86,6 +97,7 @@ document.addEventListener('keypress', function(event) {
     } else if (event.key === '4') {
         current = 3;
     } else if (event.key = 'q') {
+        current = 0;
         points = [{x: null, y: null}, {x: null, y: null}, {x: null, y: null}, {x: null, y: null}];
         for (let i = 1; i <= 4; i++) {
             document.getElementById(`x${i}`).value = null;
