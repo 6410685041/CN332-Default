@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse
-from process.models import Task, Intersection, Result
+from process.models import Task, Intersection, Result,Loop
 from django.http import HttpResponseRedirect
 from celery.result import AsyncResult
 from . import functions
@@ -37,9 +37,13 @@ def view_create_task(request):
 # view edit task
 @login_required
 def view_edit_task(request, task_id):
+    loops = Loop.objects.filter(task_id=task_id)
+    loop_id = request.session.pop('loop_id', None)
     task = Task.objects.get(id=task_id)
     data = {
         "task": task,
+        "loop_id": loop_id,
+        "loops": loops,
     }
     return render(request, "process/edit_task.html", data)
 

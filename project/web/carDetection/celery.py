@@ -5,7 +5,7 @@ from celery import Celery
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'carDetection.settings')
 
 app = Celery('carDetection', 
-             backend='rpc://', 
+             backend='rpc://', # RabbitMQ
              broker='amqp://',
              include=['process.tasks'])
 

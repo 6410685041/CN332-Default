@@ -12,17 +12,25 @@ class myVehicle(models.Model):
     
     class Meta:
         app_label = 'process'
-    # class Meta:
-    #     abstract = True
+        abstract = True
 
 class Car(myVehicle):
     model = models.TextField()
 
+    class Meta:
+        app_label = 'process'
+
 class Motorbike(myVehicle):
     model = models.TextField()
 
+    class Meta:
+        app_label = 'process'
+
 class Truck(myVehicle):
     model = models.TextField()
+
+    class Meta:
+        app_label = 'process'
 
 class Intersection(models.Model):
     intersection_name = models.CharField(max_length=256, null=False, blank=False)

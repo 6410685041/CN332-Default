@@ -9,6 +9,18 @@
 <div class="content-block">
     <h1>Edit Task</h1>
 
+    {% if loop_id %}
+    <p>Loop created: {{ loop_id }}</p>
+    {% endif %}
+
+    <h2>Loops Created:</h2>
+    
+        {% for loop in loops %}
+        <li>Loop ID: {{ loop.id }}</li>
+        <!-- Include other loop details as needed -->
+        {% endfor %}
+    
+
     <div class="container">
         <div class="site-video">
             <h3>Preview</h3>

@@ -144,3 +144,7 @@ GitHub.sublime-settings
 .history
 static/video/
 **/test.py
+**.pt
+
+**/media/result/*.MP4
+**/static/video/*.MP4
