@@ -3,10 +3,10 @@ import sys
 # Assuming 'detect_and_track_ooad' module is one directory above the current directory
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
 
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from process.models import Task, Intersection, Loop
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from random import random
 from .models import Task
 from user.models import Profile
@@ -16,6 +16,10 @@ import os
 import json
 from django.conf import settings
 from tasks import celery_start_task
+
+# celery
+from .tasks import add
+from celery.result import AsyncResult
 
 '''
 delete
@@ -72,22 +76,23 @@ def create_task(request):
         return HttpResponseRedirect(reverse("view_edit_task", args=(task.id,)))
 
 '''
-test
+test celery
 '''
-# def start_task(request):
-#     """Initiate a task and return its ID to the frontend."""
-#     task = abc.delay(random(), random())
-#     Task.objects.create(task_id=task.id, intersection_id=1)
-    
-#     return JsonResponse({'task_id': task.id})
+def add_number(request):
+    if request.method == 'POST':
+        num1 = int(request.POST.get('num1'))
+        num2 = int(request.POST.get('num2'))
+        result = add.delay(num1, num2)
+        return redirect(reverse('get_result', kwargs={'task_id': result.task_id}))
+    return render(request, 'process/process_view.html')
 
-# def task_status(request, task_id):
-#     """Check the task status and return the result if completed."""
-#     task = abc.AsyncResult(task_id)
-#     if task.ready():
-#         return JsonResponse({'status': 'SUCCESS', 'result': task.result})
-#     else:
-#         return JsonResponse({'status': 'PENDING'})
+def get_result(request, task_id):
+    task = AsyncResult(task_id)
+    if task.ready():
+        result = task.get()
+        return HttpResponse(f'The result of the addition is: {result}')
+    else:
+        return HttpResponse('Task is still processing. Please refresh the page.')     
         
 # in process
 def add_loop(request, data, task_id):

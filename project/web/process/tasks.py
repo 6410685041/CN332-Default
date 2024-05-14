@@ -18,3 +18,7 @@ def celery_start_task(url, id):
     call_detect.detect(url)
     # edit_status(2, id)
     return "Detect Finish"
+
+@shared_task()
+def add(x, y):
+    return x+y

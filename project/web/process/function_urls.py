@@ -14,6 +14,6 @@ urlpatterns = [
     # submit
     path('submit_task/<int:task_id>', functions.submit_task, name='submit_task'), # not working
     # test celery
-    # path('start-task/', functions.start_task, name='start-task'),
-    # path('task-status/<str:task_id>/', functions.task_status, name='task-status'),
+    path('add_numbers/', functions.add_number, name='add_numbers'),
+    path('get_result/<str:task_id>', functions.get_result, name='get_result'),
 ]
