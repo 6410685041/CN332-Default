@@ -95,16 +95,26 @@ def get_result(request, task_id):
         return HttpResponse('Task is still processing. Please refresh the page.')     
         
 # in process
-def add_loop(request, data, task_id):
+def add_loop(request,task_id):
     if request.method == "POST":
 
-        points = []  # encypt point from frontend
+        points = []
+        # Extract x and y coordinates from request.POST and add them to the points list
+        points.append({"x": request.POST["x1"], "y": request.POST["y1"]})
+        points.append({"x": request.POST["x2"], "y": request.POST["y2"]})
+        points.append({"x": request.POST["x3"], "y": request.POST["y3"]})
+        points.append({"x": request.POST["x4"], "y": request.POST["y4"]})
+
+        # Convert the points list to JSON format
+        points_json = json.dumps(points)
 
         task = Task.objects.get(id=task_id)
-        name = request.POST["loop_name"]
-        loop = Loop.objects.create(loop_name=name, points=points, task=task)
-        loop.save()
-        reverse("edit_task", task.id)
+        loop = Loop.objects.create( points=points_json, task_id=task_id)
+
+        request.session['loop_id'] = loop.id
+        
+        return HttpResponseRedirect(reverse("view_edit_task", args=(task.id,)))
+        # return JsonResponse({"loop_id": loop.id})
     
 # submit task and call celery_start_task
 def submit_task(request, task_id):

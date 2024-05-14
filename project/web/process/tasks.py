@@ -5,7 +5,7 @@ import sys
 
 
 # from .functions import edit_status
-from ai.detect_and_track_ooad import Detection
+# from web.ai.detect_and_track_ooad import Detection
 from celery import shared_task
 
 # from django.core.mail import send_mail

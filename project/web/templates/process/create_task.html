@@ -29,6 +29,10 @@
 
      <form action="{% url 'create_task' %}" method="post" enctype="multipart/form-data" class="grid-form">
       {% csrf_token %}
+
+      <!-- <label for="task_name">Task Name</label>
+      <input type="text" id="task_name" name="task_name" value="{{task.task_name}}"/> -->
+
       <label for="video">Video</label>
       <input type="file" id="video" name="video" accept="video/*" required>
       
