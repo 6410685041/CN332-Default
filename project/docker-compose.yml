@@ -9,7 +9,7 @@ services:
       && python manage.py runserver 0.0.0.0:8000
       "
     volumes:
-      - ./web:/app
+      - ./web:/web
     ports:
       - "8000:8000"
     environment:
@@ -39,7 +39,7 @@ services:
     build: ./web
     command: celery -A carDetection worker --loglevel=info
     volumes:
-      - ./web:/app
+      - ./web:/web
     environment:
       - DEBUG=1
     depends_on:

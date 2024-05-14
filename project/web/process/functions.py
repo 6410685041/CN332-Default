@@ -82,7 +82,7 @@ def add_number(request):
     if request.method == 'POST':
         num1 = int(request.POST.get('num1'))
         num2 = int(request.POST.get('num2'))
-        result = add.delay(num1, num2)
+        result = celery_start_task.delay(num1, num2)
         return redirect(reverse('get_result', kwargs={'task_id': result.task_id}))
     return render(request, 'process/process_view.html')
 
