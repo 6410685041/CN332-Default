@@ -129,9 +129,11 @@ def add_loop(request,task_id):
                 "summary_location": summary_location
                 
             }
+        
+        file_path = f'static/json/{task_id}.json'
 
         try:
-            with open('static/json/loops.json', 'r') as file:
+            with open(file_path, 'r') as file:
                 data = json.load(file)
         except FileNotFoundError:
                 data = {"loops": []}
@@ -139,7 +141,7 @@ def add_loop(request,task_id):
         data["loops"].append(new_loop_data)
 
         # Write the updated data back to the JSON file
-        with open('static/json/loops.json', 'w') as file:
+        with open(file_path, 'w') as file:
             json.dump(data, file, indent=4)
 
 
