@@ -108,7 +108,6 @@ function createAndDisplayPoints() {
                     ctx.lineTo(point.x * 0.6, point.y * 0.5, 2, 0, 2 * Math.PI);
                     ctx.stroke();
 
-                    // why is this code didn't set new point
                     before_x = point.x;
                     before_y = point.y;
                 });
@@ -117,21 +116,6 @@ function createAndDisplayPoints() {
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
         });
-
-    // if (window.loopsData) {
-    //     console.log(window.loopsData);
-    //     window.loopsData.forEach(loop => {
-    //         const points = loop.points;
-    //         points.forEach(point => {
-    //             ctx.fillStyle = '#00FF00';
-    //             ctx.beginPath();
-    //             ctx.arc(point.x * 0.6, point.y * 0.5, 2, 0, 2 * Math.PI);
-    //             ctx.fill();
-    //         });
-    //     });
-    // } else {
-    //     console.error('loopsData is not defined');
-    // }
 }
 
 // Initialize points from existing input values
