@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   web:
     build: ./web
@@ -45,4 +43,6 @@ services:
     depends_on:
       - web
       - broker
-    
+
+volumes:
+  db:
