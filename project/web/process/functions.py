@@ -41,8 +41,29 @@ def delete_intersection(request, intersection_id):
 
 # delete loop
 def delete_loop(request, loop_id):
+    task_id = request.GET['task_id']
     Loop.objects.get(id=loop_id).delete()
-    return redirect('view_edit_task')
+
+    file_path = f'static/json/loop_data/{task_id}.json'
+
+    # Load existing data from the JSON file
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+
+    # Find the loop data to remove
+    loop_data = next((item for item in data["loops"] if item["id"] == str(loop_id)), None)
+    
+    if loop_data:
+        # Remove the loop data from the list
+        data["loops"].remove(loop_data)
+    
+        # Write the updated data back to the JSON file
+        with open(file_path, 'w') as file:
+            json.dump(data, file, indent=4)
+    return HttpResponseRedirect(reverse("view_edit_task", args=(task_id,)))
+
+
+
     
 '''
 create
@@ -74,6 +95,7 @@ def create_task(request):
         
         # Redirect to the edit page of the created task
         return HttpResponseRedirect(reverse("view_edit_task", args=(task.id,)))
+        
 
 '''
 test celery
@@ -130,7 +152,7 @@ def add_loop(request,task_id):
                 
             }
         
-        file_path = f'static/json/{task_id}.json'
+        file_path = f'static/json/loop_data/{task_id}.json'
 
         try:
             with open(file_path, 'r') as file:
@@ -146,8 +168,10 @@ def add_loop(request,task_id):
 
 
         return HttpResponseRedirect(reverse("view_edit_task", args=(task.id,)))
-        # return JsonResponse({"loop_id": loop.id})
+
     
+
+
 # submit task and call celery_start_task
 def submit_task(request, task_id):
     task = Task.objects.get(id=task_id)
