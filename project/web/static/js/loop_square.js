@@ -80,7 +80,7 @@ function drawPoints() {
 function createAndDisplayPoints() {
 
     const taskId = window.taskId;
-    const jsonUrl = `/static/json/${taskId}.json`;
+    const jsonUrl = `/static/json/loop_data/${taskId}.json`;
 
     fetch(jsonUrl)
         .then(response => {
