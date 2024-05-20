@@ -9,10 +9,10 @@
 <div class="content-block">
     <h1>Edit Task</h1>
 
-    <h2>Loops Created:</h2>
+    
     
         {% for loop in loops %}
-        <li>Loop ID: {{ loop.id }}</li>
+        <div>Loop {{ loop.id }} created</div>
         <!-- Include other loop details as needed -->
         {% endfor %}
     
@@ -96,18 +96,11 @@
         
     </div>
     <a href="{% url 'delete_task' task.id %}" class="delete">Delete Task</a>
-    
-    <script>
-        try {
-            window.loopsData = JSON.parse('{{ loops | escapejs }}');
-            console.log(window.loopsData);
-            window.alert(1);
-        } catch (e) {
-            console.error('Failed to parse loops data:', e);
-            window.alert(2);
-        }
+
+    <script type="text/javascript">
+        var taskId = "{{ task.id }}";
     </script>
-    
+
     <script src="{% static 'js/play_video.js' %}"></script> 
     <script src="{% static 'js/loop_square.js' %}"></script> 
 </div>

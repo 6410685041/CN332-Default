@@ -2,10 +2,12 @@ const videoWrapper = document.getElementById('video-wrapper');
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+const parameter = document.getElementById('loop_number');
 
 let current = 0;
 let points = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}];
 let check = false;
+
 
 function updatePointsFromInputs() {
     for (let i = 1; i <= 4; i++) {
@@ -31,19 +33,10 @@ videoWrapper.addEventListener('click', function(event) {
     // make point bigger than real
     // const scaleX = video.videoWidth / rect.width;
     // const scaleY = video.videoHeight / rect.height;
-    
-    
-    // const scaleX = 500 / video.videoWidth;
-    // const scaleY = 300 / video.videoHeight;
 
     // use this 2 code
     const x = (event.clientX - rect.left);
     const y = (event.clientY - rect.top);
-
-    // const scaleX = (rect.width+75) / video.videoWidth;
-    // const scaleY = (rect.height-30) / video.videoHeight;
-    // const x = (event.clientX - rect.left) * scaleX;
-    // const y = (event.clientY - rect.top) * scaleY;
 
     document.getElementById(`x${current + 1}`).value = Math.ceil(x);
     document.getElementById(`y${current + 1}`).value = Math.ceil(y);
@@ -84,8 +77,68 @@ function drawPoints() {
     }
 }
 
+function createAndDisplayPoints() {
+
+    const taskId = window.taskId;
+    const jsonUrl = `/static/json/${taskId}.json`;
+
+    fetch(jsonUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('JSON Data:', data);
+
+            data.loops.forEach(loop => {
+                let before_x = loop.points[3].x;
+                let before_y = loop.points[3].y;
+
+                loop.points.forEach(point => {
+                    ctx.fillStyle = '#00FF00';
+                    ctx.strokeStyle = '#00FF00';
+                    ctx.beginPath();
+                    ctx.arc(point.x * 0.6, point.y * 0.5, 2, 0, 2 * Math.PI);
+                    ctx.fill();
+
+                    // line
+                    ctx.moveTo(before_x*0.6, before_y*0.5);
+                    ctx.lineTo(point.x * 0.6, point.y * 0.5, 2, 0, 2 * Math.PI);
+                    ctx.stroke();
+
+                    // why is this code didn't set new point
+                    before_x = point.x;
+                    before_y = point.y;
+                });
+            });
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+
+    // if (window.loopsData) {
+    //     console.log(window.loopsData);
+    //     window.loopsData.forEach(loop => {
+    //         const points = loop.points;
+    //         points.forEach(point => {
+    //             ctx.fillStyle = '#00FF00';
+    //             ctx.beginPath();
+    //             ctx.arc(point.x * 0.6, point.y * 0.5, 2, 0, 2 * Math.PI);
+    //             ctx.fill();
+    //         });
+    //     });
+    // } else {
+    //     console.error('loopsData is not defined');
+    // }
+}
+
 // Initialize points from existing input values
 updatePointsFromInputs();
+
+// console.log(window.loopsData);
+createAndDisplayPoints();
 
 document.addEventListener('keypress', function(event) {
     if (event.key === '1') {
