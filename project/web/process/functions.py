@@ -97,7 +97,8 @@ def get_result(request, task_id):
 # in process
 def add_loop(request,task_id):
     if request.method == "POST":
-
+        loop_name = request.POST.get("loop_name", "")
+        orientation = request.POST.get("orientation", "")
         points = []
         # Extract x and y coordinates from request.POST and add them to the points list
         points.append({"x": request.POST["x1"], "y": request.POST["y1"]})
@@ -105,14 +106,45 @@ def add_loop(request,task_id):
         points.append({"x": request.POST["x3"], "y": request.POST["y3"]})
         points.append({"x": request.POST["x4"], "y": request.POST["y4"]})
 
+        summary_location = {
+                "x": int(request.POST.get("summary_location_x", "")),
+                "y": int(request.POST.get("summary_location_y", ""))
+            }
+
         # Convert the points list to JSON format
         points_json = json.dumps(points)
+        summary_location_json = json.dumps(summary_location)
 
         task = Task.objects.get(id=task_id)
         loop = Loop.objects.create( points=points_json, task_id=task_id)
+       
 
         request.session['loop_id'] = loop.id
         
+        new_loop_data = {
+               "name": loop_name,
+                "id": str(loop.id),
+                "points": points,
+                "orientation": orientation,
+                "summary_location": summary_location
+                
+            }
+        
+        file_path = f'static/json/{task_id}.json'
+
+        try:
+            with open(file_path, 'r') as file:
+                data = json.load(file)
+        except FileNotFoundError:
+                data = {"loops": []}
+        # Append the new loop data to the list of loops
+        data["loops"].append(new_loop_data)
+
+        # Write the updated data back to the JSON file
+        with open(file_path, 'w') as file:
+            json.dump(data, file, indent=4)
+
+
         return HttpResponseRedirect(reverse("view_edit_task", args=(task.id,)))
         # return JsonResponse({"loop_id": loop.id})
     
