@@ -96,6 +96,9 @@ function createAndDisplayPoints() {
                 let before_x = loop.points[3].x;
                 let before_y = loop.points[3].y;
 
+                let TextPoint_x = loop.points[0].x;
+                let TextPoint_y = loop.points[0].y;
+
                 loop.points.forEach(point => {
                     ctx.fillStyle = '#00FF00';
                     ctx.strokeStyle = '#00FF00';
@@ -110,7 +113,22 @@ function createAndDisplayPoints() {
 
                     before_x = point.x;
                     before_y = point.y;
+
+                    if(TextPoint_x>point.x){
+                        if(TextPoint_y<point.y){
+                            TextPoint_x = point.x;
+                            TextPoint_y = point.y;
+                        }
+                    }
                 });
+                
+                const rectX = TextPoint_x * 0.6;
+                const rectY = TextPoint_y * 0.5;
+
+                // Display text within the rectangle
+                ctx.fillStyle = '#0000FF';
+                ctx.font = '10px Arial';
+                ctx.fillText(`Loop${loop.id}`, rectX, rectY);
             });
         })
         .catch(error => {
