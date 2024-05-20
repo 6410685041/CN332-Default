@@ -9,13 +9,33 @@
 <div class="content-block">
     <h1>Edit Task</h1>
 
-    
-    
-        {% for loop in loops %}
-        <div>Loop {{ loop.id }} created</div>
-        <!-- Include other loop details as needed -->
-        {% endfor %}
-    
+    {% if loop_id %}
+    <p>Loop {{ loop_id }}created</p>
+    {% endif %}
+
+    <h2>loop created</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Action</th>    
+            </tr>
+        </thead>
+        <tbody>
+            {% for loop in loops %}
+            <tr>
+                <td>{{ loop.id }}</td>
+                <td>
+                    <form action="{% url 'delete_loop' loop.id %}" method="GET">
+                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>            
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 
     <div class="container">
         <div class="site-video">
@@ -96,11 +116,6 @@
         
     </div>
     <a href="{% url 'delete_task' task.id %}" class="delete">Delete Task</a>
-
-    <script type="text/javascript">
-        var taskId = "{{ task.id }}";
-    </script>
-
     <script src="{% static 'js/play_video.js' %}"></script> 
     <script src="{% static 'js/loop_square.js' %}"></script> 
 </div>

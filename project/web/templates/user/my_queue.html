@@ -25,7 +25,7 @@
             <td>{{ task.created_at }}</td>
             <td>
                 <a class=" 
-                    {% if task.status == "Pending" %}
+                    {% if task.status == "Created" %}
                         status-pending
                     {% elif task.status == "In process" %}
                         status-in-progress
