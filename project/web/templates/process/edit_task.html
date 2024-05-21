@@ -109,13 +109,14 @@
                 <input class="button bttm-right" type="submit" value="CONFIRM">
             </form>
         </div>
-
-
-
-
         
     </div>
     <a href="{% url 'delete_task' task.id %}" class="delete">Delete Task</a>
+    
+    <script type="text/javascript">
+        var taskId = "{{ task.id }}";
+    </script>
+    
     <script src="{% static 'js/play_video.js' %}"></script> 
     <script src="{% static 'js/loop_square.js' %}"></script> 
 </div>
