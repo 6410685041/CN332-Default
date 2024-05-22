@@ -3,7 +3,7 @@ from django.urls import reverse
 from process.models import Task, Intersection, Result,Loop
 from django.http import HttpResponseRedirect
 from celery.result import AsyncResult
-from . import functions
+from process import functions
 import json
 from django.contrib.auth.decorators import login_required
 

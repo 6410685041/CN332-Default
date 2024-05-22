@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "django_celery_results",
     "process",
     "user",
+    # "ai",
 ]
 
 MIDDLEWARE = [

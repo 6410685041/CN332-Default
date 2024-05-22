@@ -1,36 +1,41 @@
+# import os
+# import sys
+# # Assuming 'detect_and_track_ooad' module is one directory above the current directory
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from django.db import models
 from location_field.models.plain import PlainLocationField
 from django.db.models import JSONField
 from user.models import Profile
 
-class myVehicle(models.Model):
-    location = PlainLocationField(based_fields=['city'], zoom=7)
-    speed = models.FloatField()
-    color = models.TextField()
-    license_plate = models.TextField()
-    brand = models.TextField()
+# class myVehicle(models.Model):
+#     location = PlainLocationField(based_fields=['city'], zoom=7)
+#     speed = models.FloatField()
+#     color = models.TextField()
+#     license_plate = models.TextField()
+#     brand = models.TextField()
     
-    class Meta:
-        app_label = 'process'
-        abstract = True
+#     class Meta:
+#         # app_label = 'process'
+#         abstract = True
 
-class Car(myVehicle):
-    model = models.TextField()
+# class Car(myVehicle):
+#     model = models.TextField()
 
-    class Meta:
-        app_label = 'process'
+#     class Meta:
+#         app_label = 'process'
 
-class Motorbike(myVehicle):
-    model = models.TextField()
+# class Motorbike(myVehicle):
+#     model = models.TextField()
 
-    class Meta:
-        app_label = 'process'
+#     # class Meta:
+#     #     app_label = 'process'
 
-class Truck(myVehicle):
-    model = models.TextField()
+# class Truck(myVehicle):
+#     model = models.TextField()
 
-    class Meta:
-        app_label = 'process'
+#     # class Meta:
+#     #     app_label = 'process'
 
 class Intersection(models.Model):
     intersection_name = models.CharField(max_length=256, null=False, blank=False)

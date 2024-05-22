@@ -1,12 +1,12 @@
 from django.contrib import admin
 
-from .models import Car, Motorbike, Truck
-from .models import Intersection, Road, Task, Loop, Result, Weather
+# from .models import Car, Motorbike, Truck
+from process.models import Intersection, Road, Task, Loop, Result, Weather
 # Register your models here.
 
-admin.site.register(Car)
-admin.site.register(Motorbike)
-admin.site.register(Truck)
+# admin.site.register(Car)
+# admin.site.register(Motorbike)
+# admin.site.register(Truck)
 
 admin.site.register(Intersection)
 admin.site.register(Road)
