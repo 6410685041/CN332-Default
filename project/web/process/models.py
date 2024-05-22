@@ -41,6 +41,9 @@ class Intersection(models.Model):
     intersection_name = models.CharField(max_length=256, null=False, blank=False)
     location = PlainLocationField(null=False, blank=False)
 
+    class Meta:
+        app_label = 'process'
+
     def __str__(self):
         return self.intersection_name
 
@@ -51,6 +54,9 @@ class Road(models.Model):
     lanes = models.IntegerField()
     intersection = models.ForeignKey(Intersection, on_delete=models.CASCADE)
 
+    class Meta:
+        app_label = 'process'
+
 class Task(models.Model):
     task_name = models.TextField()
     status = models.TextField()
@@ -60,6 +66,9 @@ class Task(models.Model):
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     result = models.TextField(null=True, blank=True)
+
+    class Meta:
+        app_label = 'process'
     
     def __str__(self):
         return str(self.task_name)
@@ -67,6 +76,9 @@ class Task(models.Model):
 class Loop(models.Model):
     points = JSONField(default=list)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
+
+    class Meta:
+        app_label = 'process'
 
 class Result(models.Model):
     result_name = models.TextField()
@@ -77,9 +89,15 @@ class Result(models.Model):
     loop_json = JSONField(default=list)
     result_json = JSONField(default=list)
 
+    class Meta:
+        app_label = 'process'
+
     def __str__(self):
         return str(self.result_name)
 
 
 class Weather(models.Model):
     how = models.TextField()
+
+    class Meta:
+        app_label = 'process'

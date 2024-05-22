@@ -8,7 +8,7 @@ import random
 import torch
 import torch.nn as nn
 
-from ai.ai_models.common import Conv, DWConv
+from web.ai.common import Conv, DWConv
 from utils.google_utils import attempt_download
 
 

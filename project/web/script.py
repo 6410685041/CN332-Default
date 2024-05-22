@@ -119,7 +119,7 @@ def create_initial_data(
     print("Default intersection Created")
     # create task
     Task.objects.create(
-        status="In process",
+        status="Created",
         video="static/video/test1.MP4",
         intersection=intersection,
         owner=default_user,

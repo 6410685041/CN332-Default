@@ -12,7 +12,7 @@ from numpy import random
 from random import randint
 import torch.backends.cudnn as cudnn
 
-from web.ai.experimental import attempt_load
+from .experimental import attempt_load
 from utils.datasets import LoadStreams, LoadImages
 from utils.general import check_img_size, check_requirements, \
                 check_imshow, non_max_suppression, apply_classifier, \
@@ -431,7 +431,8 @@ def mymain(cmd = False, custom_arg=None):
     global opt
     global count_boxes
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', nargs='+', type=str, default='../ai/yolov7.pt', help='model.pt path(s)')
+    # parser.add_argument('--weights', nargs='+', type=str, default='../ai/yolov7.pt', help='model.pt path(s)') # cmd
+    parser.add_argument('--weights', nargs='+', type=str, default='ai/yolov7.pt', help='model.pt path(s)') # python
     parser.add_argument('--download', action='store_true', help='download model weights automatically')
     parser.add_argument('--no-download', dest='download', action='store_false')
     parser.add_argument('--source', type=str, default='inference/images', help='source')  # file/folder, 0 for webcam
