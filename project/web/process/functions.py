@@ -1,21 +1,21 @@
 import os
 import sys
 # Assuming 'detect_and_track_ooad' module is one directory above the current directory
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from process.models import Task, Intersection, Loop
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from random import random
-from .models import Task
+from process.models import Task
 from user.models import Profile
 from datetime import datetime
 import pytz
 import os
 import json
 from django.conf import settings
-from tasks import celery_start_task
+from process.tasks import celery_start_task
 
 # celery
 from .tasks import add
@@ -175,135 +175,7 @@ def add_loop(request,task_id):
 # submit task and call celery_start_task
 def submit_task(request, task_id):
     task = Task.objects.get(id=task_id)
-    celery_start_task.delay('../static/video/' + task.video.url, task_id)
+    source = '../static/video/' + task.video.url
+    loop = '../static/json/' + task_id + ".json"
+    celery_start_task.delay(loop=loop, source=source, filename=task_id)
     return HttpResponseRedirect(reverse('home'))
-
-# utils
-def create_summary(task_id, loop_path=None):
-    task = Task.objects.get(id = task_id)
-    loops = Loop.objects.filter(task = task)
-
-    base_dir = settings.BASE_DIR
-
-    data = []
-
-    for i in range(len(loops)):
-        lcar = 0
-        ltruck = 0
-        lbike = 0
-
-        rcar = 0
-        rtruck = 0
-        rbike = 0
-
-        scar = 0
-        struck = 0
-        sbike = 0
-
-        if loop_path != None:
-            loop_path_full = str(base_dir)+loop_path
-
-            with open(loop_path_full, 'r') as file:
-                read_data = file.read()
-
-            read_data = read_data.split("\n")
-
-            for j in read_data[:-1]:
-                j = j.split(',')
-                direction = j[-1]
-                type = j[2]
-
-                if int(j[0]) == i:
-                    if direction == "LEFT":
-                        if type == "car":
-                            lcar += 1
-                        elif type == "truck":
-                            ltruck += 1
-                        else:
-                            lbike += 1
-                    elif direction == "RIGHT":
-                        if type == "car":
-                            rcar += 1
-                        elif type == "truck":
-                            rtruck += 1
-                        else:
-                            rbike += 1
-                    elif direction == "STRAIGHT":
-                        if type == "car":
-                            scar += 1
-                        elif type == "truck":
-                            struck += 1
-                        else:
-                            sbike += 1
-        
-        tcar = lcar+rcar+scar
-        ttruck = ltruck+rtruck+struck
-        tbike = lbike+rbike+sbike
-        tall = tcar+ttruck+tbike
-                    
-        data.append({
-            "name": loops[i].loop_name,
-            "direction": ["", "Left", "Right", "Straight", "Total"],
-            "type": [
-                ["Car", lcar, rcar, scar, tcar],
-                ["Truck", ltruck, rtruck, struck, ttruck],
-                ["Bike", lbike, rbike, sbike, tbike],
-                ["Total", lbike, rbike, sbike, tall],
-            ]
-        })
-
-    sum_lcar = 0
-    sum_ltruck = 0
-    sum_lbike = 0
-
-    sum_rcar = 0
-    sum_rtruck = 0
-    sum_rbike = 0
-
-    sum_scar = 0
-    sum_struck = 0
-    sum_sbike = 0
-
-    if loop_path != None:
-        for d in data:
-            sum_lcar += d['type'][0][1]
-            sum_ltruck += d['type'][1][1]
-            sum_lbike += d['type'][2][1]
-
-            sum_rcar += d['type'][0][2]
-            sum_rtruck += d['type'][1][2]
-            sum_rbike += d['type'][2][2]
-
-            sum_scar += d['type'][0][3]
-            sum_struck += d['type'][1][3]
-            sum_sbike += d['type'][2][3]
-
-    sum_tcar = sum_lcar+sum_rcar+sum_scar
-    sum_ttruck = sum_ltruck+sum_rtruck+sum_struck
-    sum_tbike = sum_lbike+sum_rbike+sum_sbike
-    sum_all = sum_tcar+sum_ttruck+sum_tbike
-    summary = [{
-        "type": [
-            ["Car", sum_lcar, sum_rcar, sum_scar, sum_tcar],
-            ["Truck", sum_ltruck, sum_rtruck, sum_struck, sum_ttruck],
-            ["Bike", sum_lbike, sum_rbike, sum_sbike, sum_tbike],
-            ["Total", sum_lbike, sum_rbike, sum_sbike, sum_all],
-        ]}
-    ]
-    data = {
-        "loops":data,
-        "summary":summary
-    }
-    
-    directory = str(base_dir)+"\\media/summary/"
-    file_path = os.path.join(directory, f"data{task_id}.json")
-    os.makedirs(directory, exist_ok=True)  # Create the directory if it doesn't exist
- 
-    try:
-        with open(file_path, 'w') as file:
-            json.dump(data, file, indent=4)
-            print(f"JSON file {task_id} created successfully.")
-    except IOError:
-        print("An error occurred while creating the JSON file.")
-
-    return file_path

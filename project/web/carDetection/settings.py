@@ -49,9 +49,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook', # facebook
     'allauth.socialaccount.providers.microsoft', # microsoft
     "phonenumber_field",
-    "django_celery_results",
     "process",
     "user",
+    "django_celery_results",
     # "ai",
 ]
 
