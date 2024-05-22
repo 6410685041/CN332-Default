@@ -1,7 +1,7 @@
 import os
 import sys
 # Assuming 'detect_and_track_ooad' module is one directory above the current directory
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
 
 import argparse
 import logging
@@ -11,8 +11,8 @@ from copy import deepcopy
 # sys.path.append('./')  # to run '$ python *.py' files in subdirectories
 logger = logging.getLogger(__name__)
 import torch
-from web.ai.common import *
-from web.ai.experimental import *
+from common import *
+from experimental import *
 from utils.autoanchor import check_anchor_order
 from utils.general import make_divisible, check_file, set_logging
 from utils.torch_utils import time_synchronized, fuse_conv_and_bn, model_info, scale_img, initialize_weights, \

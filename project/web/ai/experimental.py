@@ -1,14 +1,14 @@
 import os
 import sys
 # Assuming 'detect_and_track_ooad' module is one directory above the current directory
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
 
 import numpy as np
 import random
 import torch
 import torch.nn as nn
 
-from web.ai.common import Conv, DWConv
+from common import Conv, DWConv
 from utils.google_utils import attempt_download
 
 

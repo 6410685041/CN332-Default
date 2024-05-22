@@ -1,7 +1,7 @@
-# import os
-# import sys
-# # Assuming 'detect_and_track_ooad' module is one directory above the current directory
-# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import os
+import sys
+# Assuming 'detect_and_track_ooad' module is one directory above the current directory
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), './..')))
 
 from django.db import models
 from location_field.models.plain import PlainLocationField
