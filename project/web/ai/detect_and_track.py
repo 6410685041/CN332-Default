@@ -1,7 +1,6 @@
 import os
 import sys
-# Assuming 'detect_and_track_ooad' module is one directory above the current directory
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), './../../')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), './../')))
 
 import cv2
 import time
@@ -12,7 +11,7 @@ from numpy import random
 from random import randint
 import torch.backends.cudnn as cudnn
 
-from .experimental import attempt_load
+from ai.experimental import attempt_load
 from utils.datasets import LoadStreams, LoadImages
 from utils.general import check_img_size, check_requirements, \
                 check_imshow, non_max_suppression, apply_classifier, \
