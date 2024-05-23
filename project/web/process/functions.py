@@ -174,10 +174,11 @@ def add_loop(request,task_id):
 
 # submit task and call celery_start_task
 def submit_task(request, task_id):
+    data = {"key": "value"}
     task = Task.objects.get(id=task_id)
     source = 'static/video/' + task.video.url
     loop = 'static/json/' + task_id + ".json"
-    celery_start_task.delay(loop=loop, source=source, filename=task_id)
+    celery_start_task.delay(data)
     task.status = "In process"
     task.save()
     return HttpResponseRedirect(reverse('home'))

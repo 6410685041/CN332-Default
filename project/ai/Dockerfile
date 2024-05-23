@@ -5,6 +5,8 @@ FROM python:3.9-slim
 RUN apt-get update && apt-get install -y \
 libgl1-mesa-glx \
 libglib2.0-0 \
+gcc \
+python3-dev \
 python3-tk \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* \
@@ -27,4 +29,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8888
 
 # Run detect_and_track.py with the specified source when the container launches
-CMD ["python", "detect_and_track.py", "--loop", "static/json/example_loop.json", "--source", "static/video/test1.MP4", "--filename", "123"]
+CMD ["python", "app.py"]

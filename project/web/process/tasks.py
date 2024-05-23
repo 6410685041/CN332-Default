@@ -1,17 +1,11 @@
 # tasks.py
-
-import os
-import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
-
 from celery import shared_task
-# from ai.detect_and_track import mymain
 
 @shared_task
-def celery_start_task(loop, source, filename):
-    saved_result = mymain(cmd=False, custom_arg=['--loop', loop, '--source', source, '--filename', filename])
-    return saved_result
-    # pass
+def celery_start_task(data):
+    url = 'http://ai_service:80/run-task'
+    response = request.post(url, json=data)
+    return response.json()
 
 @shared_task()
 def add(x, y):
