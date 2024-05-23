@@ -111,7 +111,7 @@ def add_number(request):
 def get_result(request, task_id):
     task = AsyncResult(task_id)
     if task.ready():
-        result = task.get()
+        result = task.post()
         return HttpResponse(f'The result of the addition is: {result}')
     else:
         return HttpResponse('Task is still processing. Please refresh the page.')     
@@ -185,7 +185,9 @@ def add_loop(request,task_id):
 #     return JsonResponse({"task_id": result.task_id})
 
 def submit_task(request, task_id):
-    result = celery_start_task.delay()
+    loop = request.POST.get('loop')
+    source = request.POST.get('source')
+    result = celery_start_task.delay(loop, source, task_id)
     return redirect(reverse('task_status', kwargs={'task_id': result.id}))
 
 def task_status(request, task_id):
@@ -194,4 +196,4 @@ def task_status(request, task_id):
         result = task_result.result
         return render(request, 'process/process_view.html', {'result': result})
     else:
-        return render(request, 'process/wait.html')  # A template to inform the user to wait
+        return render(request, 'process/wait.html')
