@@ -14,7 +14,7 @@
             <th>Intersection</th>
             <th>Create Date</th>
             <th>Status</th>
-            <th>Details</th>
+            <th>Edit Task</th>
             <th>Delete</th>
         </tr>
         {% for task in tasks %}
@@ -26,6 +26,8 @@
             <td>
                 <a class=" 
                     {% if task.status == "Created" %}
+                        status-created
+                    {% elif task.status == "Pending" %}
                         status-pending
                     {% elif task.status == "In process" %}
                         status-in-progress
@@ -36,9 +38,9 @@
                     {% endif %}
                 ">
                     {{ task.status }}
-                </a>       
+            </a>       
             </td>
-            <td><a href="{% url 'view_edit_task' task.id %}">Details</a></td>
+            <td><a href="{% url 'view_edit_task' task.id %}">Edit</a></td>
             <td><a href="{% url 'delete_task' task.id %}" class="delete">Delete</a></td>
         </tr>
         {% endfor %}
