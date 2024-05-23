@@ -146,14 +146,22 @@ def check_enter_exit_loop(track):
 def draw_loops(img):
     loops = count_boxes["loops"]
     for loop in loops:
-        pt0,pt1,pt2,pt3 = loop["points"]
+        pt0 = loop["points"][0]
+        pt1 = loop["points"][1]
+        pt2 = loop["points"][2]
+        pt3 = loop["points"][3]
         
-        cv2.line(img, (pt0["x"],pt0["y"]),(pt1["x"],pt1["y"]),(255,0,0),2) #entering line
-        cv2.line(img, (pt1["x"],pt1["y"]),(pt2["x"],pt2["y"]),(255,255,0),2) #left line
-        cv2.line(img, (pt2["x"],pt2["y"]),(pt3["x"],pt3["y"]),(255,255,0),2) #straight
-        cv2.line(img, (pt3["x"],pt3["y"]),(pt0["x"],pt0["y"]),(255,255,0),2) #right
-        cv2.putText(img,loop["name"],(pt0["x"],pt0["y"]),cv2.FONT_HERSHEY_SIMPLEX, 0.6, [0, 255, 0], 2)
+        # Convert coordinates to integers
+        pt0 = (int(pt0["x"]), int(pt0["y"]))
+        pt1 = (int(pt1["x"]), int(pt1["y"]))
+        pt2 = (int(pt2["x"]), int(pt2["y"]))
+        pt3 = (int(pt3["x"]), int(pt3["y"]))
 
+        cv2.line(img, pt0, pt1, (255, 0, 0), 2)  # entering line
+        cv2.line(img, pt1, pt2, (255, 255, 0), 2)  # left line
+        cv2.line(img, pt2, pt3, (255, 255, 0), 2)  # straight
+        cv2.line(img, pt3, pt0, (255, 255, 0), 2)  # right
+        cv2.putText(img, loop["name"], pt0, cv2.FONT_HERSHEY_SIMPLEX, 0.6, [0, 255, 0], 2)
 
 
 
