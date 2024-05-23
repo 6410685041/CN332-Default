@@ -36,6 +36,12 @@
 
 /* style for each status */
 /* styles.css */
+#content .status-created {
+    border: 1px solid #6C7293;  /* Example border color */
+    color: #6C7293;
+    background-color: transparent; /* Ensure the background is transparent */
+}
+
 #content .status-pending {
     border: 1px solid #6C7293;  /* Example border color */
     color: #6C7293;
