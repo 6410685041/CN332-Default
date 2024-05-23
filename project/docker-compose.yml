@@ -8,6 +8,7 @@ services:
       "
     volumes:
       - ./web:/web
+      - shared_data:/shared_data
     ports:
       - "8000:8000"
     environment:
@@ -15,6 +16,7 @@ services:
     depends_on:
       - db
       - broker
+      - ai_service
   
   db:
     image: postgres:latest
@@ -38,11 +40,13 @@ services:
     command: celery -A carDetection worker --loglevel=info
     volumes:
       - ./web:/web
+      - shared_data:/shared_data
     environment:
       - DEBUG=1
     depends_on:
       - web
       - broker
+      - ai_service
 
   ai_service:
     build: ./ai
@@ -50,6 +54,8 @@ services:
       - "8888:80"
     volumes:
       - ./ai:/ai
+      - shared_data:/shared_data
 
 volumes:
   db:
+  shared_data:

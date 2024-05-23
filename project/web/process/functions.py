@@ -173,12 +173,25 @@ def add_loop(request,task_id):
 
 
 # submit task and call celery_start_task
+# def submit_task(request, task_id):
+#     data = {"key": "value"}
+#     # task = Task.objects.get(id=task_id)
+#     # source = 'static/video/' + task.video.url
+#     loop = 'static/json/' + task_id + ".json"
+#     result = celery_start_task.delay(data)
+#     # task.status = "In process"
+#     # task.save()
+#     # return HttpResponseRedirect(reverse('home'))
+#     return JsonResponse({"task_id": result.task_id})
+
 def submit_task(request, task_id):
-    data = {"key": "value"}
-    task = Task.objects.get(id=task_id)
-    source = 'static/video/' + task.video.url
-    loop = 'static/json/' + task_id + ".json"
-    celery_start_task.delay(data)
-    task.status = "In process"
-    task.save()
-    return HttpResponseRedirect(reverse('home'))
+    result = celery_start_task.delay()
+    return redirect(reverse('task_status', kwargs={'task_id': result.id}))
+
+def task_status(request, task_id):
+    task_result = AsyncResult(task_id)
+    if task_result.ready():
+        result = task_result.result
+        return render(request, 'process/process_view.html', {'result': result})
+    else:
+        return render(request, 'process/wait.html')  # A template to inform the user to wait

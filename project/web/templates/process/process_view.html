@@ -1,17 +1,10 @@
+<!-- templates/process/process_view.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Celery Task</title>
+    <title>Process Result</title>
 </head>
 <body>
-    <h1>Test Celery Add Task</h1>
-    <form action="{% url 'celery_start_task' %}" method="post">
-        {% csrf_token %}
-        <input type="number" name="num1" placeholder="Enter first number" >
-        <input type="number" name="num2" placeholder="Enter second number" >
-        <button type="submit">Add Numbers</button>
-    </form>
+    <h1>Task Result: {{ result }}</h1>
 </body>
 </html>
