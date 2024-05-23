@@ -49,16 +49,30 @@ def view_edit_task(request, task_id):
 
 # view result
 @login_required
-def view_display_result(request, result_id):
-    result = Result.objects.get(id=result_id)
-    loop_path = result.loop_json
-    summary_path = functions.create_summary(result_id, loop_path)
-    with open(summary_path, 'r') as file:
-            json_data = file.read()
-            summary = json.loads(json_data)
+def view_display_result(request, task_id):
+    result_path = f"static/result/{task_id}/{task_id}.txt"
+    
+
+    with open(result_path, 'r') as file:
+        lines = file.readlines()
+    parsed_data = []
+    for line in lines:
+            parts = line.strip().split(',')
+            if len(parts) == 5:
+                loop_id, vehicle_id, vehicle_type, time, direction = parts
+                parsed_data.append({
+                    'loop_id': int(loop_id),
+                    'vehicle_id': int(vehicle_id),
+                    'vehicle_type': vehicle_type,
+                    'time': float(time),
+                    'direction': direction
+                })
+
+    # print(summary)
+    
     data = {
-        'result': result,
-        'summary': summary,
+        'task_id': task_id,
+        'results': parsed_data
     }
     return render(request, "process/result.html", data)
 
