@@ -120,27 +120,12 @@ def create_initial_data(
     # create task
     Task.objects.create(
         status="Created",
-        video="static/video/test1.MP4",
+        video="static/detection/video/1.mp4",
         intersection=intersection,
         owner=default_user,
         created_at=datetime.now(pytz.timezone("Asia/Bangkok")),
     )
     print("Default task Created")
-    # create result
-    loop_open = open('static/json/example_loop.json')
-    loop = json.load(loop_open)
-    result_open = open('static/json/example_result.json')
-    result = json.load(result_open)
-    Result.objects.create(
-        result_name="Default result",
-        video="static/video/test1.MP4",
-        owner=default_user.username,
-        intersection=intersection,
-        created_at=datetime.now(pytz.timezone("Asia/Bangkok")),
-        loop_json=loop,
-        result_json=result,
-    )
-    print("Default result Created")
     print("Initial data created.")
 
 
