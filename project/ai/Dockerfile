@@ -27,4 +27,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8888
 
 # Run detect_and_track.py with the specified source when the container launches
-CMD ["python", "detect_and_track.py", "--source", "./static/video/test1.MP4", "--loop", "./static/json/example_loop.json", "--filename", "123"]
+CMD ["python", "detect_and_track.py", "--loop", "static/json/example_loop.json", "--source", "static/video/test1.MP4", "--filename", "123"]

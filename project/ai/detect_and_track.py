@@ -11,7 +11,7 @@ from numpy import random
 from random import randint
 import torch.backends.cudnn as cudnn
 
-from experimental import attempt_load
+from models.experimental import attempt_load
 from utils.datasets import LoadStreams, LoadImages
 from utils.general import check_img_size, check_requirements, \
                 check_imshow, non_max_suppression, apply_classifier, \
@@ -431,10 +431,10 @@ def mymain(cmd = False, custom_arg=None):
     global count_boxes
     parser = argparse.ArgumentParser()
     # parser.add_argument('--weights', nargs='+', type=str, default='../ai/yolov7.pt', help='model.pt path(s)') # cmd
-    parser.add_argument('--weights', nargs='+', type=str, default='ai/yolov7.pt', help='model.pt path(s)') # python
+    parser.add_argument('--weights', nargs='+', type=str, default='yolov7.pt', help='model.pt path(s)') # python
     parser.add_argument('--download', action='store_true', help='download model weights automatically')
     parser.add_argument('--no-download', dest='download', action='store_false')
-    parser.add_argument('--source', type=str, default='inference/images', help='source')  # file/folder, 0 for webcam
+    parser.add_argument('--source', type=str, default='static/video/test1.MP4', help='source')  # file/folder, 0 for webcam
     parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
     parser.add_argument('--conf-thres', type=float, default=0.6, help='object confidence threshold')
     parser.add_argument('--iou-thres', type=float, default=0.5, help='IOU threshold for NMS')
@@ -452,11 +452,11 @@ def mymain(cmd = False, custom_arg=None):
     parser.add_argument('--exist-ok', action='store_true', help='existing project/name ok, do not increment')
     parser.add_argument('--no-trace', action='store_true', help='don`t trace model')
     parser.add_argument('--colored-trk', action='store_true', help='assign different color to every track')
-    parser.add_argument('--loop', default="static/json/loops.json", type=str, help='loop setting file')
+    parser.add_argument('--loop', default="static/json/example_loop.json", type=str, help='loop setting file')
     parser.add_argument('--loop-txt', action='store_true', help='save history for each loop')
     parser.add_argument('--summary-txt', action='store_true', help='save summary for each loop') #todo later
     parser.add_argument('--filename', type=str, default="result", help='custom filename for the output files')
-    parser.add_argument('--filepath', type=str, default="../static/result", help='custom filename for the output files path')
+    parser.add_argument('--filepath', type=str, default="./static/result", help='custom filename for the output files path')
 
        
     parser.set_defaults(download=True)
@@ -468,6 +468,7 @@ def mymain(cmd = False, custom_arg=None):
     print(opt)
 
     #load loops settings
+    print(f"Loading loop settings from {opt.loop}")
     f = open(opt.loop)
     count_boxes = json.load(f)
     f.close()
@@ -475,7 +476,7 @@ def mymain(cmd = False, custom_arg=None):
     #check_requirements(exclude=('pycocotools', 'thop'))
     if opt.download and not os.path.exists(str(opt.weights)):
         print('Model weights not found. Attempting to download now...')
-        download('ai/')
+        download('./')
 
     return_result = None
     with torch.no_grad():
