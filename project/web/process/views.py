@@ -162,7 +162,7 @@ def view_display_result(request, task_id):
     
     # Combine results into a dictionary
     data = {
-        'task_id': task_id,
+        'task': Task.objects.get(id=task_id),
         'results': results,
         'parsed_data': parsed_data,
     }

@@ -7,83 +7,69 @@
 {% endblock %}
 {% block content %}
 <div class="content-block">
-    
-    <div class="summary-title">Task 1 Result Summary</div>
-
-    {% for loop_id, vehicle_data in results.items %}
-        <div class="loop-title">Loop ID: {{ loop_id }}</div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Vehicle Type</th>
-                    <th>Left</th>
-                    <th>Right</th>
-                    <th>Straight</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Car</td>
-                    <td>{{ vehicle_data.car.left }}</td>
-                    <td>{{ vehicle_data.car.right }}</td>
-                    <td>{{ vehicle_data.car.stright }}</td>
-                    <td>{{ vehicle_data.car.total }}</td>
-                </tr>
-                <tr>
-                    <td>Truck</td>
-                    <td>{{ vehicle_data.truck.left }}</td>
-                    <td>{{ vehicle_data.truck.right }}</td>
-                    <td>{{ vehicle_data.truck.stright }}</td>
-                    <td>{{ vehicle_data.truck.total }}</td>
-                </tr>
-                <tr>
-                    <td>Bike</td>
-                    <td>{{ vehicle_data.bike.left }}</td>
-                    <td>{{ vehicle_data.bike.right }}</td>
-                    <td>{{ vehicle_data.bike.stright }}</td>
-                    <td>{{ vehicle_data.bike.total }}</td>
-                </tr>
-            </tbody>
-        </table>
-    {% endfor %}
-
-    <div class="site-video">
-        <h3>Preview</h3>
-        <div id="video-wrapper">
-            <video id="video">
-                <source src="{{ result.video.url }}" type="video/mp4">     
-            </video>
+    <div class="container">
+        <div class="site-for-video">
+            <h1>Result</h1>
+            <div class="site-video">
+                <h3>Preview</h3>
+                <div id="video-wrapper">
+                    <video id="video">
+                        <source src="{{ task.video.url }}" type="video/mp4">     
+                    </video>
+                    <canvas id="canvas"></canvas>
+                </div>
+                
+                <!-- Video control buttons -->
+                <div id="video-controls">
+                    <button id="play-button" class="video-button">Play</button>
+                </div>
+            </div>
         </div>
-        
-        <!-- Video control buttons -->
-        <div id="video-controls">
-            <button id="play-button" class="video-button">Play</button>
+
+        {% for loop_id, vehicle_data in results.items %}
+        <div>
+            <div class="loop-title">Loop ID: {{ loop_id }}</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Vehicle Type</th>
+                        <th>Left</th>
+                        <th>Right</th>
+                        <th>Straight</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Car</td>
+                        <td>{{ vehicle_data.car.left }}</td>
+                        <td>{{ vehicle_data.car.right }}</td>
+                        <td>{{ vehicle_data.car.stright }}</td>
+                        <td>{{ vehicle_data.car.total }}</td>
+                    </tr>
+                    <tr>
+                        <td>Truck</td>
+                        <td>{{ vehicle_data.truck.left }}</td>
+                        <td>{{ vehicle_data.truck.right }}</td>
+                        <td>{{ vehicle_data.truck.stright }}</td>
+                        <td>{{ vehicle_data.truck.total }}</td>
+                    </tr>
+                    <tr>
+                        <td>Bike</td>
+                        <td>{{ vehicle_data.bike.left }}</td>
+                        <td>{{ vehicle_data.bike.right }}</td>
+                        <td>{{ vehicle_data.bike.stright }}</td>
+                        <td>{{ vehicle_data.bike.total }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+        {% endfor %}
     </div>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Loop ID</th>
-                <th>Vehicle ID</th>
-                <th>Vehicle Type</th>
-                <th>Time</th>
-                <th>Direction</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for result in parsed_data %}
-            <tr>
-                <td>{{ result.loop_id }}</td>
-                <td>{{ result.vehicle_id }}</td>
-                <td>{{ result.vehicle_type }}</td>
-                <td>{{ result.time }}</td>
-                <td>{{ result.direction }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 </div>
+<script type="text/javascript">
+    var taskId = "{{ task.id }}";
+</script>
 <script src="{% static 'js/play_video.js' %}"></script> 
+<script src="{% static 'js/display_result.js' %}" ></script>
 {% endblock content %}
