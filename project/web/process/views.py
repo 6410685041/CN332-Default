@@ -60,7 +60,7 @@ def count_vehicle_enter_per_loop(data):
 # view result
 @login_required
 def view_display_result(request, task_id):
-    result_path = f"static/result/{task_id}/{task_id}.txt"
+    result_path = f"static/detection/result/{task_id}/{task_id}.txt"
     
     # Function to find direction
     def find_direction(previous, current):
