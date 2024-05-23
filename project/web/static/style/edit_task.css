@@ -39,7 +39,7 @@
 
 .site-set-loop {
     grid-area: display;
-    margin: auto;
+    margin-top: 60px;
 }
 
 .site-status {
@@ -124,10 +124,6 @@ input.delete {
 #content .form-controls.form-controls1-2.pg1-2 .set-input-block input {
     width: 80px;
     margin: 0px 5px;
-}
-
-h4 {
-    margin-bottom: 15px;
 }
 
 #content .site-set-loop p.subtitle {

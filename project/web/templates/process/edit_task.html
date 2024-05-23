@@ -26,7 +26,6 @@
         <div class="site-set-loop">
             <form enctype="multipart/form-data" action="{% url 'add_loop' task.id %}" method="POST">
                 {% csrf_token %}
-                <h4> Set loop </h4>
                 <div class="form-controls form-controls1-2 pg1-2">
                     <div style="margin-bottom: 10px;">
                     <label for="loop_name">Loop Name</label>
@@ -58,7 +57,6 @@
                         <p class="subtitle">Press 1,2,3,4 to edit the points</p>
                         <p class="subtitle">Press Q to cancel</p>
                     </div>
-                    <br>
                     
                     <table>
                         <tr>
@@ -77,7 +75,6 @@
                             </td>
                         </tr>
                     </table>
-                    <br>
 
                     <div class="set-input-block">
                         <div class="col-left">
@@ -89,7 +86,6 @@
                             <input type="number" id="summary_location_y" name="summary_location_y" value="{{loop.summary_location_y}}" required/>
                         </div>
                     </div>
-                    <br>
                 </div>
                 <input class="button bttm-right" type="submit" value="CONFIRM">
             </form>
