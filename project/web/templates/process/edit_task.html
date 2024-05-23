@@ -118,6 +118,16 @@
         
     </div>
     <a href="{% url 'delete_task' task.id %}" class="delete">Delete Task</a>
+
+    <div class="submit-task">
+        <form action="{% url 'submit_task' task.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="loop" value="{{ loops }}">
+            <input type="hidden" name="source" value="{{ task.video.url }}">
+            <input type="hidden" name="task_id" value="{{ task.id }}">
+            <input type="submit" value="Submit Task">
+        </form>
+    </div>
     
     <script type="text/javascript">
         var taskId = "{{ task.id }}";
