@@ -8,10 +8,10 @@
 {% block content %}
 <div class="content-block">
     
-   
-    
-    {% for loop_id in loops %}
-        <h2>Loop ID: {{ loop_id }}</h2>
+    <div class="summary-title">Task 1 Result Summary</div>
+
+    {% for loop_id, vehicle_data in results.items %}
+        <div class="loop-title">Loop ID: {{ loop_id }}</div>
         <table>
             <thead>
                 <tr>
@@ -25,38 +25,28 @@
             <tbody>
                 <tr>
                     <td>Car</td>
-                    <td>{{ car.left }}</td>
-                    <td>{{ car.right }}</td>
-                    <td>{{ car.stright }}</td>
-                    <td>{{ car.total }}</td>
+                    <td>{{ vehicle_data.car.left }}</td>
+                    <td>{{ vehicle_data.car.right }}</td>
+                    <td>{{ vehicle_data.car.stright }}</td>
+                    <td>{{ vehicle_data.car.total }}</td>
                 </tr>
                 <tr>
                     <td>Truck</td>
-                    <td>{{ truck.left }}</td>
-                    <td>{{ truck.right }}</td>
-                    <td>{{ truck.stright }}</td>
-                    <td>{{ truck.total }}</td>
+                    <td>{{ vehicle_data.truck.left }}</td>
+                    <td>{{ vehicle_data.truck.right }}</td>
+                    <td>{{ vehicle_data.truck.stright }}</td>
+                    <td>{{ vehicle_data.truck.total }}</td>
                 </tr>
                 <tr>
                     <td>Bike</td>
-                    <td>{{ bike.left }}</td>
-                    <td>{{ bike.right }}</td>
-                    <td>{{ bike.stright }}</td>
-                    <td>{{ bike.total }}</td>
+                    <td>{{ vehicle_data.bike.left }}</td>
+                    <td>{{ vehicle_data.bike.right }}</td>
+                    <td>{{ vehicle_data.bike.stright }}</td>
+                    <td>{{ vehicle_data.bike.total }}</td>
                 </tr>
-                
             </tbody>
         </table>
-    
     {% endfor %}
-
-    
-    
- 
-    
-
-
-
 
     <div class="site-video">
         <h3>Preview</h3>
@@ -83,7 +73,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for result in results %}
+            {% for result in parsed_data %}
             <tr>
                 <td>{{ result.loop_id }}</td>
                 <td>{{ result.vehicle_id }}</td>
@@ -94,8 +84,6 @@
             {% endfor %}
         </tbody>
     </table>
-
-
 </div>
 <script src="{% static 'js/play_video.js' %}"></script> 
 {% endblock content %}

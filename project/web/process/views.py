@@ -160,7 +160,14 @@ def view_display_result(request, task_id):
         for vehicle_type, counts in data.items():
             counts['total'] = counts['left'] + counts['right'] + counts['stright']
     
-    return render(request, "process/result.html", results)
+    # Combine results into a dictionary
+    data = {
+        'task_id': task_id,
+        'results': results,
+        'parsed_data': parsed_data,
+    }
+    
+    return render(request, "process/result.html", data)
 
 
 
