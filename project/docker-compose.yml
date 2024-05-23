@@ -8,7 +8,7 @@ services:
       "
     volumes:
       - ./web:/web
-      - input:/web/static/detection
+      - detection:/web/static/detection
     ports:
       - "8000:8000"
     environment:
@@ -40,7 +40,7 @@ services:
     command: celery -A carDetection worker --loglevel=info
     volumes:
       - ./web:/web
-      - input:/input
+      - detection:/detection
     environment:
       - DEBUG=1
     depends_on:
@@ -54,8 +54,8 @@ services:
       - "8888:80"
     volumes:
       - ./ai:/ai
-      - input:/input
+      - detection:/detection
 
 volumes:
   db:
-  input:
+  detection:
