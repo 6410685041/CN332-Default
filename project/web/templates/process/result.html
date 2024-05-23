@@ -7,9 +7,40 @@
 {% endblock %}
 {% block content %}
 <div class="content-block">
+    
+
+    <h1>Task {{ task_id }} Result Summary</h1>
+    
+    {% for loop_id, summary in summaries_by_loop_id.items %}
+        <h2>Loop ID: {{ loop_id }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Vehicle</th>
+                    <th>Left</th>
+                    <th>Right</th>
+                    <th>Entered</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in summary %}
+                    <tr>
+                        <td>{{ entry.vehicle_type }}</td>
+                        <td>{{ entry.Left }}</td>
+                        <td>{{ entry.Right }}</td>
+                        <td>{{ entry.Entered }}</td>
+                        <td>{{ entry.Total }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+ 
+    
 
 
-    <h1>Result for Task {{ task_id }}</h1>
+
 
     <div class="site-video">
         <h3>Preview</h3>
