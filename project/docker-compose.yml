@@ -8,7 +8,7 @@ services:
       "
     volumes:
       - ./web:/web
-      - shared_data:/shared_data
+      - shared_data:/web/static
     ports:
       - "8000:8000"
     environment:

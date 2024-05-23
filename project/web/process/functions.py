@@ -185,8 +185,10 @@ def add_loop(request,task_id):
 #     return JsonResponse({"task_id": result.task_id})
 
 def submit_task(request, task_id):
-    loop = request.POST.get('loop')
-    source = request.POST.get('source')
+    # loop = request.POST.get('loop')
+    # source = request.POST.get('source')
+    loop = "/shared_data/static/json/loop_data/" + task_id + ".json"
+    source = "/shared_data/static/video/" + task_id + ".mp4"
     result = celery_start_task.delay(loop, source, task_id)
     return redirect(reverse('task_status', kwargs={'task_id': result.id}))
 
