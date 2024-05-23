@@ -148,4 +148,5 @@ static/video/
 
 **/media/result/*.MP4
 **/static/video/*.MP4
+**/static/video/*.mov
 **/static/json/loop_data/*.json
