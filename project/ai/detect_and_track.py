@@ -191,7 +191,7 @@ def detect(save_img=False):
     # Directories
     # save_dir = Path(increment_path(Path(opt.project) / opt.name, exist_ok=opt.exist_ok))  # increment run
     # Define save_dir as a Path object
-    save_dir = Path("./static/result/" + opt.filename, exist_ok=opt.exist_ok)
+    save_dir = Path("detection/result" + opt.filename, exist_ok=opt.exist_ok)
 
     # Create the directory (and any necessary parent directories) if it doesn't already exist
     save_dir.mkdir(parents=True, exist_ok=True)

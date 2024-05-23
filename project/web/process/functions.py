@@ -97,7 +97,7 @@ def create_task(request):
         )
          
         # Rename the video file to task.id
-        video_extension = os.path.splitext(video.name)[1]  # Get the file extension
+        video_extension = ".mp4"
         new_video_name = f"static/detection/video/{task.id}{video_extension}"
         video_path = default_storage.save(new_video_name, ContentFile(video.read()))
         
@@ -143,7 +143,7 @@ def add_loop(request, task_id):
 
         summary_location = {
             "x": int(request.POST.get("summary_location_x", "")),
-            "y": int(request.POST.get("summary_location_y", ""))
+            "y": str(request.POST.get("summary_location_y", ""))
         }
 
         # Convert the points list to JSON format
