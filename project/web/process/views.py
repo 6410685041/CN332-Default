@@ -75,59 +75,45 @@ def view_display_result(request, task_id):
                 'vehicle_id': int(vehicle_id),
                 'vehicle_type': vehicle_type,
                 'time': float(time),
-                'direction': direction
+                'direction': direction.strip()
             })
     
-    # Convert parsed data to DataFrame
+    # Filter out 'ENTERED' actions
     df = pd.DataFrame(parsed_data)
-
-    # Unique vehicle types and directions
-    all_vehicle_types = ['car', 'truck', 'bike']
-    all_directions = ['Left', 'Right', 'Entered']
+    df_filtered = df[df['direction'] != 'ENTERED']
     
-    # Map original direction values to standard ones
-    direction_map = {
-        'LEFT': 'Left',
-        'RIGHT': 'Right',
-        'ENTERED': 'Entered'
-    }
-    df['direction'] = df['direction'].map(direction_map)
-
-    # Unique loop IDs
-    loop_ids = df['loop_id'].unique()
+    # Group by Loop ID and Vehicle Type, and count the directions
+    summary = df_filtered.groupby(['loop_id', 'vehicle_type', 'direction']).size().unstack(fill_value=0)
     
+    # Calculate the Total column
+    summary['Total'] = summary.sum(axis=1)
+    
+    # Reset the index for easier handling
+    summary = summary.reset_index()
+    
+    # Prepare the summary dictionary for template rendering
     summaries_by_loop_id = {}
-    
-    for loop_id in loop_ids:
-        loop_data = df[df['loop_id'] == loop_id]
-        pivot_table = loop_data.pivot_table(index='vehicle_type', columns='direction', aggfunc='size', fill_value=0)
-        
-        # Reindex to ensure all vehicle types and directions are included
-        pivot_table = pivot_table.reindex(index=all_vehicle_types, columns=all_directions, fill_value=0)
-        
-        # Reset index for easier manipulation
-        pivot_table = pivot_table.reset_index()
-        
-        # Calculate total for each vehicle type
-        pivot_table['Total'] = pivot_table[['Left', 'Right', 'Entered']].sum(axis=1)
-        
-        # Convert to dictionary format for the template
-        loop_summary_dict = pivot_table.to_dict(orient='records')
-        
-        # Calculate overall totals for each loop ID
-        overall_totals = pivot_table[['Left', 'Right', 'Entered', 'Total']].sum().to_dict()
-        overall_totals['vehicle_type'] = 'Total'
-        
-        loop_summary_dict.append(overall_totals)
-        summaries_by_loop_id[loop_id] = loop_summary_dict
+    for _, row in summary.iterrows():
+        loop_id = row['loop_id']
+        vehicle_type = row['vehicle_type']
+        summary_entry = {
+            'vehicle_type': vehicle_type,
+            'Left': row.get('LEFT', 0),
+            'Right': row.get('RIGHT', 0),
+            'Straight': row.get('STRAIGHT', 0),
+            'Total': row['Total']
+        }
+        if loop_id not in summaries_by_loop_id:
+            summaries_by_loop_id[loop_id] = []
+        summaries_by_loop_id[loop_id].append(summary_entry)
     
     data = {
         'task_id': task_id,
-        'results': parsed_data,
-        'summaries_by_loop_id': summaries_by_loop_id
+        'summaries_by_loop_id': summaries_by_loop_id,
     }
     
     return render(request, "process/result.html", data)
+
 
 
 @login_required
