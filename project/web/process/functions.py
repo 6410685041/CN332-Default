@@ -47,7 +47,7 @@ def delete_loop(request, loop_id):
     task_id = request.GET['task_id']
     Loop.objects.get(id=loop_id).delete()
 
-    file_path = f'static/json/loop_data/{task_id}.json'
+    file_path = f'static/detection/loop_data/{task_id}.json'
 
     # Load existing data from the JSON file
     with open(file_path, 'r') as file:
@@ -98,7 +98,7 @@ def create_task(request):
          
         # Rename the video file to task.id
         video_extension = os.path.splitext(video.name)[1]  # Get the file extension
-        new_video_name = f"static/video/{task.id}{video_extension}"
+        new_video_name = f"static/detection/video/{task.id}{video_extension}"
         video_path = default_storage.save(new_video_name, ContentFile(video.read()))
         
         # Update the task with the new video file name
@@ -164,7 +164,7 @@ def add_loop(request,task_id):
                 
             }
         
-        file_path = f'static/json/loop_data/{task_id}.json'
+        file_path = f'static/detection/loop_data/{task_id}.json'
 
         try:
             with open(file_path, 'r') as file:
@@ -199,8 +199,8 @@ def add_loop(request,task_id):
 def submit_task(request, task_id):
     # loop = request.POST.get('loop')
     # source = request.POST.get('source')
-    loop = "/shared_data/static/json/loop_data/" + task_id + ".json"
-    source = "/shared_data/static/video/" + task_id + ".mp4"
+    loop = "/static/detection/loop_data/" + task_id + ".json"
+    source = "/static/detection/video/" + task_id + ".mp4"
     result = celery_start_task.delay(loop, source, task_id)
     return redirect(reverse('task_status', kwargs={'task_id': result.id}))
 
