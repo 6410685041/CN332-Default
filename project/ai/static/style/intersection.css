@@ -1,0 +1,110 @@
+#map {
+    height: 400px; /* or any other height */
+}
+
+/* container class */
+
+.container {
+    display: grid;
+    grid-template-columns: 4fr 2fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "map submit";
+    gap: 0px;
+    margin: auto;
+    max-width: 90%;
+}
+
+.site-map {
+    grid-area: map;
+}
+
+.site-submit {
+    grid-area: submit;
+    margin: auto;
+
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr 0.5fr 1fr;
+    grid-template-areas:
+        "label1 block1"
+        "label2 block2"
+        "dot dot"
+        "send send";
+    gap: 10px;
+    text-align: right;
+}
+
+.site-submit-button {
+    grid-area: send;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+input.site-submit-button {
+    display: inline-block;
+    background-color: black; /* Button Background */
+    color: #f2f1ec; /* Off-white Button Text */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: none;
+    font-size: 14px;
+}
+
+input.site-submit-button:hover {
+    background-color: #2b70e4;
+}
+
+/* map button */
+
+#content .leaflet-touch .leaflet-bar a {
+    padding: 1px;
+    margin: 5px;
+    font-size: 14px;
+}
+
+#content .leaflet-bottom .leaflet-right .leaflet-control-attribution .leaflet-control {
+    line-height: 0;
+}
+
+#content .leaflet-control-attribution a {
+    padding: 1px;
+    margin: 5px;
+    font-size: 10px;
+}
+
+/* input button */
+#content table td input {
+    display: inline-block;
+    background-color: black; /* Button Background */
+    color: #f2f1ec; /* Off-white Button Text */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: none;
+    font-size: 14px;
+}
+
+#content table td input:hover {
+    background-color: #2b70e4;
+}
+
+/* Overide table */
+
+#content table {
+    max-height: 500px;
+}
+
+/* scroll bar */
+
+.intersection_list {
+    margin: 20px;
+    height: 500px;
+    overflow: scroll;
+    scrollbar-color: #6c7293 #191c24;
+    scrollbar-width: thin;
+}

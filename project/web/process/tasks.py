@@ -5,7 +5,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
 from celery import shared_task
-from ai.detect_and_track import mymain
+# from ai.detect_and_track import mymain
 
 @shared_task
 def celery_start_task(loop, source, filename):

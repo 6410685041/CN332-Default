@@ -183,7 +183,7 @@ def detect(save_img=False):
     # Directories
     # save_dir = Path(increment_path(Path(opt.project) / opt.name, exist_ok=opt.exist_ok))  # increment run
     # Define save_dir as a Path object
-    save_dir = Path("../../web/static/result/" + opt.filename, exist_ok=opt.exist_ok)
+    save_dir = Path("./static/result/" + opt.filename, exist_ok=opt.exist_ok)
 
     # Create the directory (and any necessary parent directories) if it doesn't already exist
     save_dir.mkdir(parents=True, exist_ok=True)
@@ -452,10 +452,10 @@ def mymain(cmd = False, custom_arg=None):
     parser.add_argument('--exist-ok', action='store_true', help='existing project/name ok, do not increment')
     parser.add_argument('--no-trace', action='store_true', help='don`t trace model')
     parser.add_argument('--colored-trk', action='store_true', help='assign different color to every track')
-    parser.add_argument('--loop', default="loop.json", type=str, help='loop setting file')
+    parser.add_argument('--loop', default="static/json/loops.json", type=str, help='loop setting file')
     parser.add_argument('--loop-txt', action='store_true', help='save history for each loop')
     parser.add_argument('--summary-txt', action='store_true', help='save summary for each loop') #todo later
-    parser.add_argument('--filename', type=str, help='custom filename for the output files')
+    parser.add_argument('--filename', type=str, default="result", help='custom filename for the output files')
     parser.add_argument('--filepath', type=str, default="../static/result", help='custom filename for the output files path')
 
        
@@ -475,7 +475,7 @@ def mymain(cmd = False, custom_arg=None):
     #check_requirements(exclude=('pycocotools', 'thop'))
     if opt.download and not os.path.exists(str(opt.weights)):
         print('Model weights not found. Attempting to download now...')
-        download('./')
+        download('ai/')
 
     return_result = None
     with torch.no_grad():

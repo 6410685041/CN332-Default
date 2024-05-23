@@ -44,5 +44,12 @@ services:
       - web
       - broker
 
+  ai_service:
+    build: ./ai
+    ports:
+      - "8888:80"
+    volumes:
+      - ./ai:/ai
+
 volumes:
   db:
