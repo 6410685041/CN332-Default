@@ -22,13 +22,13 @@
 /* container */
 .container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: auto auto;
     grid-template-areas: 
-        "video video"
-        "display display";
+        "video display"
+        "display1 display1";
         /* "display1 display2" */
-    gap: 10px;
+    gap: 30px;
     padding: 0;
 }
 
@@ -68,4 +68,70 @@ input.button.bttm-right {
 
 input.button.bttm-right:hover {
     background-color: rgb(2, 158, 95);
+}
+
+input.delete {
+    background-color: black;
+    color: white;
+    padding: 10px 30px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: none;
+    font-size: 14px;
+}
+
+#content .content-block a.delete {
+    margin-top: 30px;
+}
+
+.delete:hover {
+    background-color: rgb(235, 115, 115);
+}
+
+/* for table */
+#content .site-status table {
+    margin: auto;
+    margin-top: 10px;
+    width: 70%;
+    border-spacing: 5px;
+    background-color: #191c24;
+    color: #6c7293;
+}
+
+#content table tr th {
+    height: 50px;
+    border-bottom: 2px solid #2c2e33;
+}
+
+.head-table {
+    width: 120px;
+}
+
+#content .content-block {
+    background-color: #191c24;
+    padding: 10px;
+    border-radius: 0.25rem;
+}
+
+#content .site-set-loop table td{
+    padding: 0px 5px;
+    text-align: left;
+}
+
+/* set input block */
+#content .form-controls.form-controls1-2.pg1-2 .set-input-block input {
+    width: 80px;
+    margin: 0px 5px;
+}
+
+h4 {
+    margin-bottom: 15px;
+}
+
+#content .site-set-loop p.subtitle {
+    color: #6c7293;
+    font-size: 12px;
+    margin: 0px;
 }

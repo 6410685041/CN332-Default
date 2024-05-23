@@ -90,8 +90,6 @@ function createAndDisplayPoints() {
             return response.json();
         })
         .then(data => {
-            console.log('JSON Data:', data);
-
             data.loops.forEach(loop => {
                 let before_x = loop.points[3].x;
                 let before_y = loop.points[3].y;
@@ -159,5 +157,6 @@ document.addEventListener('keypress', function(event) {
             document.getElementById(`y${i}`).value = null;
         }
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        createAndDisplayPoints();
     }  
 });

@@ -3,40 +3,10 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'style/layout.css' %}">
 <link rel="stylesheet" href="{% static 'style/edit_task.css' %}">
-<link rel="stylesheet" href="{% static 'style/table_and_block.css' %}">
 {% endblock %}
 {% block content %}
 <div class="content-block">
     <h1>Edit Task</h1>
-
-    {% if loop_id %}
-    <p>Loop {{ loop_id }} created</p>
-    {% endif %}
-
-    <h2>loop created</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Action</th>    
-            </tr>
-        </thead>
-        <tbody>
-            {% for loop in loops %}
-            <tr>
-                <td>{{ loop.id }}</td>
-                <td>
-                    <form action="{% url 'delete_loop' loop.id %}" method="GET">
-                        <input type="hidden" name="task_id" value="{{ task.id }}">
-                        <button type="submit">Delete</button>
-                    </form>
-                </td>            
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-
     <div class="container">
         <div class="site-video">
             <h3>Preview</h3>
@@ -56,58 +26,98 @@
         <div class="site-set-loop">
             <form enctype="multipart/form-data" action="{% url 'add_loop' task.id %}" method="POST">
                 {% csrf_token %}
-                <small>Press 1,2,3,4 to edit the points</small>
+                <h4> Set loop </h4>
                 <div class="form-controls form-controls1-2 pg1-2">
+                    <div style="margin-bottom: 10px;">
                     <label for="loop_name">Loop Name</label>
                     <input type="text" id="loop_name" name="loop_name" value="{{loop.loop_name}}"/>
-                    <br>
-
-                    <div class="col-left">
-                        <label for="x1">x1</label>
-                        <input type="number" id="x1" name="x1" value="{{loop.x1}}" required/>
-                        <label for="y1">y1</label>
-                        <input type="number" id="y1" name="y1" value="{{loop.y1}}" required/>
-                        <br>
-                        <label for="x2">x2</label>
-                        <input type="number" id="x2" name="x2" value="{{loop.x2}}" required/>
-                        <label for="y2">y2</label>
-                        <input type="number" id="y2" name="y2" value="{{loop.y2}}" required/>
-                        <br>
-                        <label for="x3">x3</label>
-                        <input type="number" id="x3" name="x3" value="{{loop.x3}}" required/>
-                        <label for="y3">y3</label>
-                        <input type="number" id="y3" name="y3" value="{{loop.y3}}" required/>
-                        <br>
-                        <label for="x4">x4</label>
-                        <input type="number" id="x4" name="x4" value="{{loop.x4}}" required/>
-                        <label for="y4">y4</label>
-                        <input type="number" id="y4" name="y4" value="{{loop.y4}}" required/>
-                        <br>
                     </div>
+
+                    <div class="set-input-block">
+                        <div class="col-left" style="margin-bottom: 10px;">
+                            <label for="x1">x1</label>
+                            <input type="number" id="x1" name="x1" value="{{loop.x1}}" required/>
+                            <label for="y1">y1</label>
+                            <input type="number" id="y1" name="y1" value="{{loop.y1}}" required/>
+                            <br>
+                            <label for="x2">x2</label>
+                            <input type="number" id="x2" name="x2" value="{{loop.x2}}" required/>
+                            <label for="y2">y2</label>
+                            <input type="number" id="y2" name="y2" value="{{loop.y2}}" required/>
+                            <br>
+                            <label for="x3">x3</label>
+                            <input type="number" id="x3" name="x3" value="{{loop.x3}}" required/>
+                            <label for="y3">y3</label>
+                            <input type="number" id="y3" name="y3" value="{{loop.y3}}" required/>
+                            <br>
+                            <label for="x4">x4</label>
+                            <input type="number" id="x4" name="x4" value="{{loop.x4}}" required/>
+                            <label for="y4">y4</label>
+                            <input type="number" id="y4" name="y4" value="{{loop.y4}}" required/>
+                        </div>
+                        <p class="subtitle">Press 1,2,3,4 to edit the points</p>
+                        <p class="subtitle">Press Q to cancel</p>
+                    </div>
+                    <br>
                     
-                    <p>Orientation</p>
-                    <div class="col-left">
-                        <label for="clockwise">Clockwise</label>
-                        <input type="radio" id="clockwise" name="orientation" value="clockwise" required/>
-                    </div>
-                    <div class="col-right">
-                        <label for="counterclockwise">Counterclockwise</label>
-                        <input type="radio" id="counterclockwise" name="orientation" value="counterclockwise" required/>
-                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <p>Orientation</p>
+                            </td>
+                            <td>
+                                <div class="col-left">
+                                    <input type="radio" id="clockwise" name="orientation" value="clockwise" required/>
+                                    <label for="clockwise">Clockwise</label>
+                                </div>
+                                <div class="col-right">
+                                    <input type="radio" id="counterclockwise" name="orientation" value="counterclockwise" required/>
+                                    <label for="counterclockwise">Counterclockwise</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                     <br>
 
-                    <div class="col-left">
-                        <label for="summary_location_x">Summary Location x</label>
-                        <input type="number" id="summary_location_x" name="summary_location_x" value="{{loop.summary_location_x}}" required/>
-                    </div>
-                    <div class="col-right">
-                        <label for="summary_location_y">Summary Location y</label>
-                        <input type="number" id="summary_location_y" name="summary_location_y" value="{{loop.summary_location_y}}" required/>
+                    <div class="set-input-block">
+                        <div class="col-left">
+                            <label for="summary_location_x">Summary Location x</label>
+                            <input type="number" id="summary_location_x" name="summary_location_x" value="{{loop.summary_location_x}}" required/>
+                        </div>
+                        <div class="col-right">
+                            <label for="summary_location_y">Summary Location y</label>
+                            <input type="number" id="summary_location_y" name="summary_location_y" value="{{loop.summary_location_y}}" required/>
+                        </div>
                     </div>
                     <br>
                 </div>
                 <input class="button bttm-right" type="submit" value="CONFIRM">
             </form>
+        </div>
+
+        <div class="site-status">
+            <h3>Loop Created</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="head-table">ID</th>
+                        <th>Action</th>    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for loop in loops %}
+                    <tr>
+                        <td>{{ loop.id }}</td>
+                        <td>
+                            <form action="{% url 'delete_loop' loop.id %}" method="GET">
+                                <input type="hidden" name="task_id" value="{{ task.id }}">
+                                <input type="submit" class="delete" value="DELETE">
+                            </form>
+                        </td>            
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
         
     </div>
