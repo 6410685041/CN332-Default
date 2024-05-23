@@ -139,8 +139,18 @@ def view_display_result(request, task_id):
     truck['stright'] = truck['stright'] // 2
     bike['stright'] = bike['stright'] // 2
 
+    unique_loop_ids = df['loop_id'].unique().tolist()
+
     # Combine results into a dictionary
-    data = {'car': car, 'truck': truck, 'bike': bike}
+    data = {
+        'task_id': task_id,
+        'results': parsed_data,
+        'car': car,
+        'truck': truck, 
+        'bike': bike ,
+        'loops': unique_loop_ids,
+
+    }
     
     return render(request, "process/result.html", data)
 
