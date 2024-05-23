@@ -86,63 +86,81 @@ def view_display_result(request, task_id):
                 })
 
     # Create DataFrame and sort by vehicle_id and time
-    df = pd.DataFrame(parsed_data).sort_values(by=['vehicle_id', 'time'])
+    df = pd.DataFrame(parsed_data).sort_values(by=['loop_id', 'vehicle_id', 'time'])
 
-    print(df["vehicle_id"].unique())
-
+    print(df)
     # Initialize dictionaries
-    car = {'left': 0, 'right': 0, 'stright': 0, 'total': 0}
-    truck = {'left': 0, 'right': 0, 'stright': 0, 'total': 0}
-    bike = {'left': 0, 'right': 0, 'stright': 0, 'total': 0}
+    results = {}
+
+    skip = 0
 
     # Process the DataFrame
     previous = None
-    for _, current in df.iterrows():
+    for i, current in df.iterrows():
+        # print(current)
         if previous is None:
             previous = current
             continue
+        loop_id = previous['loop_id']
+        if skip > 0:
+            previous = current
+            skip-=1
+            if i+1 == len(df):
+                if vehicle_type == 'car':
+                    results[loop_id]['car']['stright'] += 1
+                elif vehicle_type == 'truck':
+                    results[loop_id]['truck']['stright'] += 1
+                elif vehicle_type == 'bike':
+                    results[loop_id]['bike']['stright'] += 1
+            continue
+        if loop_id not in results:
+            results[loop_id] = {
+                'car': {'left': 0, 'right': 0, 'stright': 0, 'total': 0},
+                'truck': {'left': 0, 'right': 0, 'stright': 0, 'total': 0},
+                'bike': {'left': 0, 'right': 0, 'stright': 0, 'total': 0},
+            }
 
         direction = find_direction(previous, current)
         vehicle_type = previous['vehicle_type'].lower()
 
         if vehicle_type == 'car':
             if direction == 'LEFT':
-                car['left'] += 1
+                results[loop_id]['car']['left'] += 1
+                skip = 1
             elif direction == 'RIGHT':
-                car['right'] += 1
+                results[loop_id]['car']['right'] += 1
+                skip = 1
             elif direction == 'STRIGHT':
-                car['stright'] += 1
-            car['total'] += 1
+                results[loop_id]['car']['stright'] += 1
 
         elif vehicle_type == 'truck':
             if direction == 'LEFT':
-                truck['left'] += 1
+                results[loop_id]['truck']['left'] += 1
+                skip = 1
             elif direction == 'RIGHT':
-                truck['right'] += 1
+                results[loop_id]['truck']['right'] += 1
+                skip = 1
             elif direction == 'STRIGHT':
-                truck['stright'] += 1
-            truck['total'] += 1
+                results[loop_id]['truck']['stright'] += 1
 
         elif vehicle_type == 'bike':
             if direction == 'LEFT':
-                bike['left'] += 1
+                results[loop_id]['bike']['left'] += 1
+                skip = 1
             elif direction == 'RIGHT':
-                bike['right'] += 1
+                results[loop_id]['bike']['right'] += 1
+                skip = 1
             elif direction == 'STRIGHT':
-                bike['stright'] += 1
-            bike['total'] += 1
+                results[loop_id]['bike']['stright'] += 1
 
         previous = current
 
-    # Adjust STRIGHT counts by dividing by 2
-    car['stright'] = car['stright'] // 2
-    truck['stright'] = truck['stright'] // 2
-    bike['stright'] = bike['stright'] // 2
-
-    # Combine results into a dictionary
-    data = {'car': car, 'truck': truck, 'bike': bike}
+    # Adjust STRIGHT counts by dividing by 2 and calculate totals
+    for loop_id, data in results.items():
+        for vehicle_type, counts in data.items():
+            counts['total'] = counts['left'] + counts['right'] + counts['stright']
     
-    return render(request, "process/result.html", data)
+    return render(request, "process/result.html", results)
 
 
 
