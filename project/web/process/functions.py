@@ -17,6 +17,9 @@ import json
 from django.conf import settings
 from process.tasks import celery_start_task
 
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+
 # celery
 from .tasks import add
 from celery.result import AsyncResult
@@ -88,11 +91,20 @@ def create_task(request):
         video = request.FILES.get("video")
         intersection_id = request.POST["intersection"]
         intersection_instance = Intersection.objects.get(id=intersection_id)
+
         task = Task.objects.create(
-            video=video, intersection=intersection_instance, created_at=time, status=status, owner=owner
+            intersection=intersection_instance, created_at=time, status=status, owner=owner
         )
-        task.save()
+         
+        # Rename the video file to task.id
+        video_extension = os.path.splitext(video.name)[1]  # Get the file extension
+        new_video_name = f"static/video/{task.id}{video_extension}"
+        video_path = default_storage.save(new_video_name, ContentFile(video.read()))
         
+        # Update the task with the new video file name
+        task.video.name = video_path
+        task.save()
+
         # Redirect to the edit page of the created task
         return HttpResponseRedirect(reverse("view_edit_task", args=(task.id,)))
         
