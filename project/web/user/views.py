@@ -37,7 +37,7 @@ def view_profile(request):
 @login_required
 def view_my_queue(request):
     profile = Profile.objects.get(id=request.user.id)
-    tasks = Task.objects.all()
+    tasks = Task.objects.filter(owner=request.user)
     data = {
         "profile": profile,
         "tasks": tasks,

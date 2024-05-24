@@ -17,5 +17,5 @@ urlpatterns = [
     path('submit_task/<str:task_id>', functions.submit_task, name='submit_task'),
     # test celery
     path('get_result/<str:task_id>', functions.get_result, name='get_result'),
-    path('task_status/<str:task_id>/', functions.task_status, name='task_status'),
+    # path('task_status/<str:task_id>/', functions.task_status, name='task_status'),
 ]

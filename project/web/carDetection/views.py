@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.urls import reverse
+<<<<<<< HEAD
 from process.models import Task
+=======
+from process.models import Result, Task
+>>>>>>> 896847716e3dc5a1a7b9545bfa8a408109e600f0
 from django.http import HttpResponseRedirect
 
 from celery.result import AsyncResult
