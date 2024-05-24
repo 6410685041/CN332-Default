@@ -196,15 +196,19 @@ def add_loop(request, task_id):
 #     return JsonResponse({"task_id": result.task_id})
 
 def submit_task(request, task_id):
+    task = Task.objects.get(id=task_id)
     loop = "/detection/loop_data/" + task_id + ".json"
     source = "/detection/video/" + task_id + ".mp4"
     result = celery_start_task.delay(loop, source, task_id)
-    return redirect(reverse('task_status', kwargs={'task_id': result.id}))
+    task.status = "In process"
+    task.save()
+    # return redirect(reverse('task_status', kwargs={'task_id': result.id}))
+    return redirect(reverse('my_queue'))
 
-def task_status(request, task_id):
-    task_result = AsyncResult(task_id)
-    if task_result.ready():
-        result = task_result.result
-        return render(request, 'process/process_view.html', {'result': result})
-    else:
-        return render(request, 'process/wait.html')
+# def task_status(request, task_id):
+#     task_result = AsyncResult(task_id)
+#     if task_result.ready():
+#         result = task_result.result
+#         return render(request, 'process/process_view.html', {'result': result})
+#     else:
+#         return render(request, 'process/wait.html')
